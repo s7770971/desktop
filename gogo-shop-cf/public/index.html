@@ -403,7 +403,7 @@
   var CAT_ORDER = ["微粉肌酸", "水解乳清蛋白", "濃縮乳清雙蛋白PLUS", "濃縮乳清蛋白", "植物蛋白", "必需胺基酸", "葡萄糖／丙胺酸", "保健品", "搖搖杯", "零食"];
   var WHEY_CATS = { "水解乳清蛋白": 1, "濃縮乳清蛋白": 1, "濃縮乳清雙蛋白PLUS": 1, "植物蛋白": 1 };
   var SUBCAT_ORDER = {
-    "微粉肌酸": ["7g｜隨身包｜30入/盒", "袋裝", "軟糖"],
+    "微粉肌酸": ["單包盒裝（30入）", "袋裝", "軟糖"],
     "水解乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
     "濃縮乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
     "濃縮乳清雙蛋白PLUS": ["隨身單包", "袋裝", "單包盒裝（30入）"],
@@ -427,7 +427,7 @@
     var cat = displayCat(p), spec = p.spec || "", name = p.name || "";
     if (cat === "微粉肌酸") {
       if (name.indexOf("軟糖") !== -1) return "軟糖";
-      if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "7g｜隨身包｜30入/盒";
+      if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "單包盒裝（30入）";
       return "袋裝";
     }
     if (WHEY_CATS[cat]) {
@@ -450,7 +450,7 @@
     }
     if (cat === "零食") {
       if (/50包/.test(name) || /50包/.test(spec)) return "箱購（50包）";
-      if (/\d+入\/盒/.test(spec)) return "盒裝";
+      if (/\d+入[\/／]盒/.test(spec)) return "盒裝";
       return "單包裝";
     }
     return spec;
@@ -554,6 +554,8 @@
   // 規格統一寫法（試算表寫法很雜，前台一律換成同一套）：
   //   大包裝重量 → 500g、1kg；單包 → 35g／包；盒裝 → 30入／盒；膠囊 → 30粒（每粒 500mg）；杯子 → 28oz、750ml
   function specLabel(spec, name) {
+    // 試算表已照統一寫法填好的（含全形／、×、（、顆），直接照用
+    if (/[／×（]|^\d+\s?顆$/.test(String(spec || ""))) return String(spec).trim();
     var t = String(spec || "").replace(/\s+/g, "").replace(/克/g, "g").replace(/公斤|KG|Kg/g, "kg");
     var n = String(name || ""), m;
     if (!t) return /彈簧球/.test(n) ? "1 顆" : "單一規格";
@@ -778,8 +780,7 @@
   }
   // 分類的銷售頁（由 images/manifest.json 的 "LP|分類名" 提供），接在固定介紹圖後面
   function catContentImages(cat) {
-    var lpKey = cat === "必需胺基酸" ? SPLIT_CAT : cat; // EAA 銷售頁在圖片對照表裡用的是原分類名
-    var lp = (cat === "保健品" || cat === "葡萄糖／丙胺酸" ? [] : imageManifest["LP|" + lpKey] || []).map(function (src, i) { return { img: src, label: cat + " 介紹 " + (i + 1), lp: 1 }; });
+    var lp = (imageManifest["LP|" + cat] || []).map(function (src, i) { return { img: src, label: cat + " 介紹 " + (i + 1), lp: 1 }; });
     return (CAT_CONTENT_IMAGES[cat] || []).concat(lp);
   }
 
