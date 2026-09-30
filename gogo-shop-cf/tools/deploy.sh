@@ -3,7 +3,7 @@
 set -e
 SHOP="/Users/mo/我的雲端硬碟 (mohuangoole@gmail.com)/Mo-Agent/gogo-shop-cf"
 IMGSRC="$HOME/Downloads/果果-給經銷商圖檔-2"
-RAW="https://raw.githubusercontent.com/s7770971/desktop/claude/code-visibility-7er6rv/gogo-shop-cf"
+RAW="https://raw.githubusercontent.com/s7770971/desktop/${REF:-claude/code-visibility-7er6rv}/gogo-shop-cf"
 
 cd "$SHOP"
 stamp=$(date +%Y%m%d_%H%M)

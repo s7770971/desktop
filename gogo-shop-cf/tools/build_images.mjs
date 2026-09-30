@@ -12,7 +12,8 @@ import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+// 在 gogo-shop-cf 資料夾內執行（deploy.sh 會先 cd 進去）
+const root = process.cwd();
 const srcRoot = process.argv[2];
 if (!srcRoot || !fs.existsSync(srcRoot)) {
   console.error("找不到圖檔資料夾：" + srcRoot);
