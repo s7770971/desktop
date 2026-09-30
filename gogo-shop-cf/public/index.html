@@ -355,6 +355,21 @@
   .spec-chip.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
   .spec-now{ display:flex; align-items:center; gap:8px; }
   .spec-now-val{ display:inline-block; padding:7px 14px; border-radius:999px; background:var(--surface-2); border:1.5px solid var(--line); font-weight:900; font-size:15px; }
+  .search-box{ position:relative; }
+  .search-box input{
+    width:100%; background:var(--surface); border:1.5px solid var(--line); color:var(--ink); border-radius:999px;
+    padding:13px 44px 13px 18px; font-size:16px; font-family:inherit; font-weight:700; -webkit-appearance:none;
+  }
+  .search-box input:focus{ outline:none; border-color:var(--accent); }
+  .search-box input::-webkit-search-cancel-button{ display:none; }
+  .search-clear{ position:absolute; right:8px; top:50%; transform:translateY(-50%); width:32px; height:32px; border-radius:50%; border:0; background:var(--surface-2); color:var(--ink); font-weight:900; cursor:pointer; }
+  .prod-cat{ display:inline-block; font-size:11.5px; font-weight:900; color:var(--accent-ink); background:var(--accent); padding:2px 8px; border-radius:4px; margin-right:8px; vertical-align:middle; }
+  .freeship{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px 14px; }
+  .freeship-text{ font-size:14px; font-weight:800; margin-bottom:8px; }
+  .freeship-text b{ color:var(--accent); }
+  .freeship-track{ height:8px; border-radius:999px; background:var(--surface-2); overflow:hidden; }
+  .freeship-fill{ height:100%; background:var(--accent); border-radius:999px; transition:width .3s ease; }
+  .freeship.done{ font-size:14px; font-weight:900; color:var(--success); }
 </style>
 </head>
 <body>
@@ -530,6 +545,7 @@
   }
   var ui = {
     activeCat: null,
+    search: "",
     sheet: null,
     lastOrder: null,
     saveNote: null,
@@ -633,6 +649,15 @@
   function cartSubtotal() {
     return cartLines().reduce(function (a, l) { return a + l.p.price * l.qty; }, 0);
   }
+  function freeShipBar(subtotal, method) {
+    if (method === "pickup") return "";
+    var th = state.settings.shipping.home.freeThreshold;
+    if (!th) return "";
+    if (subtotal >= th) return '<div class="freeship done">🎉 已達免運門檻，運費 NT$0</div>';
+    var pct = Math.max(4, Math.round(subtotal / th * 100));
+    return '<div class="freeship"><div class="freeship-text">再買 <b class="num">' + fmt(th - subtotal) + "</b> 就免運 🚚</div>" +
+      '<div class="freeship-track"><div class="freeship-fill" style="width:' + pct + '%"></div></div></div>';
+  }
   function shippingFee(method, subtotal) {
     var s = state.settings.shipping;
     if (method === "pickup") return 0;
@@ -677,14 +702,31 @@
       .then(function (m) { imageManifest = m || {}; });
   }
 
+  var SHOP_CACHE_KEY = "gogo_shop_cache_v1";
   function boot() {
-    Promise.all([gsRun("getShopData"), loadImageManifest()]).then(function (results) {
+    // 先用上次存在手機裡的商品資料立刻畫出賣場（價格、庫存以後端下單時重算為準），背景再抓最新資料
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem(SHOP_CACHE_KEY) || "null"); } catch (e) { cached = null; }
+    var manifestReady = loadImageManifest();
+    if (cached && cached.products && cached.settings) {
+      manifestReady.then(function () {
+        if (state) return; // 最新資料已經先到了
+        state = { products: cached.products, settings: cached.settings, orders: [] };
+        restoreCart();
+        render();
+      });
+    }
+    Promise.all([gsRun("getShopData"), manifestReady]).then(function (results) {
       var data = results[0];
+      var fresh = JSON.stringify({ products: data.products, settings: data.settings });
+      try { localStorage.setItem(SHOP_CACHE_KEY, fresh); } catch (e) {}
+      var same = state && JSON.stringify({ products: state.products, settings: state.settings }) === fresh;
       state = data;
       restoreCart();
-      render();
+      if (!same) render(); // 資料有變才重畫，避免客人正在選的口味被洗掉
     }).catch(function (err) {
       if (window.console) console.error(err); // 技術細節只留在瀏覽器主控台，客人看到的是白話說明
+      if (state) return; // 已經用上次的資料畫出來了，就不打斷客人
       ui.loadError = LOAD_ERROR_TEXT;
       renderLoadError();
     });
@@ -886,7 +928,13 @@
         .sort(subcatCompare(cat))
         .map(function (sub) { return renderProductCard(sub, subs[sub]); })
         .join("");
+      var searchBox =
+        '<div class="search-box"><input id="shop_search" type="search" enterkeyhint="search" autocomplete="off" ' +
+        'placeholder="🔍 搜尋商品，例如：抹茶、1kg、搖搖杯" value="' + escapeHtml(ui.search) + '">' +
+        (ui.search ? '<button type="button" class="search-clear" data-action="clear-search" aria-label="清除搜尋">✕</button>' : "") +
+        "</div>";
       body =
+        searchBox +
         '<div class="cat-tabs-wrap" id="cat-tabs-wrap">' +
         (swipeHintDone() ? "" : '<div class="swipe-hint" id="swipe-hint">👉 左右滑動看更多分類</div>') +
         '<div class="cat-tabs-box"><div class="cat-tabs" id="cat-tabs">' + tabs + "</div>" +
@@ -901,6 +949,11 @@
         "</div>" +
         renderContentImages(catContentImages(cat)) +
         '<div class="prod-grid">' + cards + "</div>";
+      if (ui.search.trim()) {
+        // 搜尋中：分類內容換成搜尋結果（跨所有分類）
+        var head = body.indexOf('<div class="cat-panel-head">');
+        body = body.slice(0, head) + renderSearchResults(products);
+      }
     }
     return (
       renderTopbar() +
@@ -922,17 +975,37 @@
       escapeHtml(state.settings.igHandle) +
       '</a>　·　<a data-action="goto-admin">賣家後台</a></div>' +
       "</div>" +
-      '<button class="fab-cart" data-action="open-cart" aria-label="購物車">🧺<span class="fab-label">加入購物車</span>' +
-      (cartTotalQty() > 0 ? '<span class="fab-badge num">' + cartTotalQty() + "</span>" : "") +
-      "</button>"
+      '<button class="fab-cart" data-action="open-cart" aria-label="購物車">' + fabCartInner() + "</button>"
     );
+  }
+
+  /* ---------- 商品搜尋：每個關鍵字都要出現在 品名／規格／分類 裡 ---------- */
+  function renderSearchResults(products) {
+    var norm = function (t) { return String(t || "").toLowerCase().replace(/\s+/g, ""); };
+    var terms = ui.search.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    var hits = products.filter(function (p) {
+      var hay = norm(p.name + p.spec + specLabel(p.spec, p.name) + displayCat(p) + getSubcat(p));
+      return terms.every(function (t) { return hay.indexOf(norm(t)) !== -1; });
+    });
+    if (!hits.length) {
+      return '<div class="empty-note">找不到「' + escapeHtml(ui.search.trim()) + '」相關的商品，換個關鍵字試試，或點上面的分類瀏覽。</div>';
+    }
+    var grouped = groupByCatThenSubcat(hits);
+    var cards = Object.keys(grouped).sort(catCompare).map(function (c) {
+      return Object.keys(grouped[c]).sort(subcatCompare(c)).map(function (sub) {
+        return renderProductCard(sub, grouped[c][sub], c);
+      }).join("");
+    }).join("");
+    return '<div class="cat-panel-head"><h2 class="cat-panel-title">搜尋結果</h2>' +
+      '<span class="cat-count">「' + escapeHtml(ui.search.trim()) + '」找到 ' + hits.length + " 項商品</span></div>" +
+      '<div class="prod-grid">' + cards + "</div>";
   }
 
   var PLAIN_COLOR_SUFFIX = /[白黑藍灰紅綠黃紫粉棕橘銀金]\s*([0-9]{1,4}\s*(oz|ml))?$/i;
   function isPlainColor(name) {
     return PLAIN_COLOR_SUFFIX.test(flavorLabel(name).trim());
   }
-  function renderProductCard(subLabel, variants) {
+  function renderProductCard(subLabel, variants, catLabel) {
     variants = variants.slice().sort(function (a, b) {
       var aLast = a.name.indexOf("美日肌酸") === 0;
       var bLast = b.name.indexOf("美日肌酸") === 0;
@@ -1010,7 +1083,7 @@
       '<div class="prod" data-group="' + variants.map(function (v) { return v.id; }).join(",") + '">' +
       '<div class="prod-image"></div>' +
       '<div class="prod-info">' +
-      '<div class="prod-name">' + escapeHtml(subLabel) + "</div>" +
+      '<div class="prod-name">' + (catLabel ? '<span class="prod-cat">' + escapeHtml(catLabel) + "</span>" : "") + escapeHtml(subLabel) + "</div>" +
       (variants.length > 1 ? '<div class="prod-preview">含：' + escapeHtml(previewText) + "</div>" : "") +
       '<div class="prod-desc"></div>' +
       (useChips ? chipsHtml : '<div class="spec-now"><span class="spec-chips-label">規格</span><span class="spec-now-val"></span></div>') +
@@ -1125,7 +1198,8 @@
       '<div class="sheet-body">' +
       body +
       (lines.length > 0
-        ? '<div class="summary-row total"><span>小計</span><span class="num">' + fmt(subtotal) + "</span></div>" +
+        ? freeShipBar(subtotal, "home") +
+          '<div class="summary-row total"><span>小計</span><span class="num">' + fmt(subtotal) + "</span></div>" +
           '<button class="primary-btn" data-action="goto-checkout">前往結帳</button>'
         : "") +
       "</div>"
@@ -1155,6 +1229,7 @@
       '<div class="field"><label>備註（選填）</label><textarea id="ck_note" placeholder="想跟賣家說的話"></textarea></div>' +
       '<div id="ck_error" class="error-text" style="display:none"></div>' +
       '<div class="summary-row"><span>小計</span><span class="num">' + fmt(subtotal) + "</span></div>" +
+      freeShipBar(subtotal, method) +
       '<div class="summary-row"><span>運費' +
       (method === "pickup" ? "（自取免運）" : fee === 0 ? "（已滿額免運）" : "") +
       '</span><span class="num">' +
@@ -1435,7 +1510,11 @@
     } else if (action === "tabs-next") {
       var scroller = document.getElementById("cat-tabs");
       if (scroller) scroller.scrollBy({ left: scroller.clientWidth * 0.7, behavior: "smooth" });
+    } else if (action === "clear-search") {
+      ui.search = "";
+      render();
     } else if (action === "select-cat") {
+      ui.search = "";
       ui.activeCat = el.getAttribute("data-cat");
       render();
       var tabsEl = document.getElementById("cat-tabs");
@@ -1468,6 +1547,7 @@
       var rpid = Number(el.getAttribute("data-pid"));
       cart = cart.filter(function (l) { return l.id !== rpid; });
       saveCart();
+      renderTopbarOnly();
       renderSheet();
     } else if (action === "qty-inc" || action === "qty-dec") {
       var pid = Number(el.getAttribute("data-pid"));
@@ -1493,16 +1573,22 @@
       handleSubmitOrder();
     } else if (action === "copy-order") {
       var ta = document.getElementById("order-summary-text");
-      ta.style.position = "static";
-      ta.select();
-      try {
-        document.execCommand("copy");
-        showToast("已複製訂單內容");
-      } catch (err) {
-        showToast("複製失敗，請手動選取文字");
+      var text = ta ? ta.value : "";
+      var legacyCopy = function () {
+        ta.style.position = "static";
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        var ok = false;
+        try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+        ta.style.position = "absolute";
+        ta.style.left = "-9999px";
+        showToast(ok ? "已複製訂單內容" : "複製失敗，請長按選取文字複製");
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { showToast("已複製訂單內容"); }, legacyCopy);
+      } else {
+        legacyCopy();
       }
-      ta.style.position = "absolute";
-      ta.style.left = "-9999px";
     } else if (action === "admin-unlock") {
       var pinInput = document.getElementById("admin_pin").value;
       gsRun("verifyAdminPin", pinInput).then(function (res) {
@@ -1562,6 +1648,16 @@
   });
 
   document.addEventListener("input", function (e) {
+    if (e.target.id === "shop_search") {
+      ui.search = e.target.value;
+      clearTimeout(ui._searchT);
+      ui._searchT = setTimeout(function () {
+        render();
+        var inp = document.getElementById("shop_search");
+        if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+      }, 180);
+      return;
+    }
     if (e.target.id === "admin_search") {
       ui.adminSearch = e.target.value;
       render();
@@ -1572,12 +1668,18 @@
 
   window.addEventListener("hashchange", render);
 
+  function fabCartInner() {
+    var n = cartTotalQty();
+    return n > 0
+      ? '🧺<span class="fab-label num">購物車 ' + n + " 件｜" + fmt(cartSubtotal()) + "</span>"
+      : '🧺<span class="fab-label">購物車</span>';
+  }
   function renderTopbarOnly() {
     var tb = document.querySelector(".topbar");
     if (tb) tb.outerHTML = renderTopbar();
     var fab = document.querySelector(".fab-cart");
     if (fab) {
-      fab.innerHTML = '🧺<span class="fab-label">加入購物車</span>' + (cartTotalQty() > 0 ? '<span class="fab-badge num">' + cartTotalQty() + "</span>" : "");
+      fab.innerHTML = fabCartInner();
     }
   }
 
