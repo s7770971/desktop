@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mo果快選所</title>
+<meta property="og:title" content="Mo果快選所">
+<meta property="og:description" content="乳清蛋白、肌酸、搖搖杯周邊團購中，售價都幫大家比價過，比官網便宜一些些～">
+<meta property="og:image" content="https://gogo-shop-1aw.pages.dev/og/share-a.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap">
+<style>
+  /* 運動品牌風：固定深色底＋亮橘重點（不跟系統淺色／深色切換） */
+  :root{
+    color-scheme:dark;
+    --bg:#0D0D0F; --surface:#17171A; --surface-2:#222226; --ink:#F6F5F3; --ink-soft:#A3A3AB;
+    --accent:#FF6A1A; --accent-ink:#0D0D0F; --accent-2:#FF9A5C; --accent-2-ink:#0D0D0F; --line:#2C2C31;
+    --danger:#FF7A7A; --danger-bg:#3A1C1C; --success:#5BE08A; --success-bg:#16301F;
+    --radius:18px; --radius-sm:12px;
+    --shadow:0 2px 6px rgba(0,0,0,.5), 0 18px 36px -18px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+    font-weight:500;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  h1,h2,h3,.brand{ font-family:"Noto Sans TC",sans-serif; font-weight:700; text-wrap:balance; letter-spacing:-.01em; }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .num{ font-variant-numeric:tabular-nums; }
+  ::selection{ background:var(--accent); color:var(--accent-ink); }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
+
+  #app{ max-width:760px; margin:0 auto; padding-bottom:110px; min-height:100vh; }
+  .topbar{
+    position:sticky; top:0; z-index:20; background:rgba(13,13,15,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+  }
+  .brand{ font-size:21px; font-weight:900; display:flex; align-items:baseline; gap:8px; color:var(--ink); letter-spacing:.02em; }
+  .brand::before{ content:""; width:6px; height:20px; background:var(--accent); border-radius:2px; align-self:center; transform:skewX(-14deg); }
+  .brand small{ font-size:10.5px; font-weight:700; color:var(--ink-soft); letter-spacing:.04em; background:var(--surface-2); padding:1px 6px; border-radius:5px; }
+  .cart-btn{
+    position:relative; background:var(--accent); border:0; color:var(--accent-ink);
+    border-radius:999px; padding:8px 16px 8px 14px; font-weight:900; font-size:13.5px;
+    display:flex; align-items:center; gap:6px; cursor:pointer;
+  }
+  .cart-btn .badge{
+    background:var(--accent-ink); color:var(--accent); border-radius:999px; font-size:11px; font-weight:900;
+    min-width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; padding:0 4px;
+  }
+  .placeholder-banner{
+    background:var(--danger-bg); color:var(--danger); font-size:12.5px; padding:8px 18px; text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .content{ padding:18px; display:flex; flex-direction:column; gap:20px; }
+  .hero{
+    position:relative; overflow:hidden; padding:22px 20px 20px; border-radius:var(--radius);
+    background:linear-gradient(135deg, #1D1D21 0%, #121214 60%); border:1px solid var(--line);
+  }
+  .hero::after{
+    content:""; position:absolute; right:-40px; top:-40px; width:170px; height:170px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,106,26,.35), rgba(255,106,26,0) 70%); pointer-events:none;
+  }
+  .hero-kicker{ display:inline-block; font-size:11px; font-weight:900; letter-spacing:.12em; color:var(--accent-ink); background:var(--accent); padding:3px 9px; border-radius:4px; transform:skewX(-10deg); margin-bottom:10px; }
+  .hero h1{ position:relative; font-size:22px; line-height:1.4; margin:0 0 8px; font-weight:900; }
+  .hero p{ position:relative; margin:0; color:var(--ink-soft); font-size:13.5px; max-width:56ch; }
+  .hero-notice{ position:relative; margin:12px 0 0; padding:12px 14px 12px 32px; background:rgba(255,255,255,.04); border-left:3px solid var(--accent); border-radius:8px; color:var(--ink); font-size:12.5px; display:flex; flex-direction:column; gap:6px; }
+
+  .content-strip{ margin:0; }
+  .content-strip-title{ font-size:15px; font-weight:900; margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .content-strip-title::before{ content:""; width:4px; height:15px; background:var(--accent); border-radius:2px; transform:skewX(-14deg); }
+  .content-strip-scroll{ display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .content-strip-scroll::-webkit-scrollbar{ display:none; }
+  .content-strip-item{ flex:none; width:150px; cursor:zoom-in; }
+  .content-strip-item img{ width:100%; height:150px; object-fit:cover; border-radius:var(--radius-sm); display:block; background:var(--surface-2); border:1px solid var(--line); }
+
+  .loading-screen{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh; gap:10px; color:var(--ink-soft); font-size:13.5px; text-align:center; padding:20px; }
+  .spinner{ width:26px; height:26px; border-radius:50%; border:3px solid var(--line); border-top-color:var(--accent); animation:spin .8s linear infinite; }
+  @media (prefers-reduced-motion: reduce){ .spinner{ animation:none; } }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  /* 分類：橫向滑動標籤 */
+  .cat-tabs{
+    position:sticky; top:57px; z-index:15; margin:0 -18px; padding:10px 18px;
+    background:rgba(13,13,15,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; border-bottom:1px solid var(--line);
+  }
+  .cat-tabs::-webkit-scrollbar{ display:none; }
+  .cat-tab{
+    flex:none; background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
+    border-radius:999px; padding:8px 14px; font-weight:700; font-size:13.5px; cursor:pointer; white-space:nowrap;
+    display:flex; align-items:center; gap:6px; font-family:inherit;
+  }
+  .cat-tab.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:900; }
+  .cat-tab .tab-badge{ font-size:10px; font-weight:900; background:var(--accent); color:var(--accent-ink); padding:1px 6px; border-radius:999px; }
+  .cat-tab.active .tab-badge{ background:var(--accent-ink); color:var(--accent); }
+  .cat-panel-head{ display:flex; flex-direction:column; gap:6px; }
+  .cat-panel-title{ margin:0; font-size:24px; font-weight:900; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .cat-badge{ display:inline-block; background:var(--accent); color:var(--accent-ink); font-size:12px; font-weight:900; padding:3px 10px; border-radius:4px; transform:skewX(-10deg); }
+  .cat-sub{ font-size:13px; color:var(--ink-soft); font-weight:500; margin:0; }
+  .cat-count{ color:var(--ink-soft); font-size:12px; }
+
+  /* 商品卡：大圖在上、資訊在下 */
+  .prod-grid{ display:grid; grid-template-columns:1fr; gap:16px; }
+  @media (min-width:600px){ .prod-grid{ grid-template-columns:1fr 1fr; } }
+  .prod{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:var(--shadow);
+  }
+  .prod-info{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .prod-name{ font-weight:900; font-size:17px; }
+  .prod-preview{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:-6px; }
+  .prod-image{ position:relative; background:#F4F2EE; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; }
+  .prod-image.empty{ display:none; }
+  .prod-hero{ width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in; }
+  .nutri-thumb{
+    position:absolute; right:10px; bottom:10px; width:74px; border-radius:10px; overflow:hidden;
+    background:#fff; border:2px solid var(--accent); cursor:zoom-in; box-shadow:0 6px 16px rgba(0,0,0,.35); padding:0;
+  }
+  .nutri-thumb img{ width:100%; height:74px; object-fit:cover; display:block; }
+  .nutri-thumb span{ display:block; background:var(--accent); color:var(--accent-ink); font-size:10.5px; font-weight:900; text-align:center; padding:2px 0; }
+  .prod-image.nutri-only .nutri-thumb{ position:static; width:60%; }
+  .prod-image.nutri-only .nutri-thumb img{ height:auto; }
+  .prod-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; }
+  .prod-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .spec-select{
+    width:100%; background:var(--surface-2); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm);
+    padding:10px 12px; font-size:14px; font-family:inherit; min-width:0; font-weight:700;
+  }
+  .price-wrap{ width:100%; }
+  .price-block{ display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; }
+  .price-label{ font-size:11px; color:var(--ink-soft); }
+  .price-now{ font-weight:900; font-size:26px; color:var(--accent); letter-spacing:-.01em; }
+  .price-was{ text-decoration:line-through; color:var(--ink-soft); font-size:13px; }
+  .pill{ font-size:11.5px; font-weight:900; padding:3px 8px; border-radius:4px; }
+  .pill-save{ background:var(--accent); color:var(--accent-ink); transform:skewX(-10deg); display:inline-block; }
+  .pill-oos{ background:var(--danger-bg); color:var(--danger); }
+  .prod-controls{ flex-wrap:nowrap; }
+  .nutri-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:60; display:none;
+    align-items:center; justify-content:center; padding:24px;
+  }
+  .nutri-overlay.show{ display:flex; }
+  .nutri-overlay-scroll{ width:100%; height:100%; overflow:auto; display:flex; align-items:flex-start; justify-content:center; }
+  .nutri-overlay img{
+    max-width:100%; border-radius:var(--radius-sm); cursor:zoom-in; margin:auto;
+    transition:transform .2s ease; touch-action:pinch-zoom; background:#fff;
+  }
+  .nutri-overlay img.zoomed{ cursor:zoom-out; transform:scale(1.9); max-width:none; width:100%; }
+  .nutri-close{
+    position:fixed; top:16px; right:16px; z-index:61; background:var(--accent); color:var(--accent-ink);
+    border:0; border-radius:999px; width:40px; height:40px; font-size:18px; font-weight:900; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow);
+  }
+  .qty-row{ display:flex; align-items:center; gap:10px; }
+  .stepper{ display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--surface-2); }
+  .stepper button{ width:38px; height:42px; border:0; background:transparent; color:var(--ink); font-size:18px; font-weight:700; cursor:pointer; }
+  .stepper span{ width:30px; text-align:center; font-weight:900; }
+  .add-btn{
+    flex:1; background:var(--accent); color:var(--accent-ink); border:0; border-radius:999px; padding:12px 16px;
+    font-weight:900; font-size:14.5px; cursor:pointer; letter-spacing:.02em;
+  }
+  .add-btn:disabled{ background:var(--surface-2); color:var(--ink-soft); cursor:not-allowed; }
+  .empty-note{ color:var(--ink-soft); font-size:13px; padding:26px 18px; text-align:center; }
+
+  .sticky-cart{
+    position:fixed; left:0; right:0; bottom:0; z-index:30;
+    display:flex; justify-content:center; padding:12px; pointer-events:none;
+  }
+  .sticky-cart-inner{
+    pointer-events:auto; width:100%; max-width:600px; background:var(--ink); color:var(--bg);
+    border-radius:999px; padding:12px 20px; display:flex; align-items:center; justify-content:space-between;
+    box-shadow:var(--shadow); cursor:pointer; font-weight:600; font-size:14px;
+  }
+
+  .fab-cart{
+    position:fixed; right:18px; bottom:22px; z-index:25; overflow:visible;
+    background:var(--accent); color:var(--accent-ink); border:0; border-radius:999px;
+    height:52px; padding:0 20px; display:flex; align-items:center; justify-content:center; gap:8px;
+    font-size:20px; font-weight:700; box-shadow:var(--shadow); cursor:pointer;
+  }
+  .fab-cart .fab-label{ font-size:14px; font-weight:900; }
+  .fab-badge{
+    position:absolute; top:-3px; right:-3px; background:var(--ink); color:var(--bg);
+    border-radius:999px; font-size:11.5px; font-weight:700; min-width:21px; height:21px;
+    display:flex; align-items:center; justify-content:center; padding:0 4px; border:2px solid var(--bg);
+  }
+  .footer-note{ text-align:center; padding:20px 18px 8px; font-size:11.5px; color:var(--ink-soft); }
+  .footer-note a{ text-decoration:underline; cursor:pointer; }
+
+  .sheet-overlay{
+    position:fixed; inset:0; background:rgba(20,16,10,.45); z-index:40; display:none;
+  }
+  .sheet-overlay.show{ display:block; }
+  .sheet{
+    position:fixed; left:0; right:0; bottom:0; z-index:41; background:var(--bg);
+    border-radius:20px 20px 0 0; max-height:88vh; overflow-y:auto;
+    transform:translateY(100%); transition:transform .22s ease; box-shadow:var(--shadow);
+  }
+  .sheet.show{ transform:translateY(0); }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); }
+  .sheet-head h2{ font-size:18px; margin:0; }
+  .icon-btn{ background:var(--surface-2); border:1px solid var(--line); color:var(--ink); border-radius:999px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .sheet-body{ padding:16px 18px 28px; display:flex; flex-direction:column; gap:16px; }
+
+  .cart-line{ display:flex; justify-content:space-between; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); }
+  .cart-line:last-child{ border-bottom:0; }
+  .cart-line-name{ font-weight:600; font-size:13.5px; }
+  .cart-line-spec{ color:var(--ink-soft); font-size:12px; }
+  .cart-line-remove{ background:none; border:0; color:var(--ink-soft); font-size:12px; text-decoration:underline; cursor:pointer; padding:0; }
+
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:12.5px; font-weight:600; color:var(--ink-soft); }
+  .field input, .field select, .field textarea{
+    background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm);
+    padding:10px 12px; font-size:14px; font-family:inherit; width:100%;
+  }
+  .field textarea{ resize:vertical; min-height:64px; }
+  .toggle-group{ display:flex; gap:8px; }
+  .toggle-btn{
+    flex:1; padding:11px 8px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--surface);
+    color:var(--ink); font-weight:600; font-size:13.5px; cursor:pointer; text-align:center;
+  }
+  .toggle-btn.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .summary-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:4px 0; }
+  .summary-row.total{ font-weight:700; font-size:16px; padding-top:10px; border-top:1px solid var(--line); margin-top:4px; }
+  .primary-btn{
+    background:var(--accent); color:var(--accent-ink); border:0; border-radius:var(--radius-sm); padding:13px;
+    font-weight:700; font-size:14.5px; cursor:pointer; width:100%;
+  }
+  .primary-btn:disabled{ opacity:.5; cursor:not-allowed; }
+  .ghost-btn{
+    background:none; border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm); padding:12px;
+    font-weight:600; font-size:13.5px; cursor:pointer; width:100%;
+  }
+  .error-text{ color:var(--danger); font-size:12.5px; }
+  .hint{ color:var(--ink-soft); font-size:12px; }
+
+  .confirm-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px; }
+  .confirm-amount{ font-family:"Noto Sans TC",sans-serif; font-weight:700; font-size:34px; text-align:center; margin:6px 0 2px; }
+  .confirm-sub{ text-align:center; color:var(--ink-soft); font-size:12.5px; margin-bottom:16px; }
+  .confirm-orderid{ text-align:center; font-weight:700; font-size:16px; letter-spacing:.03em; margin-bottom:2px; }
+  .order-items{ background:var(--surface-2); border-radius:var(--radius-sm); padding:12px 14px; display:flex; flex-direction:column; gap:6px; font-size:13px; margin-bottom:14px; }
+  .order-items .row{ display:flex; justify-content:space-between; gap:10px; }
+  .bank-box{ background:var(--surface-2); border-radius:var(--radius-sm); padding:14px; display:flex; flex-direction:column; gap:6px; font-size:13.5px; }
+  .bank-box .row{ display:flex; justify-content:space-between; }
+  .bank-box .row b{ font-weight:700; }
+  .steps{ margin:16px 0 0; padding-left:18px; font-size:13px; color:var(--ink-soft); display:flex; flex-direction:column; gap:6px; }
+  .steps .substeps{ list-style:none; margin:6px 0 0; padding-left:2px; display:flex; flex-direction:column; gap:4px; }
+  .steps .substeps li{ color:var(--ink); font-weight:600; }
+  .notice-title{ margin-top:16px; font-size:15px; font-weight:900; color:#FF5A4F; }
+  .confirm-card > .substeps{ list-style:disc; margin:6px 0 0; padding-left:20px; font-size:13px; display:flex; flex-direction:column; gap:4px; }
+  .confirm-card > .substeps li{ color:var(--ink); font-weight:600; }
+  .step-btns{ display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+  .step-btns .primary-btn{ display:block; text-align:center; text-decoration:none; box-sizing:border-box; }
+
+  .admin-lock{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh; gap:14px; padding:20px; text-align:center; }
+  .tabbar{ display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; }
+  .tabbar button{ background:none; border:0; padding:10px 4px; margin-right:14px; font-weight:600; font-size:13.5px; color:var(--ink-soft); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; }
+  .tabbar button.active{ color:var(--ink); border-color:var(--accent); }
+  .admin-toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .admin-toolbar input, .admin-toolbar select{ background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm); padding:8px 10px; font-size:13px; }
+  table.admintable{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.admintable th{ text-align:left; padding:8px 6px; color:var(--ink-soft); font-weight:600; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); }
+  table.admintable td{ padding:7px 6px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  table.admintable tr.admin-row-group-start td{ border-top:2px solid var(--accent-2); }
+  table.admintable input[type=number]{ width:70px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:4px 6px; font-size:12.5px; }
+  .admin-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); }
+  .switch{ position:relative; display:inline-block; width:36px; height:20px; flex:none; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .slider{ position:absolute; inset:0; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; transition:.15s; cursor:pointer; }
+  .switch .slider:before{ content:""; position:absolute; width:14px; height:14px; left:2px; top:2px; background:var(--ink-soft); border-radius:50%; transition:.15s; }
+  .switch input:checked + .slider{ background:var(--accent); border-color:var(--accent); }
+  .switch input:checked + .slider:before{ transform:translateX(16px); background:var(--accent-ink); }
+  .settings-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:520px){ .settings-grid{ grid-template-columns:1fr; } }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px; }
+  .toast{
+    position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--ink); color:var(--bg);
+    padding:11px 18px; border-radius:999px; font-size:13px; font-weight:600; z-index:60; box-shadow:var(--shadow);
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .toast.show{ opacity:1; }
+  .link-btn{ background:none; border:0; color:var(--accent); font-weight:600; font-size:12.5px; cursor:pointer; padding:0; text-decoration:underline; }
+  .muted-block{ color:var(--ink-soft); font-size:12.5px; }
+  .sheet-link{ font-size:11.5px; color:var(--ink-soft); }
+  .sheet-link a{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="loading-screen"><div class="spinner"></div><div>連接 Google Sheet 資料庫中…</div></div>
+</div>
+<div class="sheet-overlay" id="sheet-overlay"></div>
+<div class="sheet" id="sheet"></div>
+<div class="nutri-overlay" id="nutri-overlay">
+  <button type="button" class="nutri-close" data-action="close-nutrition">✕</button>
+  <div class="nutri-overlay-scroll"><img id="nutri-overlay-img" src="" alt="營養標示" data-action="toggle-nutrition-zoom"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SHEET_URL = "https://docs.google.com/spreadsheets/d/16JHVoqK2a-7TGSr6ItQposLfMGVRc8L6kkA23DNoqcs/edit";
+  var API_URL = "https://script.google.com/macros/s/AKfycbwJmFUXQuj9My2gNI7xCdzc_u0657tmsRTewY9aJQ_sLnoNsXHxsGZh8oogLQ6Em633/exec";
+  var CLOSE_DATE = "10/5"; // 結單日期，開新團時改這裡
+  var WRITE_FUNCTIONS ={ submitOrder: 1, saveProducts: 1, saveSettings: 1, updateOrderStatus: 1 };
+  var CAT_SUBTITLES = {
+    "微粉肌酸": "補充肌酸不只能增強運動爆發力與肌肉量，近期研究也發現，它對改善大腦認知、緩解睡眠不足的疲勞、預防肌少症都有幫助。",
+    "水解乳清蛋白": "小分子好吸收，運動後快速補給",
+    "濃縮乳清蛋白": "經典配方，天天喝的蛋白基本款",
+    "濃縮乳清雙蛋白PLUS": "雙蛋白＋膳食纖維，加碼升級版",
+    "植物蛋白": "全素植物蛋白＋睡前緩釋酪蛋白，特殊需求配方",
+    "保健品/必須氨基酸/葡萄糖": "日常保養小幫手＋PRO EAAs 訓練恢復配方＋葡萄糖能量補給，一次補齊",
+    "搖搖杯": "不鏽鋼保溫款／一般塑膠款，訓練配備一次備齊",
+    "零食": "威化餅、香酥脆、蛋白棒、燕麥脆片一次補齊，訓練之餘也能吃點心"
+  };
+  var CAT_BADGES = {
+    "微粉肌酸": "大推薦"
+  };
+  var CAT_ORDER = ["微粉肌酸", "水解乳清蛋白", "濃縮乳清雙蛋白PLUS", "濃縮乳清蛋白", "植物蛋白", "保健品/必須氨基酸/葡萄糖", "搖搖杯", "零食"];
+  var WHEY_CATS = { "水解乳清蛋白": 1, "濃縮乳清蛋白": 1, "濃縮乳清雙蛋白PLUS": 1, "植物蛋白": 1 };
+  var SUBCAT_ORDER = {
+    "微粉肌酸": ["7g｜隨身包｜30入/盒", "袋裝", "軟糖"],
+    "水解乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
+    "濃縮乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
+    "濃縮乳清雙蛋白PLUS": ["隨身單包", "袋裝", "單包盒裝（30入）"],
+    "植物蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
+    "保健品/必須氨基酸/葡萄糖": ["保健營養品系列", "EAA必需氨基酸系列", "其他粉裝系列"],
+    "搖搖杯": ["不鏽鋼保溫款", "一般塑膠款"],
+    "零食": ["單包裝", "盒裝"]
+  };
+  function getSubcat(p) {
+    var cat = p.cat, spec = p.spec || "", name = p.name || "";
+    if (cat === "微粉肌酸") {
+      if (name.indexOf("軟糖") !== -1) return "軟糖";
+      if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "7g｜隨身包｜30入/盒";
+      return "袋裝";
+    }
+    if (WHEY_CATS[cat]) {
+      if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "單包盒裝（30入）";
+      var m = spec.match(/([\d.]+)/);
+      if (m) {
+        var val = parseFloat(m[1]);
+        var grams = /kg|公斤|KG/i.test(spec) ? val * 1000 : val;
+        if (grams <= 50) return "隨身單包";
+      }
+      return "袋裝";
+    }
+    if (cat === "保健品/必須氨基酸/葡萄糖") {
+      if (name.indexOf("EAA") !== -1) return "EAA必需氨基酸系列";
+      if (/\d+粒|\d+顆/.test(spec)) return "保健營養品系列";
+      if (/克|g|公斤|kg/i.test(spec)) return "其他粉裝系列";
+      return "保健營養品系列";
+    }
+    if (cat === "搖搖杯") {
+      if (name.indexOf("不鏽鋼") !== -1 || name.indexOf("Tumbler") !== -1 || name.indexOf("Sleek") !== -1) return "不鏽鋼保溫款";
+      return "一般塑膠款";
+    }
+    if (cat === "零食") {
+      if (/\d+入\/盒/.test(spec) || /50包/.test(spec)) return "盒裝";
+      return "單包裝";
+    }
+    return spec;
+  }
+  function subcatCompare(cat) {
+    var order = SUBCAT_ORDER[cat] || [];
+    return function (a, b) {
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      if (ia === -1) ia = 999;
+      if (ib === -1) ib = 999;
+      return ia - ib;
+    };
+  }
+  function catCompare(a, b) {
+    var ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+    if (ia === -1) ia = 999;
+    if (ib === -1) ib = 999;
+    return ia - ib;
+  }
+
+  // 商品圖／營養標示對照表：images/manifest.json，用「品名|規格」（去掉空白）當 key，
+  // 不綁商品編號，試算表重新編號也不會錯位。由 tools/build_images.py 產生。
+  var imageManifest = {};
+  function imageKey(p) {
+    return String(p.name || "").replace(/\s+/g, "") + "|" + String(p.spec || "").replace(/\s+/g, "");
+  }
+  function imagesFor(p) {
+    return imageManifest[imageKey(p)] || {};
+  }
+  function closeNutritionOverlay() {
+    document.getElementById("nutri-overlay").classList.remove("show");
+    document.getElementById("nutri-overlay-img").classList.remove("zoomed");
+  }
+  (function setupNutriOverlaySwipe() {
+    var overlay = document.getElementById("nutri-overlay");
+    var touchStartX = 0, touchStartY = 0, tracking = false;
+    var SWIPE_THRESHOLD = 60;
+    overlay.addEventListener("touchstart", function (e) {
+      var img = document.getElementById("nutri-overlay-img");
+      if (img.classList.contains("zoomed")) { tracking = false; return; }
+      if (e.touches.length !== 1) { tracking = false; return; }
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      tracking = true;
+    }, { passive: true });
+    overlay.addEventListener("touchend", function (e) {
+      if (!tracking) return;
+      tracking = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStartX;
+      var dy = t.clientY - touchStartY;
+      if (Math.sqrt(dx * dx + dy * dy) > SWIPE_THRESHOLD) closeNutritionOverlay();
+    }, { passive: true });
+  })();
+
+  var state = null; // {products, settings, orders} — 從 Google Sheet 讀取
+  var cart = [];
+  var ui = {
+    activeCat: null,
+    sheet: null,
+    lastOrder: null,
+    saveNote: null,
+    adminUnlocked: false,
+    adminTab: "products",
+    adminSearch: "",
+    adminCatFilter: "",
+    adminActiveOnly: false,
+    checkout: { method: "home" },
+    loadError: null
+  };
+
+  function fmt(n) {
+    if (n === null || n === undefined) return "-";
+    return "NT$" + Number(n).toLocaleString("en-US");
+  }
+  function pctOff(retail, price) {
+    if (!retail || !price || retail <= price) return null;
+    return Math.round((1 - price / retail) * 100);
+  }
+  function foldOff(retail, price) {
+    if (!retail || !price || retail <= price) return null;
+    var fold = (price / retail) * 10;
+    return (Math.round(fold * 10) / 10).toFixed(1).replace(/\.0$/, "");
+  }
+  function byId(id) {
+    return state.products.find(function (p) { return p.id === id; });
+  }
+  function activeProducts() {
+    return state.products.filter(function (p) { return p.active; });
+  }
+  function groupByCatThenSubcat(products) {
+    var cats = {};
+    products.forEach(function (p) {
+      var sub = getSubcat(p);
+      if (!cats[p.cat]) cats[p.cat] = {};
+      if (!cats[p.cat][sub]) cats[p.cat][sub] = [];
+      cats[p.cat][sub].push(p);
+    });
+    return cats;
+  }
+  function flavorLabel(name) {
+    var i = name.indexOf("-");
+    return i === -1 ? name : name.slice(i + 1);
+  }
+  function specWeightGrams(spec) {
+    var m = spec.match(/([\d.]+)\s*kg/i);
+    if (m) return parseFloat(m[1]) * 1000;
+    m = spec.match(/([\d.]+)\s*(g|克|公斤)/i);
+    if (m) return m[2] === "公斤" ? parseFloat(m[1]) * 1000 : parseFloat(m[1]);
+    return null;
+  }
+  function escapeHtml(s) {
+    return String(s === undefined || s === null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function cartTotalQty() {
+    return cart.reduce(function (a, l) { return a + l.qty; }, 0);
+  }
+  function cartLines() {
+    return cart.map(function (l) {
+      var p = byId(l.id);
+      return p ? { p: p, qty: l.qty } : null;
+    }).filter(Boolean);
+  }
+  function cartSubtotal() {
+    return cartLines().reduce(function (a, l) { return a + l.p.price * l.qty; }, 0);
+  }
+  function shippingFee(method, subtotal) {
+    var s = state.settings.shipping;
+    if (method === "pickup") return 0;
+    return subtotal >= s.home.freeThreshold ? 0 : s.home.fee;
+  }
+
+  /* ---------- 後端橋接（fetch 打 Apps Script JSON API） ---------- */
+  function gsRun(fnName) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    var isWrite = !!WRITE_FUNCTIONS[fnName];
+    var req = isWrite
+      ? fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ fn: fnName, args: args })
+        })
+      : fetch(API_URL + "?fn=" + encodeURIComponent(fnName) + "&args=" + encodeURIComponent(JSON.stringify(args)));
+    return req
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (!json.ok) throw new Error(json.error || "API 呼叫失敗");
+        return json.result;
+      });
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById("toast");
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(function () { t.classList.remove("show"); }, 2600);
+  }
+
+  /* ---------- boot ---------- */
+  var adminPin = null; // 只存在記憶體，通過驗證後才有值，不寫進 state / 不持久化
+
+  function loadImageManifest() {
+    return fetch("/images/manifest.json", { cache: "no-cache" })
+      .then(function (res) { return res.ok ? res.json() : {}; })
+      .catch(function () { return {}; })
+      .then(function (m) { imageManifest = m || {}; });
+  }
+
+  function boot() {
+    Promise.all([gsRun("getShopData"), loadImageManifest()]).then(function (results) {
+      var data = results[0];
+      state = data;
+      render();
+    }).catch(function (err) {
+      ui.loadError = (err && err.message) || "無法讀取 Google Sheet 資料，請確認 Apps Script 已部署，且已執行過一次 setup()。";
+      renderLoadError();
+    });
+  }
+
+  function renderLoadError() {
+    document.getElementById("app").innerHTML =
+      '<div class="loading-screen"><div style="font-size:28px">⚠️</div><div>' + escapeHtml(ui.loadError) + "</div></div>";
+  }
+
+  function reloadData(showSpinner) {
+    if (showSpinner) {
+      document.getElementById("app").innerHTML =
+        '<div class="loading-screen"><div class="spinner"></div><div>重新整理中…</div></div>';
+    }
+    return gsRun("getShopData", adminPin || undefined).then(function (data) {
+      state = data;
+      render();
+    }).catch(function (err) {
+      ui.loadError = (err && err.message) || "重新整理失敗，請確認網路連線後重新整理頁面再試一次。";
+      renderLoadError();
+      throw err;
+    });
+  }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    var app = document.getElementById("app");
+    if (!state) {
+      app.innerHTML = '<div class="loading-screen"><div class="spinner"></div><div>連接 Google Sheet 資料庫中…</div></div>';
+      return;
+    }
+    var hash = location.hash || "";
+    var html = "";
+    if (hash.indexOf("#admin") === 0) {
+      html = renderAdminRoot();
+    } else {
+      html = renderShop();
+    }
+    app.innerHTML = html;
+    fillProductCardDynamic();
+    renderSheet();
+  }
+
+  function renderTopbar() {
+    return (
+      '<div class="topbar">' +
+      '<div class="brand">' + escapeHtml(state.settings.shopName) + "</div>" +
+      '<button class="cart-btn" data-action="open-cart">🧺 購物車' +
+      (cartTotalQty() > 0 ? '<span class="badge">' + cartTotalQty() + "</span>" : "") +
+      "</button>" +
+      "</div>"
+    );
+  }
+
+  var TOP_CONTENT_IMAGES = [
+    { img: "/images/content/compare-overview.jpg", label: "濃縮／水解有何不同" },
+    { img: "/images/content/compare-lines.jpg", label: "蛋白線總覽" }
+  ];
+  var CAT_CONTENT_IMAGES = {
+    "濃縮乳清蛋白": [
+      { img: "/images/content/concentrate-1.jpg", label: "濃縮乳清蛋白特色" },
+      { img: "/images/content/concentrate-2.jpg", label: "濃縮乳清蛋白質含量" }
+    ],
+    "水解乳清蛋白": [
+      { img: "/images/content/hydrolysed-1.jpg", label: "水解乳清蛋白特色" },
+      { img: "/images/content/hydrolysed-2.jpg", label: "水解乳清蛋白數據" }
+    ],
+    "植物蛋白": [
+      { img: "/images/content/vegan-1.jpg", label: "植物蛋白來源" },
+      { img: "/images/content/vegan-2.jpg", label: "植物蛋白含量" }
+    ],
+    "微粉肌酸": [
+      { img: "/images/content/creatine-1.jpg", label: "肌酸特色" }
+    ]
+  };
+  function renderContentImages(list) {
+    if (!list || !list.length) return "";
+    var items = list.map(function (c) {
+      return (
+        '<div class="content-strip-item" data-action="show-nutrition" data-img="' + escapeHtml(c.img) + '">' +
+        '<img src="' + escapeHtml(c.img) + '" alt="' + escapeHtml(c.label) + '" loading="lazy">' +
+        "</div>"
+      );
+    }).join("");
+    return '<div class="content-strip-scroll">' + items + "</div>";
+  }
+
+  function renderShop() {
+    var placeholderBanner = state.settings.placeholders
+      ? '<div class="placeholder-banner">⚠️ 賣場資訊尚未完成設定（匯款帳戶／IG／運費為預設值），賣家請至「後台」補上真實資料後再分享連結。</div>'
+      : "";
+    var products = activeProducts();
+    var grouped = groupByCatThenSubcat(products);
+    var cats = Object.keys(grouped).sort(catCompare);
+    var body = "";
+    if (cats.length === 0) {
+      body =
+        '<div class="empty-note">目前賣場還沒有上架任何商品。<br>賣家可以到 <a href="#admin" data-action="goto-admin">後台管理</a> 勾選要賣的品項，或直接在 Google Sheet 裡把 active 欄改成 TRUE。</div>';
+    } else {
+      if (cats.indexOf(ui.activeCat) === -1) ui.activeCat = cats[0];
+      var cat = ui.activeCat;
+      var subs = grouped[cat];
+      var tabs = cats
+        .map(function (c) {
+          return (
+            '<button type="button" class="cat-tab' + (c === cat ? " active" : "") + '" data-action="select-cat" data-cat="' + escapeHtml(c) + '">' +
+            escapeHtml(c) + (CAT_BADGES[c] ? '<span class="tab-badge">' + escapeHtml(CAT_BADGES[c]) + "</span>" : "") +
+            "</button>"
+          );
+        })
+        .join("");
+      var cards = Object.keys(subs)
+        .sort(subcatCompare(cat))
+        .map(function (sub) { return renderProductCard(sub, subs[sub]); })
+        .join("");
+      body =
+        '<div class="cat-tabs" id="cat-tabs">' + tabs + "</div>" +
+        '<div class="cat-panel-head">' +
+        '<h2 class="cat-panel-title">' + escapeHtml(cat) +
+        (CAT_BADGES[cat] ? '<span class="cat-badge">' + escapeHtml(CAT_BADGES[cat]) + "</span>" : "") +
+        "</h2>" +
+        (CAT_SUBTITLES[cat] ? '<p class="cat-sub">' + escapeHtml(CAT_SUBTITLES[cat]) + "</p>" : "") +
+        '<span class="cat-count">共 ' + Object.keys(subs).length + " 種包裝</span>" +
+        "</div>" +
+        renderContentImages(CAT_CONTENT_IMAGES[cat]) +
+        '<div class="prod-grid">' + cards + "</div>";
+    }
+    return (
+      renderTopbar() +
+      placeholderBanner +
+      '<div class="content">' +
+      '<div class="hero"><span class="hero-kicker">團購進行中</span><h1>' + escapeHtml(state.settings.heroTitle) + "</h1>" +
+      "<p>" + escapeHtml(state.settings.heroIntro) + "</p>" +
+      '<ol class="hero-notice">' +
+      state.settings.heroNotice.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("") +
+      "</ol></div>" +
+      '<div class="content-strip">' +
+      '<div class="content-strip-title">蛋白怎麼挑</div>' +
+      renderContentImages(TOP_CONTENT_IMAGES) +
+      "</div>" +
+      body +
+      '<div class="footer-note">有任何問題歡迎私訊 IG <a href="https://www.instagram.com/' +
+      escapeHtml(String(state.settings.igHandle || "").replace(/^@/, "")) +
+      '" target="_blank" rel="noopener">' +
+      escapeHtml(state.settings.igHandle) +
+      '</a>　·　<a data-action="goto-admin">賣家後台</a></div>' +
+      "</div>" +
+      '<button class="fab-cart" data-action="open-cart" aria-label="購物車">🧺<span class="fab-label">加入購物車</span>' +
+      (cartTotalQty() > 0 ? '<span class="fab-badge num">' + cartTotalQty() + "</span>" : "") +
+      "</button>"
+    );
+  }
+
+  var PLAIN_COLOR_SUFFIX = /[白黑藍灰紅綠黃紫粉棕橘銀金]\s*([0-9]{1,4}\s*(oz|ml))?$/i;
+  function isPlainColor(name) {
+    return PLAIN_COLOR_SUFFIX.test(flavorLabel(name).trim());
+  }
+  function renderProductCard(subLabel, variants) {
+    variants = variants.slice().sort(function (a, b) {
+      var aLast = a.name.indexOf("美日肌酸") === 0;
+      var bLast = b.name.indexOf("美日肌酸") === 0;
+      if (aLast && !bLast) return 1;
+      if (bLast && !aLast) return -1;
+      var aPlain = isPlainColor(a.name), bPlain = isPlainColor(b.name);
+      if (aPlain && !bPlain) return -1;
+      if (bPlain && !aPlain) return 1;
+      var ar = a.retail || 0, br = b.retail || 0;
+      if (ar !== br) return ar - br;
+      return flavorLabel(a.name).localeCompare(flavorLabel(b.name), "zh-Hant");
+    });
+    var specSet = {};
+    variants.forEach(function (v) { specSet[v.spec] = (specSet[v.spec] || 0) + 1; });
+    var multiSpec = Object.keys(specSet).length > 1;
+    var options = variants
+      .map(function (v) {
+        var label = flavorLabel(v.name) + (multiSpec ? "（" + v.spec + "）" : "");
+        return '<option value="' + v.id + '">' + escapeHtml(label) + (v.stock ? "" : "（缺貨）") + "</option>";
+      })
+      .join("");
+    var previewNames = variants.map(function (v) { return flavorLabel(v.name); });
+    var previewText = previewNames.slice(0, 4).join("、") + (previewNames.length > 4 ? " 等 " + previewNames.length + " 款" : "");
+    return (
+      '<div class="prod" data-group="' + variants.map(function (v) { return v.id; }).join(",") + '">' +
+      '<div class="prod-image"></div>' +
+      '<div class="prod-info">' +
+      '<div class="prod-name">' + escapeHtml(subLabel) + "</div>" +
+      (variants.length > 1 ? '<div class="prod-preview">含：' + escapeHtml(previewText) + "</div>" : "") +
+      '<div class="prod-desc"></div>' +
+      '<div class="prod-row">' +
+      '<select class="spec-select" data-action="spec-change" data-name="' + escapeHtml(subLabel) + '">' + options + "</select>" +
+      '<div class="price-wrap"></div>' +
+      "</div>" +
+      '<div class="prod-row prod-controls" data-name="' + escapeHtml(subLabel) + '"></div>' +
+      "</div></div>"
+    );
+  }
+
+  function fillProductCardDynamic() {
+    document.querySelectorAll(".prod").forEach(function (card) {
+      var select = card.querySelector(".spec-select");
+      if (!select) return;
+      updateProductCardUI(card, Number(select.value));
+    });
+  }
+
+  function updateProductCardUI(card, pid) {
+    var p = byId(pid);
+    if (!p) return;
+    var imgWrap = card.querySelector(".prod-image");
+    if (imgWrap) {
+      var imgs = imagesFor(p);
+      var html = "";
+      if (imgs.main) {
+        html += '<img class="prod-hero" src="' + escapeHtml(imgs.main) + '" alt="' + escapeHtml(p.name) + '" loading="lazy" ' +
+          'data-action="show-nutrition" data-img="' + escapeHtml(imgs.main) + '">';
+      }
+      if (imgs.nutri) {
+        html += '<button type="button" class="nutri-thumb" data-action="show-nutrition" data-img="' + escapeHtml(imgs.nutri) + '">' +
+          '<img src="' + escapeHtml(imgs.nutri) + '" alt="營養標示" loading="lazy"><span>營養標示</span></button>';
+      }
+      imgWrap.innerHTML = html;
+      imgWrap.className = "prod-image" + (html ? "" : " empty") + (!imgs.main && imgs.nutri ? " nutri-only" : "");
+    }
+    var descWrap = card.querySelector(".prod-desc");
+    if (descWrap) {
+      descWrap.textContent = p.desc || "";
+      descWrap.style.display = p.desc ? "" : "none";
+    }
+    var priceWrap = card.querySelector(".price-wrap");
+    var fold = foldOff(p.retail, p.price);
+    priceWrap.innerHTML =
+      '<div class="price-block num">' +
+      (p.retail && p.retail > p.price
+        ? '<span class="price-label">官網價</span><span class="price-was">' + fmt(p.retail) + "</span>"
+        : "") +
+      '<span class="price-label">團購價</span><span class="price-now">' + fmt(p.price) + "</span>" +
+      (fold ? '<span class="pill pill-save">打' + fold + "折</span>" : "") +
+      (!p.stock ? '<span class="pill pill-oos">缺貨</span>' : "") +
+      "</div>";
+    var controls = card.querySelector(".prod-controls");
+    var existingQty = (cart.find(function (l) { return l.id === pid; }) || {}).qty || 1;
+    controls.innerHTML =
+      '<div class="qty-row"><div class="stepper" data-pid="' + pid + '">' +
+      '<button data-action="qty-dec" data-pid="' + pid + '" type="button">−</button>' +
+      '<span class="num" data-qty-display>' + existingQty + "</span>" +
+      '<button data-action="qty-inc" data-pid="' + pid + '" type="button">＋</button>' +
+      "</div></div>" +
+      '<button class="add-btn" data-action="add-cart" data-pid="' + pid + '"' +
+      (!p.stock || !p.price ? " disabled" : "") +
+      ">加入購物車</button>";
+  }
+
+  function renderSheet() {
+    var overlay = document.getElementById("sheet-overlay");
+    var sheet = document.getElementById("sheet");
+    if (!ui.sheet) {
+      overlay.classList.remove("show");
+      sheet.classList.remove("show");
+      sheet.innerHTML = "";
+      return;
+    }
+    overlay.classList.add("show");
+    sheet.classList.add("show");
+    if (ui.sheet === "cart") sheet.innerHTML = renderCartSheet();
+    if (ui.sheet === "checkout") sheet.innerHTML = renderCheckoutSheet();
+    if (ui.sheet === "confirm") sheet.innerHTML = renderConfirmSheet();
+    fillProductCardDynamic();
+  }
+
+  function renderCartSheet() {
+    var lines = cartLines();
+    var subtotal = cartSubtotal();
+    var body =
+      lines.length === 0
+        ? '<div class="empty-note">購物車是空的，先去挑選商品吧！</div>'
+        : lines
+            .map(function (l) {
+              return (
+                '<div class="cart-line"><div><div class="cart-line-name">' +
+                escapeHtml(l.p.name) +
+                '</div><div class="cart-line-spec">' +
+                escapeHtml(l.p.spec) +
+                " × " +
+                l.qty +
+                '</div><button class="cart-line-remove" data-action="cart-remove" data-pid="' +
+                l.p.id +
+                '">移除</button></div><div class="num" style="font-weight:700">' +
+                fmt(l.p.price * l.qty) +
+                "</div></div>"
+              );
+            })
+            .join("");
+    return (
+      '<div class="sheet-head"><h2>購物車</h2><button class="icon-btn" data-action="close-sheet">✕</button></div>' +
+      '<div class="sheet-body">' +
+      body +
+      (lines.length > 0
+        ? '<div class="summary-row total"><span>小計</span><span class="num">' + fmt(subtotal) + "</span></div>" +
+          '<button class="primary-btn" data-action="goto-checkout">前往結帳</button>'
+        : "") +
+      "</div>"
+    );
+  }
+
+  function renderCheckoutSheet() {
+    var lines = cartLines();
+    var subtotal = cartSubtotal();
+    var method = ui.checkout.method;
+    var fee = shippingFee(method, subtotal);
+    var total = subtotal + fee;
+    return (
+      '<div class="sheet-head"><h2>結帳資訊</h2><button class="icon-btn" data-action="close-sheet">✕</button></div>' +
+      '<div class="sheet-body">' +
+      '<div class="field"><label>取貨方式</label>' +
+      '<div class="toggle-group">' +
+      '<button type="button" class="toggle-btn' + (method === "home" ? " active" : "") + '" data-action="set-method" data-method="home">🚚 廠商直送</button>' +
+      '<button type="button" class="toggle-btn' + (method === "pickup" ? " active" : "") + '" data-action="set-method" data-method="pickup">🚶 文山區自取</button>' +
+      "</div></div>" +
+      (method === "home"
+        ? '<div class="field"><label>收件地址</label><input id="ck_address" placeholder="請輸入完整收件地址" /></div>'
+        : "") +
+      '<div class="field"><label>收件人姓名</label><input id="ck_name" placeholder="姓名" /></div>' +
+      '<div class="field"><label>聯絡電話</label><input id="ck_phone" placeholder="0912345678" /></div>' +
+      '<div class="field"><label>你的 IG 帳號（方便賣家聯繫與回報匯款）</label><input id="ck_ig" placeholder="@your_ig" /></div>' +
+      '<div class="field"><label>備註（選填）</label><textarea id="ck_note" placeholder="想跟賣家說的話"></textarea></div>' +
+      '<div id="ck_error" class="error-text" style="display:none"></div>' +
+      '<div class="summary-row"><span>小計</span><span class="num">' + fmt(subtotal) + "</span></div>" +
+      '<div class="summary-row"><span>運費' +
+      (method === "pickup" ? "（自取免運）" : fee === 0 ? "（已滿額免運）" : "") +
+      '</span><span class="num">' +
+      fmt(fee) +
+      "</span></div>" +
+      '<div class="summary-row total"><span>應付總額</span><span class="num">' + fmt(total) + "</span></div>" +
+      '<button class="primary-btn" data-action="submit-order">送出訂單</button>' +
+      "</div>"
+    );
+  }
+
+  function renderConfirmSheet() {
+    var o = ui.lastOrder;
+    if (!o) return "";
+    var b = state.settings.bank;
+    var noteHtml = ui.saveNote
+      ? '<div class="error-text" style="margin-bottom:10px">' + escapeHtml(ui.saveNote) + "</div>"
+      : "";
+    var summaryText =
+      "【" + state.settings.shopName + " 訂單 " + o.id + "】\n" +
+      o.items.map(function (it) { return it.name + "（" + it.spec + "）×" + it.qty; }).join("\n") +
+      "\n應付總額：" + fmt(o.total) +
+      "\n取貨方式：" + (o.deliveryMethod === "pickup" ? "台北市文山區自取" : "廠商直送（" + o.address + "）") +
+      "\n收件人：" + o.name + " / " + o.phone +
+      "\nIG：" + o.ig +
+      (o.note ? "\n備註：" + o.note : "") +
+      "\n\n我等等會匯款訂單總額" + fmt(o.total) + "到這裡" +
+      "\n" + b.bankName +
+      "\n" + b.account +
+      "\n\n感謝您喔";
+    var igUrl = "https://www.instagram.com/" + escapeHtml(String(state.settings.igHandle || "").replace(/^@/, ""));
+    var stepButtons =
+      '<div class="step-btns">' +
+      '<button class="ghost-btn" data-action="copy-order">步驟1. 請點我複製內容</button>' +
+      '<a class="primary-btn" href="' + igUrl + '" target="_blank" rel="noopener">步驟2. 點此跳轉找 MO 去</a>' +
+      "</div>";
+    return (
+      '<div class="sheet-head"><h2>訂單已送出</h2><button class="icon-btn" data-action="close-sheet">✕</button></div>' +
+      '<div class="sheet-body">' +
+      noteHtml +
+      stepButtons +
+      '<div class="confirm-card">' +
+      '<div class="confirm-orderid num">訂單編號 ' + o.id + "</div>" +
+      '<div class="confirm-sub">請於 ' + state.settings.transferDeadlineHours + " 小時內完成轉帳</div>" +
+      '<div class="confirm-amount num">' + fmt(o.total) + "</div>" +
+      '<div class="confirm-sub">應付總額（含運費）</div>' +
+      '<div class="order-items">' +
+      o.items.map(function (it) {
+        return '<div class="row"><span>' + escapeHtml(it.name) + "（" + escapeHtml(it.spec) + "）×" + it.qty + '</span><span class="num">' + fmt(it.price * it.qty) + "</span></div>";
+      }).join("") +
+      '<div class="row"><span>運費</span><span class="num">' + fmt(o.shipFee) + "</span></div>" +
+      "</div>" +
+      '<div class="bank-box">' +
+      '<div class="row"><span>銀行</span><b>' + escapeHtml(b.bankName) + "</b></div>" +
+      '<div class="row"><span>帳號</span><b class="num">' + escapeHtml(b.account) + "</b></div>" +
+      '<div class="row"><span>戶名</span><b>' + escapeHtml(b.holder) + "</b></div>" +
+      "</div>" +
+      '<div class="notice-title">重要請注意！！！</div>' +
+      '<ul class="substeps">' +
+      "<li>第一步　點選步驟1. 複製訂單內容</li>" +
+      "<li>第二步　點選步驟2. 跳轉 " + escapeHtml(state.settings.igHandle) + "，私訊 Mo 貼上訂單內容。</li>" +
+      "</ul>" +
+      '<ol class="steps">' +
+      "<li>請記得匯款，匯款後也請到 IG 跟我說你匯款了喔～。</li>" +
+      "<li>我將於 " + CLOSE_DATE + " 結單後統計下訂，貨到後會通知大家喔。</li>" +
+      "</ol>" +
+      '<p class="hint" style="margin-top:10px">小提醒：如果您怕自己忘記，可以自己截圖此頁面留存喔🫶</p>' +
+      "</div>" +
+      stepButtons +
+      '<button class="ghost-btn" data-action="close-sheet" style="margin-top:8px">完成</button>' +
+      '<textarea id="order-summary-text" style="position:absolute;left:-9999px">' + escapeHtml(summaryText) + "</textarea>" +
+      "</div>"
+    );
+  }
+
+  /* ---------- admin ---------- */
+  function renderAdminRoot() {
+    if (!ui.adminUnlocked) return renderAdminLock();
+    return renderAdmin();
+  }
+  function renderAdminLock() {
+    return (
+      '<div class="admin-lock">' +
+      '<h2 style="margin:0">賣家後台</h2>' +
+      '<p class="muted-block">輸入管理密碼進入（密碼存在 Google Sheet 的 Settings 分頁，僅作簡易防呆）</p>' +
+      '<input id="admin_pin" type="password" inputmode="numeric" placeholder="輸入密碼" style="max-width:200px;text-align:center;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)" />' +
+      '<button class="primary-btn" style="max-width:200px" data-action="admin-unlock">進入後台</button>' +
+      '<button class="link-btn" data-action="goto-shop">回到賣場</button>' +
+      "</div>"
+    );
+  }
+  function renderAdmin() {
+    var tabs = [
+      ["products", "商品上架"],
+      ["settings", "賣場設定"],
+      ["orders", "訂單 (" + state.orders.length + ")"]
+    ];
+    var tabbar = tabs
+      .map(function (t) {
+        return '<button class="' + (ui.adminTab === t[0] ? "active" : "") + '" data-action="admin-tab" data-tab="' + t[0] + '">' + t[1] + "</button>";
+      })
+      .join("");
+    var body = "";
+    if (ui.adminTab === "products") body = renderAdminProducts();
+    if (ui.adminTab === "settings") body = renderAdminSettings();
+    if (ui.adminTab === "orders") body = renderAdminOrders();
+    return (
+      '<div class="topbar"><div class="brand">賣家後台<small>' + escapeHtml(state.settings.shopName) + "</small></div>" +
+      '<button class="ghost-btn" style="width:auto" data-action="goto-shop">查看賣場 ↗</button></div>' +
+      '<div class="content">' +
+      '<div class="sheet-link">資料庫：<a href="' + SHEET_URL + '" target="_top">開啟 Google Sheet</a>　·　<button class="link-btn" data-action="reload-data">重新整理資料</button></div>' +
+      '<div class="tabbar">' + tabbar + "</div>" + body + "</div>"
+    );
+  }
+
+  function renderAdminProducts() {
+    var cats = Array.from(new Set(state.products.map(function (p) { return p.cat; })));
+    var q = ui.adminSearch.trim().toLowerCase();
+    var list = state.products.filter(function (p) {
+      if (ui.adminCatFilter && p.cat !== ui.adminCatFilter) return false;
+      if (ui.adminActiveOnly && !p.active) return false;
+      if (q && (p.name + p.spec).toLowerCase().indexOf(q) === -1) return false;
+      return true;
+    });
+    list.sort(function (a, b) {
+      if (a.cat !== b.cat) return a.cat.localeCompare(b.cat, "zh-Hant");
+      if (a.name !== b.name) return a.name.localeCompare(b.name, "zh-Hant");
+      return (a.retail || a.price || 0) - (b.retail || b.price || 0);
+    });
+    var activeCount = state.products.filter(function (p) { return p.active; }).length;
+    var lastName = null;
+    var rows = list
+      .map(function (p) {
+        var pct = pctOff(p.retail, p.price);
+        var isNewGroup = p.name !== lastName;
+        lastName = p.name;
+        return (
+          '<tr class="' + (isNewGroup ? "admin-row-group-start" : "") + '">' +
+          '<td><input type="checkbox" data-action="toggle-active" data-pid="' + p.id + '" ' + (p.active ? "checked" : "") + " /></td>" +
+          "<td>" + escapeHtml(p.cat) + "</td>" +
+          "<td>" + escapeHtml(p.name) + "</td>" +
+          "<td>" + escapeHtml(p.spec) + "</td>" +
+          '<td class="num">' + fmt(p.cost) + "</td>" +
+          '<td class="num">' + (p.retail ? fmt(p.retail) : "—") + "</td>" +
+          '<td><input type="number" min="0" step="1" data-action="edit-price" data-pid="' + p.id + '" value="' + (p.price === null ? "" : p.price) + '" placeholder="未設定" /></td>' +
+          "<td>" + (pct ? pct + "%" : "—") + "</td>" +
+          '<td><label class="switch"><input type="checkbox" data-action="toggle-stock" data-pid="' + p.id + '" ' + (p.stock ? "checked" : "") + '/><span class="slider"></span></label></td>' +
+          "</tr>"
+        );
+      })
+      .join("");
+    return (
+      '<div class="muted-block" style="margin-bottom:10px">已上架 ' + activeCount + " / " + state.products.length + " 項　·　勾選左側方框讓商品出現在賣場，「售價」欄留空的商品無法上架。也可以直接到 Google Sheet 的 Products 分頁改資料，改完按下面「重新整理資料」即可。</div>" +
+      '<div class="admin-toolbar">' +
+      '<input placeholder="搜尋商品名稱" id="admin_search" value="' + escapeHtml(ui.adminSearch) + '" />' +
+      '<select id="admin_cat_filter">' +
+      '<option value="">全部分類</option>' +
+      cats.map(function (c) { return '<option value="' + escapeHtml(c) + '"' + (ui.adminCatFilter === c ? " selected" : "") + ">" + escapeHtml(c) + "</option>"; }).join("") +
+      "</select>" +
+      '<label style="display:flex;align-items:center;gap:6px;font-size:12.5px"><input type="checkbox" id="admin_active_only" ' + (ui.adminActiveOnly ? "checked" : "") + " /> 只看已上架</label>" +
+      "</div>" +
+      '<div class="admin-scroll"><table class="admintable"><thead><tr>' +
+      "<th>上架</th><th>分類</th><th>商品名稱</th><th>規格</th><th>經銷成本</th><th>市售參考價</th><th>我的售價</th><th>折扣</th><th>有貨</th>" +
+      "</tr></thead><tbody>" +
+      rows +
+      "</tbody></table></div>" +
+      '<button class="primary-btn" style="margin-top:16px" data-action="admin-save">儲存並寫回 Google Sheet</button>'
+    );
+  }
+
+  function renderAdminSettings() {
+    var s = state.settings;
+    return (
+      '<div class="card"><h3 style="margin-top:0">基本資訊</h3>' +
+      '<div class="settings-grid">' +
+      '<div class="field"><label>賣場名稱</label><input id="set_shopname" value="' + escapeHtml(s.shopName) + '" /></div>' +
+      '<div class="field"><label>IG 帳號</label><input id="set_ig" value="' + escapeHtml(s.igHandle) + '" placeholder="@your_ig" /></div>' +
+      "</div></div>" +
+      '<div class="card" style="margin-top:14px"><h3 style="margin-top:0">收款帳戶</h3>' +
+      '<div class="settings-grid">' +
+      '<div class="field"><label>銀行名稱（含代碼）</label><input id="set_bankname" value="' + escapeHtml(s.bank.bankName) + '" /></div>' +
+      '<div class="field"><label>帳號</label><input id="set_bankacc" value="' + escapeHtml(s.bank.account) + '" /></div>' +
+      '<div class="field"><label>戶名</label><input id="set_bankholder" value="' + escapeHtml(s.bank.holder) + '" /></div>' +
+      '<div class="field"><label>轉帳期限（小時）</label><input id="set_deadline" type="number" value="' + s.transferDeadlineHours + '" /></div>' +
+      "</div></div>" +
+      '<div class="card" style="margin-top:14px"><h3 style="margin-top:0">運費規則</h3>' +
+      '<div class="settings-grid">' +
+      '<div class="field"><label>宅配運費</label><input id="set_home_fee" type="number" value="' + s.shipping.home.fee + '" /></div>' +
+      '<div class="field"><label>宅配滿額免運（NT$）</label><input id="set_home_free" type="number" value="' + s.shipping.home.freeThreshold + '" /></div>' +
+      "</div>" +
+      '<div class="hint" style="margin-top:10px">台北市文山區自取固定免運費，不需另外設定。</div>' +
+      "</div>" +
+      '<div class="card" style="margin-top:14px"><h3 style="margin-top:0">後台密碼</h3>' +
+      '<div class="field" style="max-width:200px"><input id="set_pin" type="password" placeholder="留空則不變更" /></div>' +
+      "</div>" +
+      '<button class="primary-btn" style="margin-top:16px" data-action="admin-save-settings">儲存設定並寫回 Google Sheet</button>'
+    );
+  }
+
+  function renderAdminOrders() {
+    if (state.orders.length === 0) {
+      return '<div class="empty-note">目前 Google Sheet 的 Orders 分頁還沒有訂單紀錄。</div>';
+    }
+    var rows = state.orders
+      .slice()
+      .reverse()
+      .map(function (o) {
+        return (
+          "<tr><td>" + escapeHtml(o.id) + "</td><td>" + new Date(o.ts).toLocaleString("zh-TW") + "</td>" +
+          "<td>" + o.items.map(function (it) { return it.name + "×" + it.qty; }).join("、") + "</td>" +
+          '<td class="num">' + fmt(o.total) + "</td>" +
+          "<td>" + (o.deliveryMethod === "store" ? "店到店：" + escapeHtml(o.store) : o.deliveryMethod === "pickup" ? "文山區自取" : "廠商直送：" + escapeHtml(o.address)) + "</td>" +
+          "<td>" + escapeHtml(o.name) + " " + escapeHtml(o.phone) + "</td>" +
+          "<td>" + escapeHtml(o.ig) + "</td>" +
+          '<td><select data-action="order-status" data-oid="' + escapeHtml(o.id) + '">' +
+          ["待確認", "已確認", "已出貨", "取消"].map(function (st) { return '<option value="' + st + '"' + (o.status === st ? " selected" : "") + ">" + st + "</option>"; }).join("") +
+          "</select></td></tr>"
+        );
+      })
+      .join("");
+    return (
+      '<div class="admin-scroll"><table class="admintable"><thead><tr>' +
+      "<th>編號</th><th>時間</th><th>品項</th><th>總額</th><th>取貨</th><th>收件人</th><th>IG</th><th>狀態</th>" +
+      "</tr></thead><tbody>" + rows + "</tbody></table></div>"
+    );
+  }
+
+  /* ---------- event wiring ---------- */
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-action]");
+    if (!el) {
+      if (e.target.id === "sheet-overlay") { ui.sheet = null; renderSheet(); }
+      if (e.target.id === "nutri-overlay") { closeNutritionOverlay(); }
+      return;
+    }
+    var action = el.getAttribute("data-action");
+
+    if (action === "show-nutrition") {
+      var img = document.getElementById("nutri-overlay-img");
+      img.classList.remove("zoomed");
+      img.src = el.getAttribute("data-img");
+      document.getElementById("nutri-overlay").classList.add("show");
+    } else if (action === "close-nutrition") {
+      closeNutritionOverlay();
+    } else if (action === "toggle-nutrition-zoom") {
+      el.classList.toggle("zoomed");
+    } else if (action === "select-cat") {
+      ui.activeCat = el.getAttribute("data-cat");
+      render();
+      var tabsEl = document.getElementById("cat-tabs");
+      var activeTab = tabsEl && tabsEl.querySelector(".cat-tab.active");
+      if (activeTab) activeTab.scrollIntoView({ inline: "center", block: "nearest" });
+      // 已經往下滑過分類標籤時，切換後回到新分類的標題（扣掉頂欄＋標籤列的高度）
+      var head = document.querySelector(".cat-panel-head");
+      var stickyH = (document.querySelector(".topbar") || { offsetHeight: 0 }).offsetHeight + (tabsEl ? tabsEl.offsetHeight : 0) + 12;
+      if (head) {
+        var target = window.scrollY + head.getBoundingClientRect().top - stickyH;
+        if (window.scrollY > target) window.scrollTo({ top: target });
+      }
+    } else if (action === "goto-admin") {
+      location.hash = "#admin";
+      render();
+    } else if (action === "goto-shop") {
+      location.hash = "";
+      render();
+    } else if (action === "open-cart") {
+      ui.sheet = "cart";
+      renderSheet();
+    } else if (action === "close-sheet") {
+      ui.sheet = null;
+      renderSheet();
+    } else if (action === "goto-checkout") {
+      if (cartLines().length === 0) return;
+      ui.sheet = "checkout";
+      renderSheet();
+    } else if (action === "cart-remove") {
+      var rpid = Number(el.getAttribute("data-pid"));
+      cart = cart.filter(function (l) { return l.id !== rpid; });
+      renderSheet();
+    } else if (action === "qty-inc" || action === "qty-dec") {
+      var pid = Number(el.getAttribute("data-pid"));
+      var card = el.closest(".prod");
+      var disp = card.querySelector("[data-qty-display]");
+      var q = Number(disp.textContent);
+      q = action === "qty-inc" ? q + 1 : Math.max(1, q - 1);
+      disp.textContent = q;
+    } else if (action === "add-cart") {
+      var apid = Number(el.getAttribute("data-pid"));
+      var card2 = el.closest(".prod");
+      var q2 = Number(card2.querySelector("[data-qty-display]").textContent);
+      var existing = cart.find(function (l) { return l.id === apid; });
+      if (existing) existing.qty = q2;
+      else cart.push({ id: apid, qty: q2 });
+      showToast("已加入購物車");
+      renderTopbarOnly();
+    } else if (action === "set-method") {
+      ui.checkout.method = el.getAttribute("data-method");
+      renderSheet();
+    } else if (action === "submit-order") {
+      handleSubmitOrder();
+    } else if (action === "copy-order") {
+      var ta = document.getElementById("order-summary-text");
+      ta.style.position = "static";
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("已複製訂單內容");
+      } catch (err) {
+        showToast("複製失敗，請手動選取文字");
+      }
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+    } else if (action === "admin-unlock") {
+      var pinInput = document.getElementById("admin_pin").value;
+      gsRun("verifyAdminPin", pinInput).then(function (res) {
+        if (res && res.ok) {
+          adminPin = pinInput;
+          ui.adminUnlocked = true;
+          reloadData(true);
+        } else {
+          showToast("密碼錯誤");
+        }
+      }).catch(function () { showToast("驗證失敗，請檢查網路連線"); });
+    } else if (action === "admin-tab") {
+      ui.adminTab = el.getAttribute("data-tab");
+      render();
+    } else if (action === "admin-save") {
+      handleAdminSaveProducts();
+    } else if (action === "admin-save-settings") {
+      handleAdminSaveSettings();
+    } else if (action === "reload-data") {
+      reloadData(false).then(function () { showToast("已從 Google Sheet 重新整理"); });
+    }
+  });
+
+  document.addEventListener("change", function (e) {
+    var el = e.target;
+    if (el.matches(".spec-select")) {
+      var card = el.closest(".prod");
+      updateProductCardUI(card, Number(el.value));
+    } else if (el.matches("[data-action=toggle-active]")) {
+      var p = byId(Number(el.getAttribute("data-pid")));
+      if (p) p.active = el.checked;
+    } else if (el.matches("[data-action=toggle-stock]")) {
+      var p2 = byId(Number(el.getAttribute("data-pid")));
+      if (p2) p2.stock = el.checked;
+    } else if (el.matches("[data-action=edit-price]")) {
+      var p3 = byId(Number(el.getAttribute("data-pid")));
+      if (p3) p3.price = el.value === "" ? null : Number(el.value);
+    } else if (el.id === "admin_cat_filter") {
+      ui.adminCatFilter = el.value;
+      render();
+    } else if (el.id === "admin_active_only") {
+      ui.adminActiveOnly = el.checked;
+      render();
+    } else if (el.matches("[data-action=order-status]")) {
+      var oid = el.getAttribute("data-oid");
+      var order = state.orders.find(function (o) { return o.id === oid; });
+      var newStatus = el.value;
+      gsRun("updateOrderStatus", adminPin, oid, newStatus).then(function (res) {
+        if (res && res.ok) {
+          if (order) order.status = newStatus;
+          showToast("訂單狀態已更新");
+        } else {
+          showToast("更新失敗");
+        }
+      }).catch(function () { showToast("更新失敗，請檢查網路連線"); });
+    }
+  });
+
+  document.addEventListener("input", function (e) {
+    if (e.target.id === "admin_search") {
+      ui.adminSearch = e.target.value;
+      render();
+      var s = document.getElementById("admin_search");
+      if (s) { s.focus(); s.setSelectionRange(s.value.length, s.value.length); }
+    }
+  });
+
+  window.addEventListener("hashchange", render);
+
+  function renderTopbarOnly() {
+    var tb = document.querySelector(".topbar");
+    if (tb) tb.outerHTML = renderTopbar();
+    var fab = document.querySelector(".fab-cart");
+    if (fab) {
+      fab.innerHTML = '🧺<span class="fab-label">加入購物車</span>' + (cartTotalQty() > 0 ? '<span class="fab-badge num">' + cartTotalQty() + "</span>" : "");
+    }
+  }
+
+  function validateCheckout() {
+    var method = ui.checkout.method;
+    var name = document.getElementById("ck_name").value.trim();
+    var phone = document.getElementById("ck_phone").value.trim();
+    var ig = document.getElementById("ck_ig").value.trim();
+    if (!name || !phone || !ig) return "請填寫姓名、電話與 IG 帳號";
+    if (method === "home") {
+      var addr = document.getElementById("ck_address").value.trim();
+      if (!addr) return "請填寫收件地址";
+    }
+    return null;
+  }
+
+  function handleSubmitOrder() {
+    var err = validateCheckout();
+    var errBox = document.getElementById("ck_error");
+    if (err) {
+      errBox.textContent = err;
+      errBox.style.display = "block";
+      return;
+    }
+    var method = ui.checkout.method;
+    var subtotal = cartSubtotal();
+    var fee = shippingFee(method, subtotal);
+    var lines = cartLines();
+    var order = {
+      id: "GN" + Date.now().toString().slice(-8),
+      ts: new Date().toISOString(),
+      items: lines.map(function (l) { return { id: l.p.id, name: l.p.name, spec: l.p.spec, qty: l.qty, price: l.p.price }; }),
+      deliveryMethod: method,
+      name: document.getElementById("ck_name").value.trim(),
+      phone: document.getElementById("ck_phone").value.trim(),
+      ig: document.getElementById("ck_ig").value.trim(),
+      note: document.getElementById("ck_note").value.trim(),
+      subtotal: subtotal,
+      shipFee: fee,
+      total: subtotal + fee,
+      status: "待確認"
+    };
+    if (method === "home") {
+      order.address = document.getElementById("ck_address").value.trim();
+    }
+
+    var submitBtn = document.querySelector('[data-action="submit-order"]');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "送出中…"; }
+
+    gsRun("submitOrder", order).then(function (result) {
+      if (result && result.ok) {
+        order.subtotal = result.subtotal;
+        order.shipFee = result.shipFee;
+        order.total = result.total;
+      }
+      state.orders.push(order);
+      ui.lastOrder = order;
+      ui.saveNote = !result || !result.ok
+        ? "⚠️ 系統目前無法自動記錄此訂單，請務必按下方「複製訂單內容」，並私訊傳送給賣家 IG！"
+        : (result.priceAdjusted ? "系統已依 Google Sheet 目前的實際售價重新核對金額，應付總額如下方顯示。" : null);
+      cart = [];
+      ui.sheet = "confirm";
+      render();
+    }).catch(function () {
+      ui.lastOrder = order;
+      ui.saveNote = "⚠️ 系統目前無法自動記錄此訂單到 Google Sheet，請務必按下方「複製訂單內容」，並私訊傳送給賣家 IG，賣家才會收到你的訂單！";
+      cart = [];
+      ui.sheet = "confirm";
+      render();
+    });
+  }
+
+  function handleAdminSaveProducts() {
+    var btn = document.querySelector('[data-action="admin-save"]');
+    if (btn) { btn.disabled = true; btn.textContent = "儲存中…"; }
+    gsRun("saveProducts", adminPin, state.products).then(function (result) {
+      showToast(result && result.ok ? "已寫回 Google Sheet" : "寫入失敗，請稍後再試");
+      render();
+    }).catch(function () {
+      showToast("寫入失敗，請檢查網路連線");
+      render();
+    });
+  }
+
+  function handleAdminSaveSettings() {
+    var s = state.settings;
+    s.shopName = document.getElementById("set_shopname").value.trim() || s.shopName;
+    s.igHandle = document.getElementById("set_ig").value.trim() || s.igHandle;
+    s.bank.bankName = document.getElementById("set_bankname").value.trim();
+    s.bank.account = document.getElementById("set_bankacc").value.trim();
+    s.bank.holder = document.getElementById("set_bankholder").value.trim();
+    s.transferDeadlineHours = Number(document.getElementById("set_deadline").value) || 24;
+    s.shipping.home.fee = Number(document.getElementById("set_home_fee").value) || 0;
+    s.shipping.home.freeThreshold = Number(document.getElementById("set_home_free").value) || 0;
+    var newPin = document.getElementById("set_pin").value.trim();
+    s.placeholders = s.bank.bankName.indexOf("尚未設定") !== -1 || s.igHandle === "@your_ig_handle";
+
+    var payload = Object.assign({}, s);
+    if (newPin) payload.newAdminPin = newPin;
+
+    var btn = document.querySelector('[data-action="admin-save-settings"]');
+    if (btn) { btn.disabled = true; btn.textContent = "儲存中…"; }
+    gsRun("saveSettings", adminPin, payload).then(function (result) {
+      showToast(result && result.ok ? "設定已寫回 Google Sheet" : "寫入失敗，請稍後再試");
+      if (newPin && result && result.ok) { adminPin = newPin; }
+      document.getElementById("set_pin").value = "";
+      render();
+    }).catch(function () {
+      showToast("寫入失敗，請檢查網路連線");
+      render();
+    });
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
