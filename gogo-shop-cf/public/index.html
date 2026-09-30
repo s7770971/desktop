@@ -711,23 +711,9 @@
     { img: "/images/content/compare-overview.jpg", label: "濃縮／水解有何不同" },
     { img: "/images/content/compare-lines.jpg", label: "蛋白線總覽" }
   ];
-  var CAT_CONTENT_IMAGES = {
-    "濃縮乳清蛋白": [
-      { img: "/images/content/concentrate-1.jpg", label: "濃縮乳清蛋白特色" },
-      { img: "/images/content/concentrate-2.jpg", label: "濃縮乳清蛋白質含量" }
-    ],
-    "水解乳清蛋白": [
-      { img: "/images/content/hydrolysed-1.jpg", label: "水解乳清蛋白特色" },
-      { img: "/images/content/hydrolysed-2.jpg", label: "水解乳清蛋白數據" }
-    ],
-    "植物蛋白": [
-      { img: "/images/content/vegan-1.jpg", label: "植物蛋白來源" },
-      { img: "/images/content/vegan-2.jpg", label: "植物蛋白含量" }
-    ],
-    "微粉肌酸": [
-      { img: "/images/content/creatine-1.jpg", label: "肌酸特色" }
-    ]
-  };
+  // 分類上方的圖：已全部改用廠商銷售頁（images/manifest.json 的 "LP|分類名"），舊介紹圖停用
+  var CAT_CONTENT_IMAGES = {};
+
   var galleries = []; // 每次 render 重建：每一排內容圖是一組，可在看圖器裡左右滑
   function renderContentImages(list) {
     if (!list || !list.length) return "";
