@@ -35,6 +35,9 @@
   h1,h2,h3,.brand{ font-family:"Noto Sans TC",sans-serif; font-weight:700; text-wrap:balance; letter-spacing:-.01em; }
   a{color:inherit;}
   button{font-family:inherit;}
+  /* iPhone：連點按鈕不要觸發「雙擊放大」（兩指縮放照常可用） */
+  button, a, select, input, textarea, label, [data-action]{ touch-action:manipulation; }
+  .stepper, .stepper button, .add-btn, .cat-tab{ -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent; }
   .num{ font-variant-numeric:tabular-nums; }
   ::selection{ background:var(--accent); color:var(--accent-ink); }
   :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
@@ -154,7 +157,7 @@
   .prod-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
   .spec-select{
     width:100%; background:var(--surface-2); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm);
-    padding:10px 12px; font-size:14px; font-family:inherit; min-width:0; font-weight:700;
+    padding:10px 12px; font-size:16px; font-family:inherit; min-width:0; font-weight:700;
   }
   .price-wrap{ width:100%; }
   .price-block{ display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; }
@@ -242,7 +245,7 @@
   .field label{ font-size:12.5px; font-weight:600; color:var(--ink-soft); }
   .field input, .field select, .field textarea{
     background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm);
-    padding:10px 12px; font-size:14px; font-family:inherit; width:100%;
+    padding:10px 12px; font-size:16px; font-family:inherit; width:100%;
   }
   .field textarea{ resize:vertical; min-height:64px; }
   .toggle-group{ display:flex; gap:8px; }
@@ -288,12 +291,12 @@
   .tabbar button{ background:none; border:0; padding:10px 4px; margin-right:14px; font-weight:600; font-size:13.5px; color:var(--ink-soft); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; }
   .tabbar button.active{ color:var(--ink); border-color:var(--accent); }
   .admin-toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
-  .admin-toolbar input, .admin-toolbar select{ background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm); padding:8px 10px; font-size:13px; }
+  .admin-toolbar input, .admin-toolbar select{ background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:var(--radius-sm); padding:8px 10px; font-size:16px; }
   table.admintable{ width:100%; border-collapse:collapse; font-size:12.5px; }
   table.admintable th{ text-align:left; padding:8px 6px; color:var(--ink-soft); font-weight:600; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); }
   table.admintable td{ padding:7px 6px; border-bottom:1px solid var(--line); vertical-align:middle; }
   table.admintable tr.admin-row-group-start td{ border-top:2px solid var(--accent-2); }
-  table.admintable input[type=number]{ width:70px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:4px 6px; font-size:12.5px; }
+  table.admintable input[type=number]{ width:70px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:4px 6px; font-size:16px; }
   .admin-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); }
   .switch{ position:relative; display:inline-block; width:36px; height:20px; flex:none; }
   .switch input{ opacity:0; width:0; height:0; }
@@ -1117,7 +1120,7 @@
       '<div class="admin-lock">' +
       '<h2 style="margin:0">賣家後台</h2>' +
       '<p class="muted-block">輸入管理密碼進入（密碼存在 Google Sheet 的 Settings 分頁，僅作簡易防呆）</p>' +
-      '<input id="admin_pin" type="password" inputmode="numeric" placeholder="輸入密碼" style="max-width:200px;text-align:center;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)" />' +
+      '<input id="admin_pin" type="password" inputmode="numeric" placeholder="輸入密碼" style="max-width:200px;text-align:center;padding:10px;font-size:16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)" />' +
       '<button class="primary-btn" style="max-width:200px" data-action="admin-unlock">進入後台</button>' +
       '<button class="link-btn" data-action="goto-shop">回到賣場</button>' +
       "</div>"
