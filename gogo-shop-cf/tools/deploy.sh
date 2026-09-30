@@ -18,8 +18,12 @@ curl -fsSL "$RAW/tools/build_images.mjs" -o tools/build_images.mjs
 curl -fsSL "$RAW/tools/image_map.json" -o tools/image_map.json
 grep -q "imageManifest" public/index.html.new && mv public/index.html.new public/index.html
 
-echo "3/4 產生商品圖（約 1 到 3 分鐘）"
-node tools/build_images.mjs "$IMGSRC"
+if [ "$ONLY" = "page" ]; then
+  echo "3/4 只更新網頁，沿用現有圖片"
+else
+  echo "3/4 產生商品圖（約 1 到 3 分鐘）"
+  node tools/build_images.mjs "$IMGSRC"
+fi
 fi
 if [ "$ONLY" = "build" ]; then echo "只產生圖片，還沒部署。"; exit 0; fi
 

@@ -283,8 +283,13 @@
   .notice-title{ margin-top:16px; font-size:15px; font-weight:900; color:#FF5A4F; }
   .confirm-card > .substeps{ list-style:disc; margin:6px 0 0; padding-left:20px; font-size:13px; display:flex; flex-direction:column; gap:4px; }
   .confirm-card > .substeps li{ color:var(--ink); font-weight:600; }
-  .step-btns{ display:flex; flex-direction:column; gap:8px; margin:14px 0; }
-  .step-btns .primary-btn{ display:block; text-align:center; text-decoration:none; box-sizing:border-box; }
+  /* 步驟1、步驟2 並排同一列，等寬等高 */
+  .step-btns{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0; }
+  .step-btns .ghost-btn, .step-btns .primary-btn{
+    width:100%; margin:0; display:flex; align-items:center; justify-content:center; text-align:center;
+    text-decoration:none; box-sizing:border-box; min-height:56px; padding:10px 8px; line-height:1.35; font-size:14px; font-weight:900;
+  }
+  .step-btns .ghost-btn{ border:1.5px solid var(--accent); color:var(--accent); }
 
   .admin-lock{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh; gap:14px; padding:20px; text-align:center; }
   .tabbar{ display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; }
@@ -1068,8 +1073,8 @@
     var igUrl = "https://www.instagram.com/" + escapeHtml(String(state.settings.igHandle || "").replace(/^@/, ""));
     var stepButtons =
       '<div class="step-btns">' +
-      '<button class="ghost-btn" data-action="copy-order">步驟1. 請點我複製內容</button>' +
-      '<a class="primary-btn" href="' + igUrl + '" target="_blank" rel="noopener">步驟2. 點此跳轉找 MO 去</a>' +
+      '<button class="ghost-btn" data-action="copy-order"><span>步驟1.<br>請點我複製內容</span></button>' +
+      '<a class="primary-btn" href="' + igUrl + '" target="_blank" rel="noopener"><span>步驟2.<br>點此跳轉找 MO 去</span></a>' +
       "</div>";
     return (
       '<div class="sheet-head"><h2>訂單已送出</h2><button class="icon-btn" data-action="close-sheet">✕</button></div>' +
