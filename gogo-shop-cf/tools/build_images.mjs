@@ -10,8 +10,9 @@ import path from "node:path";
 import os from "node:os";
 import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const srcRoot = process.argv[2];
 if (!srcRoot || !fs.existsSync(srcRoot)) {
   console.error("找不到圖檔資料夾：" + srcRoot);
