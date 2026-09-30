@@ -65,6 +65,16 @@ async function build(source) {
       const file = path.join(srcRoot, source.slice(4));
       if (!fs.existsSync(file)) throw new Error("檔案不存在：" + source.slice(4));
       toJpeg(file, dst);
+    } else if (source.startsWith("url:")) {
+      // 已人工核對過的官網商品頁，直接抓 og:image
+      const page = await fetchText(source.slice(4));
+      const img = (page.match(/<meta[^>]+property="og:image"[^>]+content="([^"?]+)/) ||
+                   page.match(/<meta[^>]+content="([^"?]+)"[^>]+property="og:image"/) || [])[1];
+      if (!img) throw new Error("頁面沒有商品圖：" + source.slice(4));
+      const tmp = path.join(tmpDir, name + (path.extname(img) || ".jpg"));
+      await download(img, tmp);
+      toJpeg(tmp, dst);
+      report.official.push(source.slice(4) + " → " + img);
     } else if (source.startsWith("official:")) {
       const found = await resolveOfficial(source.slice(9));
       const tmp = path.join(tmpDir, name + path.extname(found.url).split("?")[0]);

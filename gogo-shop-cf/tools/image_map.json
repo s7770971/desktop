@@ -64,11 +64,9 @@
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/WPC_500g優格多多_營養標示 (1).png"
  },
  "水解乳清蛋白-可可歐蕾|500g": {
-  "main": "official:水解乳清 可可歐蕾|可可歐蕾",
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/coco olay.png"
  },
  "水解乳清蛋白-木瓜牛奶|500g": {
-  "main": "official:水解乳清 木瓜牛奶|木瓜牛奶",
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/papaya milk.png"
  },
  "水解乳清蛋白-桂花烏龍|500g": {
@@ -76,7 +74,6 @@
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/WPC_500g 桂花烏龍_營養標示.png"
  },
  "水解乳清蛋白-海鹽焦糖|500g": {
-  "main": "official:水解乳清 海鹽焦糖|海鹽焦糖",
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/salted caramel.png"
  },
  "水解乳清蛋白-生椰拿鐵|500g": {
@@ -84,7 +81,6 @@
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/WPH_生椰拿鐵_商品圖_500g_營養標.png"
  },
  "水解乳清蛋白-綠豆沙牛奶|500g": {
-  "main": "official:水解乳清 綠豆沙牛奶|綠豆沙牛奶",
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/mung bean pasta milk.png"
  },
  "水解乳清蛋白-蜂蜜檸檬|500g": {
@@ -92,7 +88,6 @@
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/WPC_500g蜂蜜檸檬_營養標示 (1).png"
  },
  "水解乳清蛋白-香蕉牛奶|500g": {
-  "main": "official:水解乳清 香蕉牛奶|香蕉牛奶",
   "nutri": "src:果果能量_水解乳清系列/產品圖/500G 立袋/營養標/banana milk.png"
  },
  "水解乳清蛋白-優格多多|35g/包": {
@@ -581,7 +576,7 @@
   "nutri": "src:果果能量_PRO EAAs 必需胺基酸/營養標示圖/梅子綠茶.jpg"
  },
  "PROEAAs必需胺基酸-莓果爆擊|420g/包": {
-  "main": "official:PRO EAAs 莓果爆擊|莓果爆擊",
+  "main": "url:https://www.gogonuts.best/products/pro-eaas-berries",
   "nutri": "src:果果能量_PRO EAAs 必需胺基酸/營養標示圖/莓果爆擊.png"
  },
  "PROEAAs必需胺基酸-蜜桃鐵觀音|420g/包": {
@@ -597,47 +592,38 @@
   "nutri": "src:果果能量_葡萄糖粉/葡萄糖420_營養標-01 (2).png"
  },
  "300億膠原蛋白益生菌|30包/袋": {
-  "main": "official:300億膠原蛋白益生菌|300億膠原蛋白益生菌",
   "nutri": "src:守衛者/營養標示/300億膠原蛋白益生菌 (30包／袋).jpg"
  },
  "90%Omega-3挪威高濃度魚油|60顆/盒": {
-  "main": "official:90% Omega-3 挪威高濃度魚油|Omega-3",
   "nutri": "src:守衛者/營養標示/90_ Omega-3 挪威高濃度魚油 ( 60顆／盒 ).jpg"
  },
  "Chromium酵母鉻|500mg/30粒": {
-  "main": "official:Chromium 酵母鉻|Chromium",
   "nutri": "src:守衛者/營養標示/Chromium 酵母鉻(500mg／30粒)【CAP】.jpg"
  },
  "L-carnitine左旋肉鹼|465mg/30粒": {
-  "main": "official:L-carnitine左旋肉鹼|L-carnitine",
   "nutri": "src:守衛者/營養標示/L-carnitine左旋肉鹼 (465mg／30粒) 【CAP】.jpg"
  },
  "Multi-Enzyme綜合消化酵素|400mg/15粒": {
-  "main": "official:Multi-Enzyme 綜合消化酵素|Multi-Enzyme",
   "nutri": "src:守衛者/營養標示/Multi-Enzyme 綜合消化酵素(400mg／15粒)【CAP】.jpg"
  },
  "Multi-VitaminB綜合維生素B群|480mg/30粒": {
-  "main": "official:Multi-Vitamin B 綜合維生素B群|Multi-Vitamin B",
   "nutri": "src:守衛者/營養標示/Multi-Vitamin B 綜合維生素B群(480mg／30粒)【CAP】.jpg"
  },
  "Taurine牛磺酸|500mg/30粒": {
-  "main": "official:Taurine 牛磺酸|Taurine",
   "nutri": "src:守衛者/營養標示/Taurine 牛磺酸 (500mg／30粒).jpg"
  },
  "UC2+HA固力穩|500mg/30粒": {
-  "main": "official:UC2+HA 固力穩|UC2 + HA",
   "nutri": "src:守衛者/營養標示/UC2 + HA 固力穩 (500mg／30粒).jpg"
  },
  "強勁瑪卡膠囊|60顆/盒": {
-  "main": "official:強勁瑪卡膠囊|MACA",
   "nutri": "src:守衛者/營養標示/MACA 強勁瑪卡膠囊 ( 60顆／罐 ).jpg"
  },
  "輔酵素Q10|400mg/15粒": {
-  "main": "official:輔酵素 Q10|輔酵素 Q10",
+  "main": "url:https://www.gogonuts.best/products/q10",
   "nutri": "src:守衛者/營養標示/輔酵素 Q10(400mg／15粒) 【CAP】.jpg"
  },
  "Glutamine+VitaminD3麩醯胺酸+維生素D3(/袋)|300g": {
-  "main": "official:Glutamine+Vitamin D3 麩醯胺酸+維生素D3|Glutamine",
+  "main": "url:https://www.gogonuts.best/products/glutamine",
   "nutri": "src:守衛者/營養標示/Glutamine+Vitamin D3 麩醯胺酸+維生素D3 (300g／袋).jpg"
  },
  "無調味綜合堅果|30g/包": {
@@ -688,10 +674,10 @@
   "nutri": "src:果果能量_蛋白香酥脆/義式紅醬披薩_營養標-07.png"
  },
  "麥脆朵朵-濃布朗尼(單包)|40g/包": {
-  "main": "official:麥脆朵朵 濃布朗尼|濃布朗尼"
+  "main": "url:https://www.gogonuts.best/products/oatmeal-brownie-40g"
  },
  "麥脆朵朵-黑糖肉桂(單包)|40g/包": {
-  "main": "official:麥脆朵朵 黑糖肉桂|黑糖肉桂"
+  "main": "url:https://www.gogonuts.best/products/oatmeal-cinnamon-40g"
  },
  "堅果能量棒-黑巧瑪卡|10入/盒": {
   "main": "src:果果能量_堅果能量棒/黑巧瑪卡/新包裝_黑巧瑪卡盒裝.jpg",
@@ -738,13 +724,13 @@
   "nutri": "src:果果能量_燕麥脆片40g-包/燕麥脆片-金沙鹹蛋-營養標示.jpg"
  },
  "麥脆朵朵-濃布朗尼(50包)|40克/包": {
-  "main": "official:麥脆朵朵 濃布朗尼|濃布朗尼"
+  "main": "url:https://www.gogonuts.best/products/oatmeal-brownie-40g"
  },
  "麥脆朵朵-黑糖肉桂(50包)|40克/包": {
-  "main": "official:麥脆朵朵 黑糖肉桂|黑糖肉桂"
+  "main": "url:https://www.gogonuts.best/products/oatmeal-cinnamon-40g"
  },
  "BlenderBottle316不鏽鋼彈簧球|": {
-  "main": "official:Blender Bottle 316 不鏽鋼彈簧球|Blender Bottle 316 不鏽鋼彈簧球"
+  "main": "url:https://www.gogonuts.best/products/ball"
  },
  "BlenderBottle不鏽鋼吸管隨行杯|【Tumbler夜幕星空】|710ml": {
   "main": "src:其他周邊_Blender Bottle 不鏽鋼吸管隨行杯/Tumbler-24oz-Midnight夜幕星空-600x600.png"
@@ -758,55 +744,29 @@
  "BlenderBottle不鏽鋼吸管隨行杯|【Tumbler曙光碧影】|710ml": {
   "main": "src:其他周邊_Blender Bottle 不鏽鋼吸管隨行杯/Tumbler-24oz-Sea-Glass曙光碧影-600x600.png"
  },
- "BlenderBottle不鏽鋼搖搖杯【Sleek冷杉拿鐵】|25oz": {
-  "main": "official:Blender Bottle 不鏽鋼搖搖杯|冷杉拿鐵"
- },
- "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻丁香紫】|25oz": {
-  "main": "official:Blender Bottle 不鏽鋼搖搖杯|夢幻丁香紫"
- },
- "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻棉花糖】|25oz": {
-  "main": "official:Blender Bottle 不鏽鋼搖搖杯|夢幻棉花糖"
- },
- "BlenderBottle不鏽鋼搖搖杯【Sleek奶油白】|25oz": {
-  "main": "official:Blender Bottle 不鏽鋼搖搖杯|奶油白"
- },
- "BlenderBottle搖搖杯【Classic奶茶】|20oz": {
-  "main": "official:Blender Bottle 搖搖杯|奶茶"
- },
- "BlenderBottle搖搖杯【Classic層白雲】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|層白雲"
- },
- "BlenderBottle搖搖杯【Classic桃開心】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|桃開心"
- },
- "BlenderBottle搖搖杯【Pro午夜黑】|24oz": {
-  "main": "official:Blender Bottle 搖搖杯|午夜黑"
- },
- "BlenderBottle搖搖杯【Pro太空灰】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|太空灰"
- },
- "BlenderBottle搖搖杯【Pro青瓷綠】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|青瓷綠"
- },
- "BlenderBottle搖搖杯【StradaTritan午夜黑】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|午夜黑"
- },
- "BlenderBottle搖搖杯【StradaTritan薄紅紫】|24oz": {
-  "main": "official:Blender Bottle 搖搖杯|薄紅紫"
- },
- "BlenderBottle搖搖杯【StradaTritan薄紅紫】|28oz": {
-  "main": "official:Blender Bottle 搖搖杯|薄紅紫"
- },
+ "BlenderBottle不鏽鋼搖搖杯【Sleek冷杉拿鐵】|25oz": {},
+ "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻丁香紫】|25oz": {},
+ "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻棉花糖】|25oz": {},
+ "BlenderBottle不鏽鋼搖搖杯【Sleek奶油白】|25oz": {},
+ "BlenderBottle搖搖杯【Classic奶茶】|20oz": {},
+ "BlenderBottle搖搖杯【Classic層白雲】|28oz": {},
+ "BlenderBottle搖搖杯【Classic桃開心】|28oz": {},
+ "BlenderBottle搖搖杯【Pro午夜黑】|24oz": {},
+ "BlenderBottle搖搖杯【Pro太空灰】|28oz": {},
+ "BlenderBottle搖搖杯【Pro青瓷綠】|28oz": {},
+ "BlenderBottle搖搖杯【StradaTritan午夜黑】|28oz": {},
+ "BlenderBottle搖搖杯【StradaTritan薄紅紫】|24oz": {},
+ "BlenderBottle搖搖杯【StradaTritan薄紅紫】|28oz": {},
  "HyperNutro電動攪拌杯--白|750ml": {
-  "main": "official:Hyper Nutro 電動攪拌杯|白"
+  "main": "url:https://www.gogonuts.best/products/hypernutro-white"
  },
  "HyperNutro電動攪拌杯--粉|750ml": {
-  "main": "official:Hyper Nutro 電動攪拌杯|粉"
+  "main": "url:https://www.gogonuts.best/products/hypernutro-pink"
  },
  "HyperNutro電動攪拌杯--藍|750ml": {
-  "main": "official:Hyper Nutro 電動攪拌杯|藍"
+  "main": "url:https://www.gogonuts.best/products/hypernutro-blue"
  },
  "HyperNutro電動攪拌杯--黑|750ml": {
-  "main": "official:Hyper Nutro 電動攪拌杯|黑"
+  "main": "url:https://www.gogonuts.best/products/hypernutro-black"
  }
 }
