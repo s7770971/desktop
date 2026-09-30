@@ -318,7 +318,7 @@
 </head>
 <body>
 <div id="app">
-  <div class="loading-screen"><div class="spinner"></div><div>連接 Google Sheet 資料庫中…</div></div>
+  <div class="loading-screen"><div class="spinner"></div><div>熱身一下，商品馬上出場 🏃</div></div>
 </div>
 <div class="sheet-overlay" id="sheet-overlay"></div>
 <div class="sheet" id="sheet"></div>
@@ -335,6 +335,7 @@
   var SHEET_URL = "https://docs.google.com/spreadsheets/d/16JHVoqK2a-7TGSr6ItQposLfMGVRc8L6kkA23DNoqcs/edit";
   var API_URL = "https://script.google.com/macros/s/AKfycbwJmFUXQuj9My2gNI7xCdzc_u0657tmsRTewY9aJQ_sLnoNsXHxsGZh8oogLQ6Em633/exec";
   var CLOSE_DATE = "10/5"; // 結單日期，開新團時改這裡
+  var LOAD_ERROR_TEXT = "商品暫時載不出來，請重新整理頁面試試；還是不行的話，私訊 IG @mohuang_ig 🙏";
   var WRITE_FUNCTIONS ={ submitOrder: 1, saveProducts: 1, saveSettings: 1, updateOrderStatus: 1 };
   var CAT_SUBTITLES = {
     "微粉肌酸": "補充肌酸不只能增強運動爆發力與肌肉量，近期研究也發現，它對改善大腦認知、緩解睡眠不足的疲勞、預防肌少症都有幫助。",
@@ -568,14 +569,17 @@
       state = data;
       render();
     }).catch(function (err) {
-      ui.loadError = (err && err.message) || "無法讀取 Google Sheet 資料，請確認 Apps Script 已部署，且已執行過一次 setup()。";
+      if (window.console) console.error(err); // 技術細節只留在瀏覽器主控台，客人看到的是白話說明
+      ui.loadError = LOAD_ERROR_TEXT;
       renderLoadError();
     });
   }
 
   function renderLoadError() {
     document.getElementById("app").innerHTML =
-      '<div class="loading-screen"><div style="font-size:28px">⚠️</div><div>' + escapeHtml(ui.loadError) + "</div></div>";
+      '<div class="loading-screen"><div style="font-size:28px">⚠️</div><div>' +
+      escapeHtml(ui.loadError).replace("@mohuang_ig", '<a href="https://www.instagram.com/mohuang_ig" target="_blank" rel="noopener" style="color:var(--accent)">@mohuang_ig</a>') +
+      "</div></div>";
   }
 
   function reloadData(showSpinner) {
@@ -587,7 +591,8 @@
       state = data;
       render();
     }).catch(function (err) {
-      ui.loadError = (err && err.message) || "重新整理失敗，請確認網路連線後重新整理頁面再試一次。";
+      if (window.console) console.error(err);
+      ui.loadError = LOAD_ERROR_TEXT;
       renderLoadError();
       throw err;
     });
@@ -597,7 +602,7 @@
   function render() {
     var app = document.getElementById("app");
     if (!state) {
-      app.innerHTML = '<div class="loading-screen"><div class="spinner"></div><div>連接 Google Sheet 資料庫中…</div></div>';
+      app.innerHTML = '<div class="loading-screen"><div class="spinner"></div><div>熱身一下，商品馬上出場 🏃</div></div>';
       return;
     }
     var hash = location.hash || "";
