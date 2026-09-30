@@ -314,6 +314,30 @@
   .muted-block{ color:var(--ink-soft); font-size:12.5px; }
   .sheet-link{ font-size:11.5px; color:var(--ink-soft); }
   .sheet-link a{ text-decoration:underline; }
+  .content-strip-item.lp{ width:130px; }
+  .content-strip-item.lp img{ height:220px; object-position:top; }
+  /* 看圖器 */
+  .gal{ position:fixed; inset:0; z-index:70; background:#000; display:none; flex-direction:column; }
+  .gal.show{ display:flex; }
+  .gal-head{ display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#0D0D0F; border-bottom:1px solid var(--line); }
+  .gal-count{ font-weight:900; font-size:15px; color:var(--ink); }
+  .gal-close{ background:var(--accent); color:var(--accent-ink); border:0; border-radius:999px; padding:8px 14px; font-weight:900; font-size:14px; cursor:pointer; font-family:inherit; }
+  .gal-track{ flex:1; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .gal-track::-webkit-scrollbar{ display:none; }
+  .gal-slide{ flex:0 0 100%; height:100%; overflow-y:auto; scroll-snap-align:start; -webkit-overflow-scrolling:touch; }
+  .gal-slide img{ display:block; width:100%; max-width:760px; margin:0 auto; background:#fff; }
+  .gal-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:0; cursor:pointer;
+    background:rgba(255,106,26,.92); color:var(--accent-ink); font-size:26px; font-weight:900; line-height:1;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(0,0,0,.5);
+  }
+  .gal-prev{ left:10px; } .gal-next{ right:10px; }
+  .gal-hint{
+    position:absolute; left:50%; bottom:28px; transform:translateX(-50%); background:rgba(0,0,0,.78); color:#fff;
+    padding:10px 16px; border-radius:999px; font-size:13.5px; font-weight:800; white-space:nowrap;
+    opacity:0; transition:opacity .3s ease; pointer-events:none;
+  }
+  .gal-hint.show{ opacity:1; }
 </style>
 </head>
 <body>
@@ -325,6 +349,13 @@
 <div class="nutri-overlay" id="nutri-overlay">
   <button type="button" class="nutri-close" data-action="close-nutrition">✕</button>
   <div class="nutri-overlay-scroll"><img id="nutri-overlay-img" src="" alt="營養標示" data-action="toggle-nutrition-zoom"></div>
+</div>
+<div class="gal" id="gal">
+  <div class="gal-head"><span class="gal-count num" id="gal-count"></span><button type="button" class="gal-close" data-action="close-gallery">✕ 關閉</button></div>
+  <div class="gal-track" id="gal-track"></div>
+  <button type="button" class="gal-arrow gal-prev" id="gal-prev" data-action="gal-prev" aria-label="上一張">‹</button>
+  <button type="button" class="gal-arrow gal-next" id="gal-next" data-action="gal-next" aria-label="下一張">›</button>
+  <div class="gal-hint" id="gal-hint">← 左右滑動看下一張 →</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -601,6 +632,7 @@
   /* ---------- rendering ---------- */
   function render() {
     var app = document.getElementById("app");
+    galleries = [];
     if (!state) {
       app.innerHTML = '<div class="loading-screen"><div class="spinner"></div><div>熱身一下，商品馬上出場 🏃</div></div>';
       return;
@@ -688,17 +720,73 @@
       { img: "/images/content/creatine-1.jpg", label: "肌酸特色" }
     ]
   };
+  var galleries = []; // 每次 render 重建：每一排內容圖是一組，可在看圖器裡左右滑
   function renderContentImages(list) {
     if (!list || !list.length) return "";
-    var items = list.map(function (c) {
+    var gid = galleries.push(list.map(function (c) { return c.img; })) - 1;
+    var items = list.map(function (c, i) {
       return (
-        '<div class="content-strip-item" data-action="show-nutrition" data-img="' + escapeHtml(c.img) + '">' +
-        '<img src="' + escapeHtml(c.img) + '" alt="' + escapeHtml(c.label) + '" loading="lazy">' +
+        '<div class="content-strip-item' + (c.lp ? " lp" : "") + '" data-action="open-gallery" data-gid="' + gid + '" data-idx="' + i + '">' +
+        '<img src="' + escapeHtml(c.img) + '" alt="' + escapeHtml(c.label || "") + '" loading="lazy">' +
         "</div>"
       );
     }).join("");
     return '<div class="content-strip-scroll">' + items + "</div>";
   }
+  // 分類的銷售頁（由 images/manifest.json 的 "LP|分類名" 提供），接在固定介紹圖後面
+  function catContentImages(cat) {
+    var lp = (imageManifest["LP|" + cat] || []).map(function (src, i) { return { img: src, label: cat + " 介紹 " + (i + 1), lp: 1 }; });
+    return (CAT_CONTENT_IMAGES[cat] || []).concat(lp);
+  }
+
+  /* ---------- 看圖器：左右滑換張、長圖可上下捲 ---------- */
+  var gal = { list: [], idx: 0 };
+  function openGallery(list, idx) {
+    gal.list = list; gal.idx = idx;
+    var track = document.getElementById("gal-track");
+    track.innerHTML = list.map(function (src) {
+      return '<div class="gal-slide"><img src="' + escapeHtml(src) + '" alt="" loading="lazy"></div>';
+    }).join("");
+    document.getElementById("gal").classList.add("show");
+    document.body.style.overflow = "hidden";
+    gal.opening = true; // 開啟時跳到指定張數也會觸發捲動，這段期間不要把提示關掉
+    track.scrollLeft = idx * track.clientWidth;
+    setTimeout(function () { gal.opening = false; }, 400);
+    updateGalleryCount();
+    var hint = document.getElementById("gal-hint");
+    if (list.length > 1) {
+      hint.classList.add("show");
+      clearTimeout(openGallery._h);
+      openGallery._h = setTimeout(function () { hint.classList.remove("show"); }, 2200);
+    }
+  }
+  function closeGallery() {
+    document.getElementById("gal").classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  function updateGalleryCount() {
+    var track = document.getElementById("gal-track");
+    gal.idx = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+    document.getElementById("gal-count").textContent = (gal.idx + 1) + " / " + gal.list.length;
+    document.getElementById("gal-prev").style.visibility = gal.idx > 0 ? "" : "hidden";
+    document.getElementById("gal-next").style.visibility = gal.idx < gal.list.length - 1 ? "" : "hidden";
+  }
+  function galleryGo(step) {
+    var track = document.getElementById("gal-track");
+    var next = Math.max(0, Math.min(gal.list.length - 1, gal.idx + step));
+    track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
+  }
+  document.getElementById("gal-track").addEventListener("scroll", function () {
+    clearTimeout(updateGalleryCount._h);
+    updateGalleryCount._h = setTimeout(updateGalleryCount, 60);
+    if (!gal.opening) document.getElementById("gal-hint").classList.remove("show");
+  }, { passive: true });
+  document.addEventListener("keydown", function (e) {
+    if (!document.getElementById("gal").classList.contains("show")) return;
+    if (e.key === "Escape") closeGallery();
+    if (e.key === "ArrowRight") galleryGo(1);
+    if (e.key === "ArrowLeft") galleryGo(-1);
+  });
 
   function renderShop() {
     var placeholderBanner = state.settings.placeholders
@@ -741,7 +829,7 @@
         (CAT_SUBTITLES[cat] ? '<p class="cat-sub">' + escapeHtml(CAT_SUBTITLES[cat]) + "</p>" : "") +
         '<span class="cat-count">共 ' + Object.keys(subs).length + " 種包裝</span>" +
         "</div>" +
-        renderContentImages(CAT_CONTENT_IMAGES[cat]) +
+        renderContentImages(catContentImages(cat)) +
         '<div class="prod-grid">' + cards + "</div>";
     }
     return (
@@ -1190,6 +1278,12 @@
       closeNutritionOverlay();
     } else if (action === "toggle-nutrition-zoom") {
       el.classList.toggle("zoomed");
+    } else if (action === "open-gallery") {
+      openGallery(galleries[Number(el.getAttribute("data-gid"))] || [], Number(el.getAttribute("data-idx")) || 0);
+    } else if (action === "close-gallery") {
+      closeGallery();
+    } else if (action === "gal-prev" || action === "gal-next") {
+      galleryGo(action === "gal-next" ? 1 : -1);
     } else if (action === "tabs-next") {
       var scroller = document.getElementById("cat-tabs");
       if (scroller) scroller.scrollBy({ left: scroller.clientWidth * 0.7, behavior: "smooth" });

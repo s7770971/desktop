@@ -52,6 +52,10 @@ async function download(url, dst) {
 function toJpeg(src, dst) {
   execFileSync("sips", ["-Z", "1400", "-s", "format", "jpeg", "-s", "formatOptions", "82", src, "--out", dst], { stdio: "ignore" });
 }
+// 銷售頁是直長圖：固定寬度 1000（不能用 -Z 最長邊，會把寬度縮得太小看不清楚字）
+function toJpegWide(src, dst) {
+  execFileSync("sips", ["--resampleWidth", "1000", "-s", "format", "jpeg", "-s", "formatOptions", "80", src, "--out", dst], { stdio: "ignore" });
+}
 
 const done = {}; // 來源 → 輸出網址（同一張圖只處理一次）
 const report = { ok: 0, missing: [], official: [] };
@@ -61,7 +65,11 @@ async function build(source) {
   const name = crypto.createHash("sha1").update(source).digest("hex").slice(0, 12) + ".jpg";
   const dst = path.join(outDir, name);
   try {
-    if (source.startsWith("src:")) {
+    if (source.startsWith("lp:")) {
+      const file = path.join(srcRoot, source.slice(3));
+      if (!fs.existsSync(file)) throw new Error("檔案不存在：" + source.slice(3));
+      toJpegWide(file, dst);
+    } else if (source.startsWith("src:")) {
       const file = path.join(srcRoot, source.slice(4));
       if (!fs.existsSync(file)) throw new Error("檔案不存在：" + source.slice(4));
       toJpeg(file, dst);
@@ -101,6 +109,13 @@ async function build(source) {
 
 const manifest = {};
 for (const [key, entry] of Object.entries(map)) {
+  if (Array.isArray(entry)) { // "LP|分類名"：一整套銷售頁
+    const urls = [];
+    for (const src of entry) { const u = await build(src); if (u) urls.push(u); }
+    if (urls.length) manifest[key] = urls;
+    console.log("銷售頁 " + key + "：" + urls.length + " / " + entry.length + " 張");
+    continue;
+  }
   const main = await build(entry.main);
   const nutri = await build(entry.nutri);
   if (main || nutri) {
@@ -114,7 +129,7 @@ fs.writeFileSync(path.join(root, "public/images/manifest.json"), JSON.stringify(
 fs.rmSync(tmpDir, { recursive: true, force: true });
 
 const lines = [
-  "有圖的商品：" + report.ok + " / " + Object.keys(map).length,
+  "有圖的商品：" + report.ok + " / " + Object.keys(map).filter((k) => !k.startsWith("LP|")).length,
   "從官網抓的圖：",
   ...report.official.map((s) => "  " + s),
   "失敗：",
