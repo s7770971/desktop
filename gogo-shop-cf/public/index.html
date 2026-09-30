@@ -346,6 +346,15 @@
     opacity:0; transition:opacity .3s ease; pointer-events:none;
   }
   .gal-hint.show{ opacity:1; }
+  .spec-chips{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .spec-chips-label{ font-size:12px; color:var(--ink-soft); font-weight:800; margin-right:2px; }
+  .spec-chip{
+    padding:9px 18px; border-radius:999px; border:1.5px solid var(--line); background:var(--surface-2);
+    color:var(--ink); font-weight:900; font-size:15px; cursor:pointer; font-family:inherit;
+  }
+  .spec-chip.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .spec-now{ display:flex; align-items:center; gap:8px; }
+  .spec-now-val{ display:inline-block; padding:7px 14px; border-radius:999px; background:var(--surface-2); border:1.5px solid var(--line); font-weight:900; font-size:15px; }
 </style>
 </head>
 <body>
@@ -382,14 +391,16 @@
     "濃縮乳清蛋白": "經典配方，天天喝的蛋白基本款",
     "濃縮乳清雙蛋白PLUS": "雙蛋白＋膳食纖維，加碼升級版",
     "植物蛋白": "全素植物蛋白＋睡前緩釋酪蛋白，特殊需求配方",
-    "保健品/必須氨基酸/葡萄糖": "日常保養小幫手＋PRO EAAs 訓練恢復配方＋葡萄糖能量補給，一次補齊",
+    "必需胺基酸": "PRO EAAs 必需胺基酸，訓練恢復配方",
+    "葡萄糖／丙胺酸": "葡萄糖能量補給＋丙胺酸，運動前後的粉狀補充",
+    "保健品": "日常保養小幫手：益生菌、魚油、B 群、Q10 等",
     "搖搖杯": "不鏽鋼保溫款／一般塑膠款，訓練配備一次備齊",
     "零食": "威化餅、香酥脆、蛋白棒、燕麥脆片一次補齊，訓練之餘也能吃點心"
   };
   var CAT_BADGES = {
     "微粉肌酸": "大推薦"
   };
-  var CAT_ORDER = ["微粉肌酸", "水解乳清蛋白", "濃縮乳清雙蛋白PLUS", "濃縮乳清蛋白", "植物蛋白", "保健品/必須氨基酸/葡萄糖", "搖搖杯", "零食"];
+  var CAT_ORDER = ["微粉肌酸", "水解乳清蛋白", "濃縮乳清雙蛋白PLUS", "濃縮乳清蛋白", "植物蛋白", "必需胺基酸", "葡萄糖／丙胺酸", "保健品", "搖搖杯", "零食"];
   var WHEY_CATS = { "水解乳清蛋白": 1, "濃縮乳清蛋白": 1, "濃縮乳清雙蛋白PLUS": 1, "植物蛋白": 1 };
   var SUBCAT_ORDER = {
     "微粉肌酸": ["7g｜隨身包｜30入/盒", "袋裝", "軟糖"],
@@ -397,12 +408,23 @@
     "濃縮乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
     "濃縮乳清雙蛋白PLUS": ["隨身單包", "袋裝", "單包盒裝（30入）"],
     "植物蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
-    "保健品/必須氨基酸/葡萄糖": ["保健營養品系列", "EAA必需氨基酸系列", "其他粉裝系列"],
-    "搖搖杯": ["不鏽鋼保溫款", "一般塑膠款"],
-    "零食": ["單包裝", "盒裝"]
+    "必需胺基酸": ["PRO EAAs"],
+    "葡萄糖／丙胺酸": ["粉狀補給"],
+    "保健品": ["膠囊系列", "粉包系列"],
+    "搖搖杯": ["不鏽鋼保溫款", "一般塑膠款", "配件"],
+    "零食": ["單包裝", "盒裝", "箱購（50包）"]
   };
+  // 試算表的「保健品/必須氨基酸/葡萄糖」在前台拆成三個主項目（只影響顯示，後台存檔仍用原分類）
+  var SPLIT_CAT = "保健品/必須氨基酸/葡萄糖";
+  function displayCat(p) {
+    if (p.cat !== SPLIT_CAT) return p.cat;
+    var name = p.name || "";
+    if (name.indexOf("EAA") !== -1) return "必需胺基酸";
+    if (/葡萄糖|丙胺酸/.test(name)) return "葡萄糖／丙胺酸";
+    return "保健品";
+  }
   function getSubcat(p) {
-    var cat = p.cat, spec = p.spec || "", name = p.name || "";
+    var cat = displayCat(p), spec = p.spec || "", name = p.name || "";
     if (cat === "微粉肌酸") {
       if (name.indexOf("軟糖") !== -1) return "軟糖";
       if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "7g｜隨身包｜30入/盒";
@@ -418,18 +440,17 @@
       }
       return "袋裝";
     }
-    if (cat === "保健品/必須氨基酸/葡萄糖") {
-      if (name.indexOf("EAA") !== -1) return "EAA必需氨基酸系列";
-      if (/\d+粒|\d+顆/.test(spec)) return "保健營養品系列";
-      if (/克|g|公斤|kg/i.test(spec)) return "其他粉裝系列";
-      return "保健營養品系列";
-    }
+    if (cat === "必需胺基酸") return "PRO EAAs";
+    if (cat === "葡萄糖／丙胺酸") return "粉狀補給";
+    if (cat === "保健品") return /\d+粒|\d+顆/.test(spec) ? "膠囊系列" : "粉包系列";
     if (cat === "搖搖杯") {
+      if (name.indexOf("彈簧球") !== -1) return "配件";
       if (name.indexOf("不鏽鋼") !== -1 || name.indexOf("Tumbler") !== -1 || name.indexOf("Sleek") !== -1) return "不鏽鋼保溫款";
       return "一般塑膠款";
     }
     if (cat === "零食") {
-      if (/\d+入\/盒/.test(spec) || /50包/.test(spec)) return "盒裝";
+      if (/50包/.test(name) || /50包/.test(spec)) return "箱購（50包）";
+      if (/\d+入\/盒/.test(spec)) return "盒裝";
       return "單包裝";
     }
     return spec;
@@ -523,12 +544,40 @@
   function groupByCatThenSubcat(products) {
     var cats = {};
     products.forEach(function (p) {
-      var sub = getSubcat(p);
-      if (!cats[p.cat]) cats[p.cat] = {};
-      if (!cats[p.cat][sub]) cats[p.cat][sub] = [];
-      cats[p.cat][sub].push(p);
+      var sub = getSubcat(p), c = displayCat(p);
+      if (!cats[c]) cats[c] = {};
+      if (!cats[c][sub]) cats[c][sub] = [];
+      cats[c][sub].push(p);
     });
     return cats;
+  }
+  // 規格統一寫法（試算表寫法很雜，前台一律換成同一套）：
+  //   大包裝重量 → 500g、1kg；單包 → 35g／包；盒裝 → 30入／盒；膠囊 → 30粒（每粒 500mg）；杯子 → 28oz、750ml
+  function specLabel(spec, name) {
+    var t = String(spec || "").replace(/\s+/g, "").replace(/克/g, "g").replace(/公斤|KG|Kg/g, "kg");
+    var n = String(name || ""), m;
+    if (!t) return /彈簧球/.test(n) ? "1 顆" : "單一規格";
+    if (t === "隨身包" && (m = n.match(/(\d+)入\/包/))) return m[1] + "入／包";
+    if (/50包/.test(n) && (m = t.match(/^(\d+)g\/包$/))) return m[1] + "g × 50包";
+    if ((m = t.match(/^([\d.]+g)｜.*?(\d+)入\/盒$/))) return m[1] + " × " + m[2] + "入／盒";
+    if ((m = t.match(/盒裝\(?(\d+)入\)?/)) || (m = t.match(/^(\d+)入\/盒$/))) return m[1] + "入／盒";
+    if ((m = t.match(/^([\d.]+)mg\/(\d+)粒$/))) return m[2] + "粒（每粒 " + m[1] + "mg）";
+    if ((m = t.match(/^(\d+)(顆|粒)\/(盒|罐)$/))) return m[1] + "粒／" + m[3];
+    if ((m = t.match(/^(\d+)包\/袋$/))) return m[1] + "包／袋";
+    if ((m = t.match(/^([\d.]+)(g|kg)(?:\/(?:包|袋))?(?:｜隨身包)?$/))) {
+      var grams = m[2] === "kg" ? parseFloat(m[1]) * 1000 : parseFloat(m[1]);
+      if (grams >= 1000) return grams / 1000 + "kg";
+      return grams <= 50 ? grams + "g／包" : grams + "g";
+    }
+    if ((m = t.match(/^([\d.]+)(oz|ml)$/i))) return m[1] + m[2].toLowerCase();
+    return t.replace(/\//g, "／");
+  }
+  // 規格排序用：g／kg 換成公克，oz／ml 換成毫升，其他回傳 null
+  function specSize(label) {
+    var m = String(label).match(/([\d.]+)\s*(kg|g|oz|ml)/i);
+    if (!m) return null;
+    var v = parseFloat(m[1]), u = m[2].toLowerCase();
+    return u === "kg" ? v * 1000 : u === "oz" ? v * 29.57 : v;
   }
   function flavorLabel(name) {
     var i = name.indexOf("-");
@@ -729,7 +778,8 @@
   }
   // 分類的銷售頁（由 images/manifest.json 的 "LP|分類名" 提供），接在固定介紹圖後面
   function catContentImages(cat) {
-    var lp = (imageManifest["LP|" + cat] || []).map(function (src, i) { return { img: src, label: cat + " 介紹 " + (i + 1), lp: 1 }; });
+    var lpKey = cat === "必需胺基酸" ? SPLIT_CAT : cat; // EAA 銷售頁在圖片對照表裡用的是原分類名
+    var lp = (cat === "保健品" || cat === "葡萄糖／丙胺酸" ? [] : imageManifest["LP|" + lpKey] || []).map(function (src, i) { return { img: src, label: cat + " 介紹 " + (i + 1), lp: 1 }; });
     return (CAT_CONTENT_IMAGES[cat] || []).concat(lp);
   }
 
@@ -869,15 +919,43 @@
       if (ar !== br) return ar - br;
       return flavorLabel(a.name).localeCompare(flavorLabel(b.name), "zh-Hant");
     });
-    var specSet = {};
-    variants.forEach(function (v) { specSet[v.spec] = (specSet[v.spec] || 0) + 1; });
-    var multiSpec = Object.keys(specSet).length > 1;
-    var options = variants
-      .map(function (v) {
-        var label = flavorLabel(v.name) + (multiSpec ? "（" + v.spec + "）" : "");
+    // 依「規格」分組（500g／1kg、20oz／28oz⋯）；同一口味有多種規格時，用規格按鈕讓客人先選容量
+    var bySpec = {}, specOrder = [];
+    variants.forEach(function (v) {
+      var sl = specLabel(v.spec, v.name);
+      if (!bySpec[sl]) { bySpec[sl] = []; specOrder.push(sl); }
+      bySpec[sl].push(v);
+    });
+    specOrder.sort(function (a, b) {
+      var wa = specSize(a), wb = specSize(b);
+      if (wa === null && wb === null) return 0;
+      if (wa === null) return 1;
+      if (wb === null) return -1;
+      return wa - wb;
+    });
+    var seen = {}, shared = false;
+    variants.forEach(function (v) { var f = flavorLabel(v.name); if (seen[f] && seen[f] !== specLabel(v.spec, v.name)) shared = true; seen[f] = specLabel(v.spec, v.name); });
+    var useChips = specOrder.length >= 2 && specOrder.length <= 4 && shared;
+    var multiSpec = specOrder.length > 1;
+    function optionsFor(list, withSpec) {
+      return list.map(function (v) {
+        var label = flavorLabel(v.name);
         return '<option value="' + v.id + '">' + escapeHtml(label) + (v.stock ? "" : "（缺貨）") + "</option>";
-      })
-      .join("");
+      }).join("");
+    }
+    var selectHtml, chipsHtml = "";
+    if (useChips) {
+      chipsHtml =
+        '<div class="spec-chips"><span class="spec-chips-label">規格</span>' +
+        specOrder.map(function (sl, i) {
+          return '<button type="button" class="spec-chip' + (i === 0 ? " active" : "") + '" data-action="pick-spec" data-spec="' + escapeHtml(sl) + '">' + escapeHtml(sl) + "</button>";
+        }).join("") + "</div>";
+      selectHtml = specOrder.map(function (sl, i) {
+        return '<select class="spec-select" data-spec="' + escapeHtml(sl) + '"' + (i === 0 ? "" : " hidden") + ">" + optionsFor(bySpec[sl], false) + "</select>";
+      }).join("");
+    } else {
+      selectHtml = '<select class="spec-select">' + optionsFor(variants, multiSpec) + "</select>";
+    }
     var previewNames = variants.map(function (v) { return flavorLabel(v.name); });
     var previewText = previewNames.slice(0, 4).join("、") + (previewNames.length > 4 ? " 等 " + previewNames.length + " 款" : "");
     return (
@@ -887,8 +965,9 @@
       '<div class="prod-name">' + escapeHtml(subLabel) + "</div>" +
       (variants.length > 1 ? '<div class="prod-preview">含：' + escapeHtml(previewText) + "</div>" : "") +
       '<div class="prod-desc"></div>' +
+      (useChips ? chipsHtml : '<div class="spec-now"><span class="spec-chips-label">規格</span><span class="spec-now-val"></span></div>') +
       '<div class="prod-row">' +
-      '<select class="spec-select" data-action="spec-change" data-name="' + escapeHtml(subLabel) + '">' + options + "</select>" +
+      selectHtml +
       '<div class="price-wrap"></div>' +
       "</div>" +
       '<div class="prod-row prod-controls" data-name="' + escapeHtml(subLabel) + '"></div>' +
@@ -898,7 +977,7 @@
 
   function fillProductCardDynamic() {
     document.querySelectorAll(".prod").forEach(function (card) {
-      var select = card.querySelector(".spec-select");
+      var select = card.querySelector(".spec-select:not([hidden])");
       if (!select) return;
       updateProductCardUI(card, Number(select.value));
     });
@@ -922,6 +1001,8 @@
       imgWrap.innerHTML = html;
       imgWrap.className = "prod-image" + (html ? "" : " empty") + (!imgs.main && imgs.nutri ? " nutri-only" : "");
     }
+    var specNow = card.querySelector(".spec-now-val");
+    if (specNow) specNow.textContent = specLabel(p.spec, p.name);
     var descWrap = card.querySelector(".prod-desc");
     if (descWrap) {
       descWrap.textContent = p.desc || "";
@@ -980,7 +1061,7 @@
                 '<div class="cart-line"><div><div class="cart-line-name">' +
                 escapeHtml(l.p.name) +
                 '</div><div class="cart-line-spec">' +
-                escapeHtml(l.p.spec) +
+                escapeHtml(specLabel(l.p.spec, l.p.name)) +
                 " × " +
                 l.qty +
                 '</div><button class="cart-line-remove" data-action="cart-remove" data-pid="' +
@@ -1046,7 +1127,7 @@
       : "";
     var summaryText =
       "【" + state.settings.shopName + " 訂單 " + o.id + "】\n" +
-      o.items.map(function (it) { return it.name + "（" + it.spec + "）×" + it.qty; }).join("\n") +
+      o.items.map(function (it) { return it.name + "（" + specLabel(it.spec, it.name) + "）×" + it.qty; }).join("\n") +
       "\n應付總額：" + fmt(o.total) +
       "\n取貨方式：" + (o.deliveryMethod === "pickup" ? "台北市文山區自取" : "廠商直送（" + o.address + "）") +
       "\n收件人：" + o.name + " / " + o.phone +
@@ -1074,7 +1155,7 @@
       '<div class="confirm-sub">應付總額（含運費）</div>' +
       '<div class="order-items">' +
       o.items.map(function (it) {
-        return '<div class="row"><span>' + escapeHtml(it.name) + "（" + escapeHtml(it.spec) + "）×" + it.qty + '</span><span class="num">' + fmt(it.price * it.qty) + "</span></div>";
+        return '<div class="row"><span>' + escapeHtml(it.name) + "（" + escapeHtml(specLabel(it.spec, it.name)) + "）×" + it.qty + '</span><span class="num">' + fmt(it.price * it.qty) + "</span></div>";
       }).join("") +
       '<div class="row"><span>運費</span><span class="num">' + fmt(o.shipFee) + "</span></div>" +
       "</div>" +
@@ -1272,6 +1353,24 @@
       closeNutritionOverlay();
     } else if (action === "toggle-nutrition-zoom") {
       el.classList.toggle("zoomed");
+    } else if (action === "pick-spec") {
+      var pcard = el.closest(".prod");
+      var cur = pcard.querySelector(".spec-select:not([hidden])");
+      var curFlavor = cur ? cur.options[cur.selectedIndex].text.replace("（缺貨）", "") : "";
+      var target = null;
+      pcard.querySelectorAll(".spec-select").forEach(function (sel) {
+        var on = sel.getAttribute("data-spec") === el.getAttribute("data-spec");
+        sel.hidden = !on;
+        if (on) target = sel;
+      });
+      pcard.querySelectorAll(".spec-chip").forEach(function (c) { c.classList.toggle("active", c === el); });
+      if (target) {
+        // 換規格時盡量保留同一個口味
+        for (var oi = 0; oi < target.options.length; oi++) {
+          if (target.options[oi].text.replace("（缺貨）", "") === curFlavor) { target.selectedIndex = oi; break; }
+        }
+        updateProductCardUI(pcard, Number(target.value));
+      }
     } else if (action === "open-gallery") {
       openGallery(galleries[Number(el.getAttribute("data-gid"))] || [], Number(el.getAttribute("data-idx")) || 0);
     } else if (action === "close-gallery") {
