@@ -592,31 +592,40 @@
   "nutri": "src:果果能量_葡萄糖粉/葡萄糖420_營養標-01 (2).png"
  },
  "300億膠原蛋白益生菌|30包/袋": {
-  "nutri": "src:守衛者/營養標示/300億膠原蛋白益生菌 (30包／袋).jpg"
+  "nutri": "src:守衛者/營養標示/300億膠原蛋白益生菌 (30包／袋).jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/益生菌.jpg"
  },
  "90%Omega-3挪威高濃度魚油|60顆/盒": {
-  "nutri": "src:守衛者/營養標示/90_ Omega-3 挪威高濃度魚油 ( 60顆／盒 ).jpg"
+  "nutri": "src:守衛者/營養標示/90_ Omega-3 挪威高濃度魚油 ( 60顆／盒 ).jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/01/魚油.png"
  },
  "Chromium酵母鉻|500mg/30粒": {
-  "nutri": "src:守衛者/營養標示/Chromium 酵母鉻(500mg／30粒)【CAP】.jpg"
+  "nutri": "src:守衛者/營養標示/Chromium 酵母鉻(500mg／30粒)【CAP】.jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/酵母鉻.png"
  },
  "L-carnitine左旋肉鹼|465mg/30粒": {
-  "nutri": "src:守衛者/營養標示/L-carnitine左旋肉鹼 (465mg／30粒) 【CAP】.jpg"
+  "nutri": "src:守衛者/營養標示/L-carnitine左旋肉鹼 (465mg／30粒) 【CAP】.jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/左旋肉鹼.png"
  },
  "Multi-Enzyme綜合消化酵素|400mg/15粒": {
-  "nutri": "src:守衛者/營養標示/Multi-Enzyme 綜合消化酵素(400mg／15粒)【CAP】.jpg"
+  "nutri": "src:守衛者/營養標示/Multi-Enzyme 綜合消化酵素(400mg／15粒)【CAP】.jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/綜合消化酵素.png"
  },
  "Multi-VitaminB綜合維生素B群|480mg/30粒": {
-  "nutri": "src:守衛者/營養標示/Multi-Vitamin B 綜合維生素B群(480mg／30粒)【CAP】.jpg"
+  "nutri": "src:守衛者/營養標示/Multi-Vitamin B 綜合維生素B群(480mg／30粒)【CAP】.jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/綜合維生素B群.png"
  },
  "Taurine牛磺酸|500mg/30粒": {
-  "nutri": "src:守衛者/營養標示/Taurine 牛磺酸 (500mg／30粒).jpg"
+  "nutri": "src:守衛者/營養標示/Taurine 牛磺酸 (500mg／30粒).jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2022/11/牛磺酸.png"
  },
  "UC2+HA固力穩|500mg/30粒": {
-  "nutri": "src:守衛者/營養標示/UC2 + HA 固力穩 (500mg／30粒).jpg"
+  "nutri": "src:守衛者/營養標示/UC2 + HA 固力穩 (500mg／30粒).jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2024/02/UC2_FSP.jpg"
  },
  "強勁瑪卡膠囊|60顆/盒": {
-  "nutri": "src:守衛者/營養標示/MACA 強勁瑪卡膠囊 ( 60顆／罐 ).jpg"
+  "nutri": "src:守衛者/營養標示/MACA 強勁瑪卡膠囊 ( 60顆／罐 ).jpg",
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/05/瑪卡商品圖-1.jpg"
  },
  "輔酵素Q10|400mg/15粒": {
   "main": "url:https://www.gogonuts.best/products/q10",
@@ -744,19 +753,45 @@
  "BlenderBottle不鏽鋼吸管隨行杯|【Tumbler曙光碧影】|710ml": {
   "main": "src:其他周邊_Blender Bottle 不鏽鋼吸管隨行杯/Tumbler-24oz-Sea-Glass曙光碧影-600x600.png"
  },
- "BlenderBottle不鏽鋼搖搖杯【Sleek冷杉拿鐵】|25oz": {},
- "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻丁香紫】|25oz": {},
- "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻棉花糖】|25oz": {},
- "BlenderBottle不鏽鋼搖搖杯【Sleek奶油白】|25oz": {},
- "BlenderBottle搖搖杯【Classic奶茶】|20oz": {},
- "BlenderBottle搖搖杯【Classic層白雲】|28oz": {},
- "BlenderBottle搖搖杯【Classic桃開心】|28oz": {},
- "BlenderBottle搖搖杯【Pro午夜黑】|24oz": {},
- "BlenderBottle搖搖杯【Pro太空灰】|28oz": {},
- "BlenderBottle搖搖杯【Pro青瓷綠】|28oz": {},
- "BlenderBottle搖搖杯【StradaTritan午夜黑】|28oz": {},
- "BlenderBottle搖搖杯【StradaTritan薄紅紫】|24oz": {},
- "BlenderBottle搖搖杯【StradaTritan薄紅紫】|28oz": {},
+ "BlenderBottle不鏽鋼搖搖杯【Sleek冷杉拿鐵】|25oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Sleek-冷衫拿鐵-scaled.png"
+ },
+ "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻丁香紫】|25oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Sleek-25oz-Lavender夢幻丁香紫-2.png"
+ },
+ "BlenderBottle不鏽鋼搖搖杯【Sleek夢幻棉花糖】|25oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Sleek-25oz-Gradient夢幻棉花糖-2.png"
+ },
+ "BlenderBottle不鏽鋼搖搖杯【Sleek奶油白】|25oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Sleek-25oz-Butter奶油白-2.png"
+ },
+ "BlenderBottle搖搖杯【Classic奶茶】|20oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Classic-V2-20oz-Milk-Tea奶茶-2.png"
+ },
+ "BlenderBottle搖搖杯【Classic層白雲】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Classic-V2-28oz-White層雲白-1.png"
+ },
+ "BlenderBottle搖搖杯【Classic桃開心】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/classic桃開心28oz.png"
+ },
+ "BlenderBottle搖搖杯【Pro午夜黑】|24oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Pro24-Black午夜黑-1.png"
+ },
+ "BlenderBottle搖搖杯【Pro太空灰】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2026/01/PRO28-太空灰.png"
+ },
+ "BlenderBottle搖搖杯【Pro青瓷綠】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/綠蔭夏天28.png"
+ },
+ "BlenderBottle搖搖杯【StradaTritan午夜黑】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Tritan-28oz-Nightshade午夜黑.png"
+ },
+ "BlenderBottle搖搖杯【StradaTritan薄紅紫】|24oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Tritan-24oz-Lilac薄紅紫.png"
+ },
+ "BlenderBottle搖搖杯【StradaTritan薄紅紫】|28oz": {
+  "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Tritan-28oz-Lilac薄紅紫.png"
+ },
  "HyperNutro電動攪拌杯--白|750ml": {
   "main": "url:https://www.gogonuts.best/products/hypernutro-white"
  },

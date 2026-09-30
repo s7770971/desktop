@@ -8,6 +8,7 @@ RAW="https://raw.githubusercontent.com/s7770971/desktop/${REF:-claude/code-visib
 cd "$SHOP"
 stamp=$(date +%Y%m%d_%H%M)
 mkdir -p backups tools
+if [ "$ONLY" != "deploy" ]; then
 echo "1/4 備份舊版 index.html → backups/index_$stamp.html"
 cp public/index.html "backups/index_$stamp.html"
 
@@ -19,6 +20,8 @@ grep -q "imageManifest" public/index.html.new && mv public/index.html.new public
 
 echo "3/4 產生商品圖（約 1 到 3 分鐘）"
 node tools/build_images.mjs "$IMGSRC"
+fi
+if [ "$ONLY" = "build" ]; then echo "只產生圖片，還沒部署。"; exit 0; fi
 
 echo "4/4 部署到 Cloudflare Pages"
 project=$(npx --yes wrangler pages project list 2>/dev/null | grep "gogo-shop-1aw" | awk -F'│' '{gsub(/ /,"",$2); print $2}' | head -1)
