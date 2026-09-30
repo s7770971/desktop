@@ -89,11 +89,31 @@
   @keyframes spin{ to{ transform:rotate(360deg); } }
 
   /* 分類：橫向滑動標籤 */
-  .cat-tabs{
-    position:sticky; top:57px; z-index:15; margin:0 -18px; padding:10px 18px;
+  .cat-tabs-wrap{
+    position:sticky; top:57px; z-index:15; margin:0 -18px;
     background:rgba(13,13,15,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
+  .cat-tabs-box{ position:relative; }
+  .cat-tabs{ display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; padding:10px 18px; }
+  .swipe-hint{ padding:9px 18px 0; font-size:12.5px; font-weight:800; color:var(--accent-2); letter-spacing:.02em; }
+  .swipe-hint.hidden{ display:none; }
+  /* 右側漸層＋箭頭：提示後面還有分類，滑到底自動消失 */
+  .tabs-fade{
+    position:absolute; top:0; right:0; bottom:0; width:72px; pointer-events:none;
+    background:linear-gradient(to right, rgba(13,13,15,0), rgba(13,13,15,.95) 65%);
+    display:flex; align-items:center; justify-content:flex-end; padding-right:10px; transition:opacity .2s ease;
+  }
+  .tabs-fade.at-end{ opacity:0; }
+  .tabs-next{
+    pointer-events:auto; width:34px; height:34px; border-radius:50%; border:0; cursor:pointer;
+    background:var(--accent); color:var(--accent-ink); font-size:20px; font-weight:900; line-height:1;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,.5);
+    animation:nudge-arrow 1.2s ease-in-out infinite;
+  }
+  .tabs-fade.at-end .tabs-next{ pointer-events:none; }
+  @keyframes nudge-arrow{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+  @media (prefers-reduced-motion: reduce){ .tabs-next{ animation:none; } }
   .cat-tabs::-webkit-scrollbar{ display:none; }
   .cat-tab{
     flex:none; background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
@@ -590,6 +610,45 @@
     app.innerHTML = html;
     fillProductCardDynamic();
     renderSheet();
+    setupCatTabs();
+  }
+
+  /* ---------- 分類標籤：引導滑動（漸層箭頭＋自動示範＋文字提示） ---------- */
+  var SWIPE_HINT_KEY = "gogo_swipe_hint_done";
+  var tabsNudged = false, tabsNudging = false;
+  function swipeHintDone() {
+    try { return localStorage.getItem(SWIPE_HINT_KEY) === "1"; } catch (e) { return false; }
+  }
+  function markSwipeHintDone() {
+    try { localStorage.setItem(SWIPE_HINT_KEY, "1"); } catch (e) {}
+    var h = document.getElementById("swipe-hint");
+    if (h) h.classList.add("hidden");
+  }
+  function setupCatTabs() {
+    var el = document.getElementById("cat-tabs");
+    if (!el) return;
+    var fade = document.getElementById("tabs-fade");
+    function update() {
+      if (fade) fade.classList.toggle("at-end", el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+    }
+    el.addEventListener("scroll", function () {
+      update();
+      if (!tabsNudging && el.scrollLeft > 20) markSwipeHintDone();
+    }, { passive: true });
+    update();
+    // 第一次打開時自動往左滑一小段再彈回，示範這排可以滑（每次載入只示範一次）
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!tabsNudged && !reduce && el.scrollWidth > el.clientWidth + 10) {
+      tabsNudged = true;
+      tabsNudging = true;
+      setTimeout(function () {
+        el.scrollTo({ left: 110, behavior: "smooth" });
+        setTimeout(function () {
+          el.scrollTo({ left: 0, behavior: "smooth" });
+          setTimeout(function () { tabsNudging = false; }, 700);
+        }, 750);
+      }, 700);
+    }
   }
 
   function renderTopbar() {
@@ -665,7 +724,11 @@
         .map(function (sub) { return renderProductCard(sub, subs[sub]); })
         .join("");
       body =
-        '<div class="cat-tabs" id="cat-tabs">' + tabs + "</div>" +
+        '<div class="cat-tabs-wrap" id="cat-tabs-wrap">' +
+        (swipeHintDone() ? "" : '<div class="swipe-hint" id="swipe-hint">👉 左右滑動看更多分類</div>') +
+        '<div class="cat-tabs-box"><div class="cat-tabs" id="cat-tabs">' + tabs + "</div>" +
+        '<div class="tabs-fade" id="tabs-fade"><button type="button" class="tabs-next" data-action="tabs-next" aria-label="看更多分類">›</button></div>' +
+        "</div></div>" +
         '<div class="cat-panel-head">' +
         '<h2 class="cat-panel-title">' + escapeHtml(cat) +
         (CAT_BADGES[cat] ? '<span class="cat-badge">' + escapeHtml(CAT_BADGES[cat]) + "</span>" : "") +
@@ -1122,6 +1185,9 @@
       closeNutritionOverlay();
     } else if (action === "toggle-nutrition-zoom") {
       el.classList.toggle("zoomed");
+    } else if (action === "tabs-next") {
+      var scroller = document.getElementById("cat-tabs");
+      if (scroller) scroller.scrollBy({ left: scroller.clientWidth * 0.7, behavior: "smooth" });
     } else if (action === "select-cat") {
       ui.activeCat = el.getAttribute("data-cat");
       render();
@@ -1130,7 +1196,7 @@
       if (activeTab) activeTab.scrollIntoView({ inline: "center", block: "nearest" });
       // 已經往下滑過分類標籤時，切換後回到新分類的標題（扣掉頂欄＋標籤列的高度）
       var head = document.querySelector(".cat-panel-head");
-      var stickyH = (document.querySelector(".topbar") || { offsetHeight: 0 }).offsetHeight + (tabsEl ? tabsEl.offsetHeight : 0) + 12;
+      var stickyH = (document.querySelector(".topbar") || { offsetHeight: 0 }).offsetHeight + (document.getElementById("cat-tabs-wrap") || { offsetHeight: 0 }).offsetHeight + 12;
       if (head) {
         var target = window.scrollY + head.getBoundingClientRect().top - stickyH;
         if (window.scrollY > target) window.scrollTo({ top: target });
