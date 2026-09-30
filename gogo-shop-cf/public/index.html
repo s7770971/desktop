@@ -405,10 +405,10 @@
   var WHEY_CATS = { "水解乳清蛋白": 1, "濃縮乳清蛋白": 1, "濃縮乳清雙蛋白PLUS": 1, "植物蛋白": 1 };
   var SUBCAT_ORDER = {
     "微粉肌酸": ["單包盒裝（30入）", "袋裝", "軟糖"],
-    "水解乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
-    "濃縮乳清蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
-    "濃縮乳清雙蛋白PLUS": ["隨身單包", "袋裝", "單包盒裝（30入）"],
-    "植物蛋白": ["隨身單包", "袋裝", "單包盒裝（30入）"],
+    "水解乳清蛋白": ["隨身包（單包／30入盒裝）", "袋裝"],
+    "濃縮乳清蛋白": ["隨身包（單包／30入盒裝）", "袋裝"],
+    "濃縮乳清雙蛋白PLUS": ["隨身包（單包／30入盒裝）", "袋裝"],
+    "植物蛋白": ["隨身包（單包／30入盒裝）", "袋裝"],
     "必需胺基酸": ["PRO EAAs"],
     "葡萄糖／丙胺酸": ["粉狀補給"],
     "保健品": ["膠囊系列", "粉包系列"],
@@ -435,12 +435,13 @@
       return "袋裝";
     }
     if (WHEY_CATS[cat]) {
-      if (/盒/.test(spec) || /\d+入\/盒/.test(spec)) return "單包盒裝（30入）";
+      // 單包和 30 入盒裝合成同一張卡片，用規格按鈕切換
+      if (/盒/.test(spec)) return "隨身包（單包／30入盒裝）";
       var m = spec.match(/([\d.]+)/);
       if (m) {
         var val = parseFloat(m[1]);
         var grams = /kg|公斤|KG/i.test(spec) ? val * 1000 : val;
-        if (grams <= 50) return "隨身單包";
+        if (grams <= 50) return "隨身包（單包／30入盒裝）";
       }
       return "袋裝";
     }
@@ -585,6 +586,10 @@
     if (!m) return null;
     var v = parseFloat(m[1]), u = m[2].toLowerCase();
     return u === "kg" ? v * 1000 : u === "oz" ? v * 29.57 : v;
+  }
+  function seriesName(name) {
+    var i = String(name).indexOf("-");
+    return i === -1 ? String(name) : String(name).slice(0, i);
   }
   function flavorLabel(name) {
     var i = name.indexOf("-");
@@ -925,6 +930,17 @@
       if (ar !== br) return ar - br;
       return flavorLabel(a.name).localeCompare(flavorLabel(b.name), "zh-Hant");
     });
+    var baseCount = {}, mainBase = null;
+    variants.forEach(function (v) {
+      var bs = seriesName(v.name);
+      baseCount[bs] = (baseCount[bs] || 0) + 1;
+      if (!mainBase || baseCount[bs] > baseCount[mainBase]) mainBase = bs;
+    });
+    var mixed = Object.keys(baseCount).length > 1;
+    // 同一系列：只寫口味；卡片裡混了不同系列（零食、葡萄糖／丙胺酸⋯）：一律寫完整品名，選單再依系列分組
+    function optionLabel(v) {
+      return mixed ? v.name : flavorLabel(v.name);
+    }
     // 依「規格」分組（500g／1kg、20oz／28oz⋯）；同一口味有多種規格時，用規格按鈕讓客人先選容量
     var bySpec = {}, specOrder = [];
     variants.forEach(function (v) {
@@ -941,12 +957,23 @@
     });
     var seen = {}, shared = false;
     variants.forEach(function (v) { var f = flavorLabel(v.name); if (seen[f] && seen[f] !== specLabel(v.spec, v.name)) shared = true; seen[f] = specLabel(v.spec, v.name); });
-    var useChips = specOrder.length >= 2 && specOrder.length <= 4 && shared;
+    var useChips = specOrder.length >= 2 && specOrder.length <= 4 && (shared || subLabel === "隨身包（單包／30入盒裝）");
     var multiSpec = specOrder.length > 1;
-    function optionsFor(list, withSpec) {
-      return list.map(function (v) {
-        var label = flavorLabel(v.name);
-        return '<option value="' + v.id + '">' + escapeHtml(label) + (v.stock ? "" : "（缺貨）") + "</option>";
+    function optionsFor(list) {
+      function opt(v) {
+        return '<option value="' + v.id + '">' + escapeHtml(optionLabel(v)) + (v.stock ? "" : "（缺貨）") + "</option>";
+      }
+      if (!mixed) return list.map(opt).join("");
+      var groups = {}, order = [];
+      list.forEach(function (v) {
+        var g = seriesName(v.name);
+        if (!groups[g]) { groups[g] = []; order.push(g); }
+        groups[g].push(v);
+      });
+      return order.map(function (g) {
+        return groups[g].length > 1
+          ? '<optgroup label="' + escapeHtml(g) + '">' + groups[g].map(opt).join("") + "</optgroup>"
+          : groups[g].map(opt).join("");
       }).join("");
     }
     var selectHtml, chipsHtml = "";
@@ -962,7 +989,7 @@
     } else {
       selectHtml = '<select class="spec-select">' + optionsFor(variants, multiSpec) + "</select>";
     }
-    var previewNames = variants.map(function (v) { return flavorLabel(v.name); });
+    var previewNames = mixed ? Object.keys(baseCount) : variants.map(optionLabel);
     var previewText = previewNames.slice(0, 4).join("、") + (previewNames.length > 4 ? " 等 " + previewNames.length + " 款" : "");
     return (
       '<div class="prod" data-group="' + variants.map(function (v) { return v.id; }).join(",") + '">' +
