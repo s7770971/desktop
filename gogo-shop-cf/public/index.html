@@ -825,10 +825,6 @@
     );
   }
 
-  var TOP_CONTENT_IMAGES = [
-    { img: "/images/content/compare-overview.jpg", label: "濃縮／水解有何不同" },
-    { img: "/images/content/compare-lines.jpg", label: "蛋白線總覽" }
-  ];
   // 分類上方的圖：已全部改用廠商銷售頁（images/manifest.json 的 "LP|分類名"），舊介紹圖停用
   var CAT_CONTENT_IMAGES = {};
 
@@ -964,10 +960,7 @@
       '<ol class="hero-notice">' +
       state.settings.heroNotice.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("") +
       "</ol></div>" +
-      '<div class="content-strip">' +
-      '<div class="content-strip-title">蛋白怎麼挑</div>' +
-      renderContentImages(TOP_CONTENT_IMAGES) +
-      "</div>" +
+
       body +
       '<div class="footer-note">有任何問題歡迎私訊 IG <a href="https://www.instagram.com/' +
       escapeHtml(String(state.settings.igHandle || "").replace(/^@/, "")) +
