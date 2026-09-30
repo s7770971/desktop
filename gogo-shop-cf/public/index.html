@@ -514,6 +514,20 @@
 
   var state = null; // {products, settings, orders} — 從 Google Sheet 讀取
   var cart = [];
+  var CART_KEY = "gogo_cart_v1";
+  function saveCart() {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+  }
+  function restoreCart() {
+    // 只還原仍在上架、有貨、有售價的商品
+    try {
+      var saved = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+      cart = (Array.isArray(saved) ? saved : []).filter(function (l) {
+        var p = byId(Number(l.id));
+        return p && p.active && p.stock && p.price && l.qty >= 1;
+      }).map(function (l) { return { id: Number(l.id), qty: Math.min(50, Math.floor(l.qty)) }; });
+    } catch (e) { cart = []; }
+  }
   var ui = {
     activeCat: null,
     sheet: null,
@@ -639,7 +653,7 @@
     return req
       .then(function (res) { return res.json(); })
       .then(function (json) {
-        if (!json.ok) throw new Error(json.error || "API 呼叫失敗");
+        if (!json.ok) { var e = new Error(json.error || "API 呼叫失敗"); e.fromServer = true; throw e; }
         return json.result;
       });
   }
@@ -667,6 +681,7 @@
     Promise.all([gsRun("getShopData"), loadImageManifest()]).then(function (results) {
       var data = results[0];
       state = data;
+      restoreCart();
       render();
     }).catch(function (err) {
       if (window.console) console.error(err); // 技術細節只留在瀏覽器主控台，客人看到的是白話說明
@@ -1204,7 +1219,7 @@
       "</ul>" +
       '<ol class="steps">' +
       "<li>請記得匯款，匯款後也請到 IG 跟我說你匯款了喔～。</li>" +
-      "<li>我將於 " + CLOSE_DATE + " 結單後統計下訂，貨到後會通知大家喔。</li>" +
+      "<li>我將於 " + (state.settings.closeDate || CLOSE_DATE) + " 結單後統計下訂，貨到後會通知大家喔。</li>" +
       "</ol>" +
       '<p class="hint" style="margin-top:10px">小提醒：如果您怕自己忘記，可以自己截圖此頁面留存喔🫶</p>' +
       "</div>" +
@@ -1324,6 +1339,7 @@
       '<div class="field"><label>帳號</label><input id="set_bankacc" value="' + escapeHtml(s.bank.account) + '" /></div>' +
       '<div class="field"><label>戶名</label><input id="set_bankholder" value="' + escapeHtml(s.bank.holder) + '" /></div>' +
       '<div class="field"><label>轉帳期限（小時）</label><input id="set_deadline" type="number" value="' + s.transferDeadlineHours + '" /></div>' +
+      '<div class="field"><label>結單日期（例如 10/5）</label><input id="set_closedate" value="' + escapeHtml(s.closeDate || "") + '" placeholder="10/5" /></div>' +
       "</div></div>" +
       '<div class="card" style="margin-top:14px"><h3 style="margin-top:0">運費規則</h3>' +
       '<div class="settings-grid">' +
@@ -1339,6 +1355,12 @@
     );
   }
 
+  var ORDER_STATUSES = ["待確認", "確認付款", "已出貨", "取消"];
+  function orderStatusOptions(current) {
+    var list = ORDER_STATUSES.slice();
+    if (current && list.indexOf(String(current)) === -1) list.unshift(String(current));
+    return list;
+  }
   function renderAdminOrders() {
     if (state.orders.length === 0) {
       return '<div class="empty-note">目前 Google Sheet 的 Orders 分頁還沒有訂單紀錄。</div>';
@@ -1355,7 +1377,7 @@
           "<td>" + escapeHtml(o.name) + " " + escapeHtml(o.phone) + "</td>" +
           "<td>" + escapeHtml(o.ig) + "</td>" +
           '<td><select data-action="order-status" data-oid="' + escapeHtml(o.id) + '">' +
-          ["待確認", "已確認", "已出貨", "取消"].map(function (st) { return '<option value="' + st + '"' + (o.status === st ? " selected" : "") + ">" + st + "</option>"; }).join("") +
+          orderStatusOptions(o.status).map(function (st) { return '<option value="' + escapeHtml(st) + '"' + (o.status === st ? " selected" : "") + ">" + escapeHtml(st) + "</option>"; }).join("") +
           "</select></td></tr>"
         );
       })
@@ -1445,13 +1467,14 @@
     } else if (action === "cart-remove") {
       var rpid = Number(el.getAttribute("data-pid"));
       cart = cart.filter(function (l) { return l.id !== rpid; });
+      saveCart();
       renderSheet();
     } else if (action === "qty-inc" || action === "qty-dec") {
       var pid = Number(el.getAttribute("data-pid"));
       var card = el.closest(".prod");
       var disp = card.querySelector("[data-qty-display]");
       var q = Number(disp.textContent);
-      q = action === "qty-inc" ? q + 1 : Math.max(1, q - 1);
+      q = action === "qty-inc" ? Math.min(50, q + 1) : Math.max(1, q - 1);
       disp.textContent = q;
     } else if (action === "add-cart") {
       var apid = Number(el.getAttribute("data-pid"));
@@ -1460,6 +1483,7 @@
       var existing = cart.find(function (l) { return l.id === apid; });
       if (existing) existing.qty = q2;
       else cart.push({ id: apid, qty: q2 });
+      saveCart();
       showToast("已加入購物車");
       renderTopbarOnly();
     } else if (action === "set-method") {
@@ -1615,9 +1639,17 @@
         ? "⚠️ 系統目前無法自動記錄此訂單，請務必按下方「複製訂單內容」，並私訊傳送給賣家 IG！"
         : (result.priceAdjusted ? "系統已依 Google Sheet 目前的實際售價重新核對金額，應付總額如下方顯示。" : null);
       cart = [];
+      saveCart();
       ui.sheet = "confirm";
       render();
-    }).catch(function () {
+    }).catch(function (err) {
+      if (err && err.fromServer) {
+        // 後端檢查沒過（例如商品剛缺貨、數量不對）：留在結帳頁說明原因，購物車保留
+        var box = document.getElementById("ck_error");
+        if (box) { box.textContent = "⚠️ " + err.message; box.style.display = "block"; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "送出訂單"; }
+        return;
+      }
       ui.lastOrder = order;
       ui.saveNote = "⚠️ 系統目前無法自動記錄此訂單到 Google Sheet，請務必按下方「複製訂單內容」，並私訊傳送給賣家 IG，賣家才會收到你的訂單！";
       cart = [];
@@ -1646,6 +1678,7 @@
     s.bank.account = document.getElementById("set_bankacc").value.trim();
     s.bank.holder = document.getElementById("set_bankholder").value.trim();
     s.transferDeadlineHours = Number(document.getElementById("set_deadline").value) || 24;
+    s.closeDate = document.getElementById("set_closedate").value.trim();
     s.shipping.home.fee = Number(document.getElementById("set_home_fee").value) || 0;
     s.shipping.home.freeThreshold = Number(document.getElementById("set_home_free").value) || 0;
     var newPin = document.getElementById("set_pin").value.trim();
