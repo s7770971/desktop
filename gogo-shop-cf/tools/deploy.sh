@@ -1,7 +1,9 @@
 #!/bin/bash
 # 果果快選所：下載新版 → 備份舊版 → 產生商品圖 → 部署到 Cloudflare Pages
 set -e
-SHOP="/Users/mo/我的雲端硬碟 (mohuangoole@gmail.com)/Mo-Agent/gogo-shop-cf"
+AGENT="/Users/mo/我的雲端硬碟 (mohuangoole@gmail.com)/Mo-Agent"
+SHOP="$AGENT/專案/果果快選所/gogo-shop-cf"
+[ -d "$SHOP" ] || SHOP="$AGENT/gogo-shop-cf"  # 資料夾整理前的舊位置
 IMGSRC="$HOME/Downloads/果果-給經銷商圖檔-2"
 RAW="https://raw.githubusercontent.com/s7770971/desktop/${REF:-claude/code-visibility-7er6rv}/gogo-shop-cf"
 

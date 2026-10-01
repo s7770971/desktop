@@ -31,7 +31,7 @@ def fix_line(path, line):
     return new
 
 
-files = sorted(glob.glob(os.path.join(ROOT, "參考", "*.md"))) + [os.path.join(ROOT, "CLAUDE.md"), os.path.join(ROOT, "交辦範本.md")]
+files = sorted(glob.glob(os.path.join(ROOT, "參考", "*.md")) + glob.glob(os.path.join(ROOT, "專案", "*", "*.md"))) + [os.path.join(ROOT, "CLAUDE.md"), os.path.join(ROOT, "交辦範本.md")]
 stamp = time.strftime("%Y%m%d_%H%M")
 total = 0
 for path in files:
