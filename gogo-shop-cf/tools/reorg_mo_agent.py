@@ -59,17 +59,18 @@ REWRITE += [("Mo-Agent/gogo-shop-cf", "Mo-Agent/專案/果果快選所/gogo-shop
             ("Mo-Agent/文件", "Mo-Agent/個人/文件"),
             ("Mo-Agent/個人工具", "Mo-Agent/個人/個人工具"),
             ("個人工具/打平帳本", "個人/個人工具/打平帳本")]
-REWRITE += [("文件/" + n, "個人/文件/" + n) for n in ("免除教育召集", "命理分析報告", "教召免召", "無一定雇主")]
+REWRITE += [("文件/" + n, "個人/文件/" + n) for n in ("免除教育召集申請事由陳述書", "命理分析報告", "教召免召申請重點", "無一定雇主工作證明")]
 REWRITE.sort(key=lambda p: -len(p[0]))
 # 前面必須是開頭、空白、斜線、引號、括號等，避免改到「本機鏡像/…」或別的字中間
-PAT = re.compile(r"(?<![^\s/`'\"(（「『~:：\[|])(" + "|".join(re.escape(a) for a, _ in REWRITE) + ")")
+PAT = re.compile(r"(?<![^\s/`'\"(（「『~:：\[|])(" + "|".join(re.escape(a) for a, _ in REWRITE) + r")(?!\w)")  # 後面不能接字，避免「企劃/PANDA表演…」被改到
 NEW = dict(REWRITE)
 
 
 def fix_paths(text):
     # 已經是新路徑（前面是「個人/」「專案/」）就不再改，重跑也不會疊兩層
     def rep(m):
-        if m.string[:m.start()].endswith(("個人/", "專案/")):
+        # 「/Users/mo/Mo-Agent/」「~/Mo-Agent/」是 Mac 本機資料夾，不是雲端這份，不改
+        if m.string[:m.start()].endswith(("個人/", "專案/", "/Users/mo/", "/Users/mo/Mo-Agent/", "~/", "~/Mo-Agent/")):
             return m.group(1)
         return NEW[m.group(1)]
     return PAT.sub(rep, text)
