@@ -1,12 +1,26 @@
 // 抓經銷網站 sell.gogonuts.best 的商品清單：品名、網址、價格、庫存狀態、各規格（口味）的庫存與價格、主圖
 // 存成 JSON 給 Claude 跟賣場商品清單比對
-// 用法：node dealer_catalog.mjs "<輸出 JSON 路徑>"
+// 用法：node dealer_catalog.mjs "<輸出 JSON 路徑>" [--login]
 import fs from "node:fs";
+import readline from "node:readline";
 
-const OUT = process.argv[2] || "經銷網站商品清單.json";
+const OUT = process.argv.slice(2).find((a) => !a.startsWith("--")) || "經銷網站商品清單.json";
 const BASE = "https://sell.gogonuts.best";
-// 有登入跟沒登入看到的價格不同：要看登入後的經銷價，執行時帶 COOKIE="$(pbpaste)"（先從瀏覽器複製登入後的 cookie）
-const COOKIE = (process.env.COOKIE || "").replace(/^cookie:\s*/i, "").trim();
+// 有登入跟沒登入看到的價格不同：加 --login 會請你貼上瀏覽器裡登入後的 cookie（輸入時不顯示在畫面上）
+async function askCookie() {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+  console.log("請到 Chrome 複製 cookie 的值，回到這裡貼上（畫面不會顯示），再按 Enter：");
+  rl._writeToOutput = () => {};
+  const ans = await new Promise((r) => rl.question("", r));
+  rl.close();
+  process.stdout.write("\n");
+  return ans;
+}
+const COOKIE = (process.argv.includes("--login") ? await askCookie() : "").replace(/^cookie:\s*/i, "").trim();
+if (COOKIE && (/[^\x20-\x7e]/.test(COOKIE) || !COOKIE.includes("="))) {
+  console.log("❌ 貼上的不是 cookie（裡面有中文或格式不對），可能剪貼簿被別的東西蓋掉了。請回 Chrome 重新複製 cookie 再跑一次。");
+  process.exit(1);
+}
 const UA = { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/605.1.15", ...(COOKIE ? { cookie: COOKIE } : {}) } };
 
 async function get(url) {
