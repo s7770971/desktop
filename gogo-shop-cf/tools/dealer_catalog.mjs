@@ -6,20 +6,63 @@ import readline from "node:readline";
 
 const OUT = process.argv.slice(2).find((a) => !a.startsWith("--")) || "經銷網站商品清單.json";
 const BASE = "https://sell.gogonuts.best";
-// 有登入跟沒登入看到的價格不同：加 --login 會請你貼上瀏覽器裡登入後的 cookie（輸入時不顯示在畫面上）
-async function askCookie() {
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: true });
-  console.log("請到 Chrome 複製 cookie 的值，回到這裡貼上（畫面不會顯示），再按 Enter：");
-  rl._writeToOutput = () => {};
-  const ans = await new Promise((r) => rl.question("", r));
-  rl.close();
-  process.stdout.write("\n");
-  return ans;
+// 有登入跟沒登入看到的價格不同：加 --login 會請你輸入經銷網站帳號密碼，程式自己登入（密碼輸入時不顯示，只用在這台 Mac 上）
+let rl = null, lines = null, muted = false;
+async function ask(question, hidden) {
+  if (!rl) {
+    rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: !!process.stdin.isTTY });
+    const write = rl._writeToOutput.bind(rl);
+    rl._writeToOutput = (s) => { if (!muted) write(s); };
+    lines = rl[Symbol.asyncIterator]();  // 會先排隊，貼太快也不會漏
+  }
+  console.log(question);
+  muted = hidden;
+  const { value } = await lines.next();
+  muted = false;
+  if (hidden) process.stdout.write("\n");
+  return String(value || "").trim();
 }
-const COOKIE = (process.argv.includes("--login") ? await askCookie() : "").replace(/^cookie:\s*/i, "").trim();
-if (COOKIE && (/[^\x20-\x7e]/.test(COOKIE) || !COOKIE.includes("="))) {
-  console.log("❌ 貼上的不是 cookie（裡面有中文或格式不對），可能剪貼簿被別的東西蓋掉了。請回 Chrome 重新複製 cookie 再跑一次。");
-  process.exit(1);
+const jar = new Map();
+function keepCookies(res) {
+  for (const c of res.headers.getSetCookie?.() || []) {
+    const [kv] = c.split(";");
+    const i = kv.indexOf("=");
+    if (i > 0) jar.set(kv.slice(0, i).trim(), kv.slice(i + 1).trim());
+  }
+}
+const cookieHeader = () => [...jar].map(([k, v]) => k + "=" + v).join("; ");
+async function login(user, pass) {
+  const ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/605.1.15";
+  const page = await fetch(BASE + "/my-account/", { headers: { "user-agent": ua } });
+  keepCookies(page);
+  const html = await page.text();
+  const nonce = (html.match(/name="woocommerce-login-nonce"\s+value="([^"]+)"/) || [])[1];
+  let res;
+  if (nonce) {
+    const body = new URLSearchParams({ username: user, password: pass, rememberme: "forever", "woocommerce-login-nonce": nonce,
+      _wp_http_referer: "/my-account/", login: "登入" });
+    res = await fetch(BASE + "/my-account/", { method: "POST", redirect: "manual", body,
+      headers: { "user-agent": ua, cookie: cookieHeader(), "content-type": "application/x-www-form-urlencoded", referer: BASE + "/my-account/" } });
+  } else {
+    jar.set("wordpress_test_cookie", "WP%20Cookie%20check");
+    const body = new URLSearchParams({ log: user, pwd: pass, rememberme: "forever", "wp-submit": "登入", redirect_to: BASE + "/shop/", testcookie: "1" });
+    res = await fetch(BASE + "/wp-login.php", { method: "POST", redirect: "manual", body,
+      headers: { "user-agent": ua, cookie: cookieHeader(), "content-type": "application/x-www-form-urlencoded" } });
+  }
+  keepCookies(res);
+  return [...jar.keys()].some((k) => k.startsWith("wordpress_logged_in"));
+}
+let COOKIE = "";
+if (process.argv.includes("--login")) {
+  const user = await ask("請輸入經銷網站的帳號（email 或使用者名稱），按 Enter：", false);
+  const pass = await ask("請輸入密碼（畫面不會顯示），按 Enter：", true);
+  rl.close();
+  if (!(await login(user, pass))) {
+    console.log("❌ 登入失敗：帳號密碼不對，或網站有驗證碼擋住程式登入。請跟 Claude 說，改用別的方法。");
+    process.exit(1);
+  }
+  COOKIE = cookieHeader();
+  console.log("登入成功，開始掃描…");
 }
 const UA = { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/605.1.15", ...(COOKIE ? { cookie: COOKIE } : {}) } };
 
@@ -47,7 +90,7 @@ for (let page = 1; page <= 60; page++) {
   if (/my-account|wp-login/.test(r.url)) { console.log("⚠️ 被導到登入頁：" + r.url); loginWall = true; break; }
   if (page === 1) {
     loggedIn = /<body[^>]+class="[^"]*\blogged-in\b/.test(r.html);
-    console.log(loggedIn ? "✅ 已用登入身分讀取（看到的是登入後的價格）" : COOKIE ? "⚠️ 有帶 cookie 但網站沒認出登入，可能 cookie 複製不完整或已過期" : "目前是「沒登入」身分（看到的是沒登入的價格）");
+    console.log(loggedIn ? "✅ 已用登入身分讀取（看到的是登入後的價格）" : COOKIE ? "⚠️ 登入後網站還是沒認出身分，請跟 Claude 說" : "目前是「沒登入」身分（看到的是沒登入的價格）");
   }
   const before = links.size;
   for (const m of r.html.matchAll(/<a[^>]+href="(https:\/\/sell\.gogonuts\.best\/product\/[^"#?]+)"/g)) links.set(m[1], true);
