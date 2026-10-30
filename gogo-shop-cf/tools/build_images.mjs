@@ -83,11 +83,15 @@ async function build(source) {
     } else if (source.startsWith("url:")) {
       // 已人工核對過的官網商品頁，直接抓 og:image
       const page = await fetchText(source.slice(4));
+      // 依序找：og:image → 經銷網站商品圖庫的大圖 → 商品主圖
       const img = (page.match(/<meta[^>]+property="og:image"[^>]+content="([^"?]+)/) ||
-                   page.match(/<meta[^>]+content="([^"?]+)"[^>]+property="og:image"/) || [])[1];
+                   page.match(/<meta[^>]+content="([^"?]+)"[^>]+property="og:image"/) ||
+                   page.match(/data-large_image="([^"?]+)"/) ||
+                   page.match(/<img[^>]+class="[^"]*wp-post-image[^"]*"[^>]+src="([^"?]+)"/) ||
+                   page.match(/<img[^>]+src="([^"?]+)"[^>]+class="[^"]*wp-post-image/) || [])[1];
       if (!img) throw new Error("頁面沒有商品圖：" + source.slice(4));
       const tmp = path.join(tmpDir, name + (path.extname(img) || ".jpg"));
-      await download(img, tmp);
+      await download(encodeURI(decodeURI(img.replace(/&amp;/g, "&"))), tmp);
       toJpeg(tmp, dst);
       report.official.push(source.slice(4) + " → " + img);
     } else if (source.startsWith("official:")) {
