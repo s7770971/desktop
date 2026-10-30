@@ -1,6 +1,6 @@
-# 透過 Safari 分頁讀果果官網（www.gogonuts.best）所有商品的名稱和價格，存成 JSON
-# 官網會擋程式直接連線，所以在 Safari 分頁裡讀（跟一般人開網頁一樣）
-# 事前：Safari「開發 → 允許來自 Apple 事件的 JavaScript」要打勾（之前已開過）
+# 透過 Google Chrome 分頁讀果果官網（www.gogonuts.best）所有商品的名稱和價格，存成 JSON
+# 官網會擋程式直接連線，所以在 Chrome 分頁裡讀（跟一般人開網頁一樣）
+# 事前：Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」要打勾
 # 用法：python3 official_scan.py <輸出 JSON>
 import json, subprocess, sys, tempfile, time
 
@@ -12,39 +12,45 @@ def osa(script, wait=60):
     try:
         r = subprocess.run(["osascript", "-"], input=script, capture_output=True, text=True, timeout=wait)
     except subprocess.TimeoutExpired:
-        sys.exit("❌ Safari 超過 %d 秒沒回應。請看畫面上有沒有跳出「允許」的視窗沒按；按完再跑一次。" % wait)
+        sys.exit("❌ Chrome 超過 %d 秒沒回應。請看畫面上有沒有跳出「允許」的視窗沒按；按完再跑一次。" % wait)
     if r.returncode != 0:
-        sys.exit("❌ 跟 Safari 溝通失敗：" + r.stderr.strip())
+        msg = r.stderr.strip()
+        if "JavaScript" in msg or "Apple 事件" in msg or "Apple Events" in msg:
+            sys.exit("❌ Chrome 還沒允許：Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」打勾，再跑一次。")
+        if "-1743" in msg or "不允許" in msg or "not allowed" in msg.lower():
+            sys.exit("❌ Mac 沒允許終端機控制 Chrome：系統設定 → 隱私權與安全性 → 自動化 → 終端機 → 打開 Google Chrome，再跑一次。")
+        sys.exit("❌ 跟 Chrome 溝通失敗：" + msg)
     return r.stdout.strip()
 
 
 def find_tab():
     return osa('''
-tell application "Safari"
+tell application "Google Chrome"
   repeat with w in windows
-    set i to 0
     repeat with t in tabs of w
-      set i to i + 1
-      if URL of t contains "%s" then return (id of w as text) & "," & (i as text)
+      if URL of t contains "%s" then return (id of w as text) & "," & (id of t as text)
     end repeat
   end repeat
   return ""
 end tell''' % SITE)
 
 
-print("1. 找 Safari 裡的果果官網分頁…", flush=True)
+print("1. 找 Google Chrome 裡的果果官網分頁…", flush=True)
 loc = find_tab()
 if not loc:
-    print("   沒有開著的官網分頁，幫你開一個，等 8 秒…", flush=True)
-    osa('tell application "Safari" to make new document with properties {URL:"https://%s/"}' % SITE)
+    print("   沒有開著的官網分頁，幫你在 Chrome 開一個，等 8 秒…", flush=True)
+    osa('''
+tell application "Google Chrome"
+  activate
+  if (count of windows) = 0 then make new window
+  tell front window to make new tab with properties {URL:"https://%s/"}
+end tell''' % SITE)
     time.sleep(8)
-    print("1. 找 Safari 裡的果果官網分頁…", flush=True)
-loc = find_tab()
+    loc = find_tab()
 if not loc:
-    print("   沒有開著的官網分頁，幫你開一個，等 8 秒…", flush=True)
     sys.exit("❌ 開不出官網分頁")
 wid, tid = loc.split(",")
-print("2. 用這個分頁讀官網（Safari 視窗 %s 第 %s 個分頁）" % (wid, tid), flush=True)
+print("2. 用 Chrome 這個分頁讀官網", flush=True)
 jsfile = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8").name
 
 
@@ -52,7 +58,10 @@ def run_js(code):
     open(jsfile, "w", encoding="utf-8").write(code)
     return osa('''
 set js to read POSIX file "%s" as «class utf8»
-tell application "Safari" to return do JavaScript js in tab %s of window id %s''' % (jsfile, tid, wid))
+tell application "Google Chrome"
+  set t to (first tab of window id %s whose id is %s)
+  return execute t javascript js
+end tell''' % (jsfile, wid, tid))
 
 
 JS = r'''
