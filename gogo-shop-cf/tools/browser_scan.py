@@ -1,6 +1,7 @@
-# 用「已經登入的 Chrome 分頁」掃經銷網站登入後的價格與庫存
+# 用「已經登入的瀏覽器分頁」（Safari 或 Chrome，哪個有開經銷網站就用哪個）掃經銷網站登入後的價格與庫存
 # 做法：終端機叫 Chrome 在經銷網站的分頁裡執行一小段程式，逐頁讀商品頁，結果存成 JSON。不讀、不碰任何登入資料。
-# 事前：Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」打勾
+# 事前（Safari）：Safari 設定 → 進階 → 勾「顯示網頁開發者功能」；再到選單「開發 → 允許來自 Apple 事件的 JavaScript」
+# 事前（Chrome）：Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」打勾
 # 用法：python3 chrome_scan.py <未登入掃描的 JSON（拿商品網址用）> <輸出 JSON>
 import json, os, subprocess, sys, tempfile, time
 
@@ -10,38 +11,69 @@ urls = [i["url"] for i in json.load(open(SRC, encoding="utf-8"))["items"] if i.g
 print("要掃 %d 個商品頁" % len(urls))
 
 
+BROWSER = None
+
+
 def osa(script):
     r = subprocess.run(["osascript", "-"], input=script, capture_output=True, text=True)
     if r.returncode != 0:
         msg = r.stderr.strip()
-        if "Apple 事件" in msg or "Apple Events" in msg or "JavaScript" in msg:
-            sys.exit("❌ Chrome 還沒允許：請到 Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」打勾，再跑一次。")
-        if "-1743" in msg or "not allowed" in msg.lower():
-            sys.exit("❌ Mac 沒允許終端機控制 Chrome：系統設定 → 隱私權與安全性 → 自動化 → 終端機 → 打開 Google Chrome，再跑一次。")
-        sys.exit("❌ 跟 Chrome 溝通失敗：" + msg)
+        if "-1743" in msg or "not allowed" in msg.lower() or "不允許" in msg:
+            sys.exit("❌ Mac 沒允許終端機控制瀏覽器：系統設定 → 隱私權與安全性 → 自動化 → 終端機 → 打開 %s，再跑一次。" % (BROWSER or "瀏覽器"))
+        if "JavaScript" in msg or "Apple 事件" in msg or "Apple Events" in msg:
+            if BROWSER == "Safari":
+                sys.exit("❌ Safari 還沒允許：Safari 設定 → 進階 → 勾「顯示網頁開發者功能」，再到選單列「開發 → 允許來自 Apple 事件的 JavaScript」，再跑一次。")
+            sys.exit("❌ Chrome 還沒允許：Chrome 選單「檢視 → 開發人員 → 允許來自 Apple 事件的 JavaScript」打勾，再跑一次。")
+        sys.exit("❌ 跟瀏覽器溝通失敗：" + msg)
     return r.stdout.strip()
 
 
-# 1. 找經銷網站的分頁（沒有就開一個）
-loc = osa('''
+# 1. 找開著經銷網站的分頁：先找 Safari，再找 Chrome
+def find_tab():
+    global BROWSER
+    for app, test in (("Safari", 'application "Safari" is running'), ("Google Chrome", 'application "Google Chrome" is running')):
+        if osa("return " + test) != "true":
+            continue
+        BROWSER = app
+        if app == "Safari":
+            got = osa('''
+tell application "Safari"
+  repeat with w in windows
+    set i to 0
+    repeat with t in tabs of w
+      set i to i + 1
+      if URL of t contains "%s" then return (id of w as text) & "," & (i as text)
+    end repeat
+  end repeat
+  return ""
+end tell''' % SITE)
+        else:
+            got = osa('''
 tell application "Google Chrome"
   repeat with w in windows
     repeat with t in tabs of w
       if URL of t contains "%s" then return (id of w as text) & "," & (id of t as text)
     end repeat
   end repeat
-  set w to front window
-  tell w to make new tab with properties {URL:"https://%s/shop/"}
-  delay 5
-  return (id of w as text) & "," & (id of active tab of w as text)
-end tell''' % (SITE, SITE))
-wid, tid = loc.split(",")
+  return ""
+end tell''' % SITE)
+        if got:
+            return got.split(",")
+    sys.exit("❌ 找不到開著經銷網站（%s）的分頁。請先用 Safari 打開經銷網站並登入，分頁不要關，再跑一次。" % SITE)
+
+
+wid, tid = find_tab()
+print("使用 %s 裡開著經銷網站的分頁" % BROWSER)
 jsfile = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8")
 
 
 def run_js(code):
     with open(jsfile.name, "w", encoding="utf-8") as f:
         f.write(code)
+    if BROWSER == "Safari":
+        return osa('''
+set js to read POSIX file "%s" as «class utf8»
+tell application "Safari" to return do JavaScript js in tab %s of window id %s''' % (jsfile.name, tid, wid))
     return osa('''
 set js to read POSIX file "%s" as «class utf8»
 tell application "Google Chrome"
@@ -51,8 +83,8 @@ end tell''' % (jsfile.name, wid, tid))
 
 
 if run_js("document.body.classList.contains('logged-in') ? 'yes' : 'no'") != "yes":
-    sys.exit("❌ 這個 Chrome 分頁看起來沒登入經銷網站。請先在 Chrome 登入，再跑一次。")
-print("✅ Chrome 分頁已登入，開始掃描（Chrome 不要關，可以照常做別的事）")
+    sys.exit("❌ 這個 %s 分頁看起來沒登入經銷網站。請先登入，再跑一次。" % BROWSER)
+print("✅ %s 分頁已登入，開始掃描（那個分頁不要關，可以照常做別的事）" % BROWSER)
 
 # 2. 在分頁裡啟動掃描（同時 4 頁）
 JS = r'''
