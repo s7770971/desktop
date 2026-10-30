@@ -1,0 +1,2098 @@
+{
+ "cells": [
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E2",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E6",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E7",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E13",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E14",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E15",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E16",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E17",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E18",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H18",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I18",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B18",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H19",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I19",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B19",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H20",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I20",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B20",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E21",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H21",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I21",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B21",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H22",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I22",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B22",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H23",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I23",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B23",
+   "old": "7g｜輕巧包｜100入/無盒",
+   "new": "7g｜輕巧包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H24",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I24",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B24",
+   "old": "7g｜輕巧包｜100入/無盒",
+   "new": "7g｜輕巧包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E25",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H25",
+   "old": 2500.0,
+   "new": 7500,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I25",
+   "old": 2125.0,
+   "new": 6375,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B25",
+   "old": "7g｜隨身包｜100入/無盒",
+   "new": "7g｜隨身包｜300入/無盒",
+   "why": "規格更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E65",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E69",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E77",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E78",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E87",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E89",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E92",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E94",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E95",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E96",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E98",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E99",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E101",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E103",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E104",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E107",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!A108",
+   "old": "濃縮乳清蛋白-草莓牛奶",
+   "new": "濃縮乳清蛋白 PLUS-草莓牛奶",
+   "why": "改成 PLUS 版"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!B108",
+   "old": "500g",
+   "new": "500克",
+   "why": "改成 PLUS 版"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!C108",
+   "old": "一般乳清(濃縮)",
+   "new": "濃縮乳清蛋白PLUS",
+   "why": "改成 PLUS 版"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!D108",
+   "old": "一般乳清(濃縮)-袋裝",
+   "new": "濃縮乳清蛋白PLUS-袋裝",
+   "why": "改成 PLUS 版"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!H108",
+   "old": 689.0,
+   "new": 699,
+   "why": "牌價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!I108",
+   "old": 586.0,
+   "new": 594,
+   "why": "經銷價更新"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E113",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E120",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E121",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E126",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E133",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E134",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E138",
+   "old": true,
+   "new": false,
+   "why": "經銷網站找不到"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E156",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E157",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E191",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E192",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E193",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E195",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E199",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E202",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E205",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E229",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E231",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E233",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E249",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E250",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E256",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E257",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E258",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E259",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E260",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E261",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E262",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E264",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E265",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E274",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E276",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E281",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E284",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E285",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E286",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E287",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E295",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E296",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E310",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E315",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E317",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E318",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E319",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E320",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E321",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E322",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E323",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E325",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E327",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E343",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E356",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E362",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E367",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E368",
+   "old": false,
+   "new": true,
+   "why": "經銷有貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E378",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!E380",
+   "old": true,
+   "new": false,
+   "why": "經銷缺貨"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F6",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F7",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F13",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F14",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F192",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F193",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F195",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F199",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F202",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F65",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F256",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F77",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F274",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F276",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F284",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F285",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F87",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F317",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F89",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F318",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F319",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F92",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F321",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F94",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F322",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F323",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F101",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F104",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F103",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F107",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F113",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F120",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F121",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F126",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F133",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F134",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!F138",
+   "old": true,
+   "new": false,
+   "why": "賣場下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H5",
+   "old": true,
+   "new": false,
+   "why": "下架：微粉化肌酸-檸檬萊姆 420g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I5",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H6",
+   "old": true,
+   "new": false,
+   "why": "下架：微粉化肌酸-海鹽柚子 420g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I6",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H12",
+   "old": true,
+   "new": false,
+   "why": "下架：美日肌酸-水漾蜜桃 7g × 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I12",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H13",
+   "old": true,
+   "new": false,
+   "why": "下架：美日肌酸-玫瑰輕檸 7g × 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I13",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H53",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-茉綠歐蕾 500g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I53",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H64",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-黃金蕎麥茶 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I64",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H73",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-臻醇可可 1kg"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I73",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H75",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-芝麻拿鐵 1kg"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I75",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H78",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-香蕉巧克力 1kg"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I78",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H80",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白PLUS-黃金蕎麥茶 35g／包"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I80",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H81",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-日式抹茶 500g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I81",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H83",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-烏龍奶茶 500g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I83",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H84",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-焦糖瑪奇朵 500g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I84",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H87",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-經典奶茶 500g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I87",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H89",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-冬瓜鮮奶 35g／包"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I89",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H96",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-經典奶茶 35g／包"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I96",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H97",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-芝麻拿鐵 35g／包"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I97",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H98",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-冬瓜鮮奶 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I98",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H105",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-經典奶茶 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I105",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H106",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-芝麻拿鐵 30入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I106",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H108",
+   "old": true,
+   "new": false,
+   "why": "下架：濃縮乳清蛋白-烏龍奶茶 1kg"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I108",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H152",
+   "old": true,
+   "new": false,
+   "why": "下架：丙胺酸-青梅 360g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I152",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H153",
+   "old": true,
+   "new": false,
+   "why": "下架：葡萄糖粉 420g"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I153",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H155",
+   "old": true,
+   "new": false,
+   "why": "下架：90% Omega-3 挪威高濃度魚油 60粒／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I155",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H159",
+   "old": true,
+   "new": false,
+   "why": "下架：Multi-Vitamin B 綜合維生素B群 30粒（每粒 480mg）"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I159",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H162",
+   "old": true,
+   "new": false,
+   "why": "下架：強勁瑪卡膠囊 60粒／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I162",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H184",
+   "old": true,
+   "new": false,
+   "why": "下架：蛋白威化餅-草莓起司Ｘ大湖農會聯名 6入／盒"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I184",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H193",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 不鏽鋼吸管隨行杯【Tumbler 夜幕星空】 710ml"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I193",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H195",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 不鏽鋼吸管隨行杯【Tumbler 晨霧絨粉】 710ml"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I195",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H199",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 不鏽鋼搖搖杯【Sleek 夢幻棉花糖】 25oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I199",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H200",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 不鏽鋼搖搖杯【Sleek 奶油白】 25oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I200",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H201",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Classic 奶茶】 20oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I201",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H202",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Classic 層白雲】 28oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I202",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H203",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Classic 桃開心】 28oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I203",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H204",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Pro 午夜黑】 24oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I204",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H205",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Pro 太空灰】 28oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I205",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!H206",
+   "old": true,
+   "new": false,
+   "why": "下架：Blender Bottle 搖搖杯【Pro 青瓷綠】 28oz"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!I206",
+   "old": true,
+   "new": false,
+   "why": "下架"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!E14",
+   "old": 280.0,
+   "new": 238,
+   "why": "軟糖成本"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!G14",
+   "old": 300.0,
+   "new": 260,
+   "why": "軟糖降價"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!B88",
+   "old": "濃縮乳清蛋白",
+   "new": "濃縮乳清雙蛋白PLUS",
+   "why": "草莓牛奶改 PLUS"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!C88",
+   "old": "濃縮乳清蛋白-草莓牛奶",
+   "new": "濃縮乳清蛋白PLUS-草莓牛奶",
+   "why": "草莓牛奶改 PLUS"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!E88",
+   "old": 586.0,
+   "new": 594,
+   "why": "草莓牛奶改 PLUS"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J18",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J19",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J20",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J21",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J22",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J23",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J24",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  },
+  {
+   "sheet": "全部販售商品",
+   "range": "全部販售商品!J25",
+   "old": 2300.0,
+   "new": null,
+   "why": "散裝改300入，建議售價待定"
+  }
+ ],
+ "new_rows": [
+  {
+   "row": 387,
+   "values": [
+    "此為散裝微粉化肌酸-香檸蜂蜜風味",
+    "7g｜隨身包｜300入/無盒",
+    "肌酸產品類",
+    "肌酸產品類-無盒裝",
+    true,
+    false,
+    null,
+    7500,
+    6375,
+    null,
+    "=J387-I387",
+    null
+   ]
+  },
+  {
+   "row": 388,
+   "values": [
+    "此為散裝微粉化肌酸-海鹽柚子風味",
+    "7g｜隨身包｜300入/無盒",
+    "肌酸產品類",
+    "肌酸產品類-無盒裝",
+    true,
+    false,
+    null,
+    7500,
+    6375,
+    null,
+    "=J388-I388",
+    null
+   ]
+  },
+  {
+   "row": 389,
+   "values": [
+    "微粉化肌酸-芭樂綠茶",
+    "420克/包",
+    "肌酸產品類",
+    "肌酸產品類-袋裝",
+    true,
+    false,
+    null,
+    659,
+    560,
+    600,
+    "=J389-I389",
+    null
+   ]
+  },
+  {
+   "row": 390,
+   "values": [
+    "微粉化肌酸-香檸蜂蜜風味",
+    "7g｜隨身包｜30入/盒",
+    "肌酸產品類",
+    "肌酸產品類-盒裝",
+    true,
+    false,
+    null,
+    380,
+    323,
+    350,
+    "=J390-I390",
+    null
+   ]
+  },
+  {
+   "row": 391,
+   "values": [
+    "微粉化肌酸-海鹽柚子風味",
+    "7g｜隨身包｜30入/盒",
+    "肌酸產品類",
+    "肌酸產品類-盒裝",
+    true,
+    false,
+    null,
+    380,
+    323,
+    350,
+    "=J391-I391",
+    null
+   ]
+  },
+  {
+   "row": 392,
+   "values": [
+    "濃縮乳清蛋白 PLUS-奶香金萱茶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J392-I392",
+    null
+   ]
+  },
+  {
+   "row": 393,
+   "values": [
+    "濃縮乳清蛋白 PLUS-奶香金萱茶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J393-I393",
+    null
+   ]
+  },
+  {
+   "row": 394,
+   "values": [
+    "濃縮乳清蛋白 PLUS-奶香金萱茶",
+    "35克｜隨身包",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    65,
+    55,
+    60,
+    "=J394-I394",
+    null
+   ]
+  },
+  {
+   "row": 395,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜紅玉紅茶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J395-I395",
+    null
+   ]
+  },
+  {
+   "row": 396,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜紅玉紅茶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J396-I396",
+    null
+   ]
+  },
+  {
+   "row": 397,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜紅玉紅茶",
+    "35克｜隨身包",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    65,
+    55,
+    60,
+    "=J397-I397",
+    null
+   ]
+  },
+  {
+   "row": 398,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜梨山烏龍茶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J398-I398",
+    null
+   ]
+  },
+  {
+   "row": 399,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜梨山烏龍茶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J399-I399",
+    null
+   ]
+  },
+  {
+   "row": 400,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜梨山烏龍茶",
+    "35克｜隨身包",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    65,
+    55,
+    60,
+    "=J400-I400",
+    null
+   ]
+  },
+  {
+   "row": 401,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜濃香焙茶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J401-I401",
+    null
+   ]
+  },
+  {
+   "row": 402,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜濃香焙茶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J402-I402",
+    null
+   ]
+  },
+  {
+   "row": 403,
+   "values": [
+    "濃縮乳清蛋白 PLUS-初蔚茶萃聯名｜濃香焙茶",
+    "35克｜隨身包",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    65,
+    55,
+    60,
+    "=J403-I403",
+    null
+   ]
+  },
+  {
+   "row": 404,
+   "values": [
+    "濃縮乳清蛋白 PLUS-蜜香紅茶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J404-I404",
+    null
+   ]
+  },
+  {
+   "row": 405,
+   "values": [
+    "濃縮乳清蛋白 PLUS-蜜香紅茶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J405-I405",
+    null
+   ]
+  },
+  {
+   "row": 406,
+   "values": [
+    "濃縮乳清蛋白 PLUS-蜜香紅茶",
+    "35克｜隨身包",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    65,
+    55,
+    60,
+    "=J406-I406",
+    null
+   ]
+  },
+  {
+   "row": 407,
+   "values": [
+    "濃縮乳清蛋白 PLUS-麥芽可可",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J407-I407",
+    null
+   ]
+  },
+  {
+   "row": 408,
+   "values": [
+    "濃縮乳清蛋白 PLUS-麥芽可可",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J408-I408",
+    null
+   ]
+  },
+  {
+   "row": 409,
+   "values": [
+    "濃縮乳清蛋白 PLUS-早安大冰奶",
+    "500克",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-袋裝",
+    true,
+    false,
+    null,
+    699,
+    594,
+    630,
+    "=J409-I409",
+    null
+   ]
+  },
+  {
+   "row": 410,
+   "values": [
+    "濃縮乳清蛋白 PLUS-早安大冰奶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    true,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J410-I410",
+    null
+   ]
+  },
+  {
+   "row": 411,
+   "values": [
+    "濃縮乳清蛋白 PLUS-草莓牛奶",
+    "1公斤",
+    "濃縮乳清蛋白PLUS",
+    "濃縮乳清蛋白PLUS-其他",
+    false,
+    false,
+    null,
+    1299,
+    1104,
+    1170,
+    "=J411-I411",
+    null
+   ]
+  }
+ ],
+ "last_row": 386
+}
