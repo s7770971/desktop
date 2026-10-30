@@ -77,7 +77,7 @@ print("已備份：果果快選所_商品資料庫_備份_%s" % stamp)
 # 3. 寫入（整塊覆寫成整理後的內容）
 v = lambda x: "" if x is None else x
 na, npr = len(plan["all_new"]), len(plan["prod_new"])
-blocks = [(T, "A", "L", plan["all_new"]), (PR, "A", "N", plan["prod_new"])]
+blocks = [(T, "A", "L", [r[:12] for r in plan["all_new"]]), (PR, "A", "N", [r[:14] for r in plan["prod_new"]])]  # 只寫表格範圍內的欄位
 for sheet, c0, c1, rows in blocks:  # 分批送，每批 30 列（一次送太大會被系統擋）
     for i in range(0, len(rows), 30):
         part = rows[i:i + 30]
