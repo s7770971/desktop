@@ -65,8 +65,9 @@ from collections import Counter
 print("要改 %d 格：" % len(plan["cells"]))
 for (sheet, why), n in sorted(Counter((c["sheet"], c["why"].split("：")[0]) for c in plan["cells"]).items()):
     print("  %-8s %-20s %d 格" % (sheet, why, n))
-print("要在「全部販售商品」第 %d～%d 列新增 %d 個新品（平台開啟販售先不勾）：" % (
-    plan["new_rows"][0]["row"], plan["new_rows"][-1]["row"], len(plan["new_rows"])))
+if plan["new_rows"]:
+    print("要在「全部販售商品」第 %d～%d 列新增 %d 個新品（平台開啟販售先不勾）：" % (
+        plan["new_rows"][0]["row"], plan["new_rows"][-1]["row"], len(plan["new_rows"])))
 for r in plan["new_rows"]:
     v = r["values"]
     print("  第%d列 %s %s ｜%s｜牌價 %s 經銷 %s 建議 %s" % (r["row"], v[0], v[1], "有貨" if v[4] else "缺貨", v[7], v[8], v[9]))
@@ -94,9 +95,11 @@ updates += [{"range": "%s!A%d:L%d" % (T, r["row"], r["row"]), "values": [[val(v)
 gws("sheets", "spreadsheets", "values", "batchUpdate", "--params", json.dumps({"spreadsheetId": SHEET}),
     "--json", json.dumps({"valueInputOption": "USER_ENTERED", "data": updates}))
 # 新品列的「庫存狀態／平台開啟販售」做成勾選框
-meta = gws("sheets", "spreadsheets", "get", "--params", json.dumps({"spreadsheetId": SHEET, "fields": "sheets.properties"}))
-sid = next(s["properties"]["sheetId"] for s in meta["sheets"] if s["properties"]["title"] == T)
-gws("sheets", "spreadsheets", "batchUpdate", "--params", json.dumps({"spreadsheetId": SHEET}), "--json", json.dumps({"requests": [{
+meta = None
+if plan["new_rows"]:
+  meta = gws("sheets", "spreadsheets", "get", "--params", json.dumps({"spreadsheetId": SHEET, "fields": "sheets.properties"}))
+  sid = next(s["properties"]["sheetId"] for s in meta["sheets"] if s["properties"]["title"] == T)
+  gws("sheets", "spreadsheets", "batchUpdate", "--params", json.dumps({"spreadsheetId": SHEET}), "--json", json.dumps({"requests": [{
     "setDataValidation": {"range": {"sheetId": sid, "startRowIndex": plan["new_rows"][0]["row"] - 1, "endRowIndex": plan["new_rows"][-1]["row"],
                                     "startColumnIndex": 4, "endColumnIndex": 6},
                           "rule": {"condition": {"type": "BOOLEAN"}, "strict": True}}}]}))

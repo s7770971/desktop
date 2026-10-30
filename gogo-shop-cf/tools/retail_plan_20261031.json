@@ -1,0 +1,272 @@
+{
+ "cells": [
+  {
+   "sheet": "Products",
+   "range": "Products!F9",
+   "old": null,
+   "new": 789,
+   "why": "官網原價：微粉化肌酸-經典原味 400g ← 微粉化肌酸經典原味｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F10",
+   "old": null,
+   "new": 799,
+   "why": "官網原價：微粉化肌酸-芭樂綠茶 420g ← 微粉化肌酸芭樂綠茶｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F14",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：微粉化肌酸-仲夏野莓 7g × 30入／盒 ← 微粉化肌酸仲夏野莓隨身包｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F15",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：微粉化肌酸-檸檬萊姆 7g × 30入／盒 ← 微粉化肌酸檸檬萊姆隨身包｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F16",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：微粉化肌酸-麝香葡萄 7g × 30入／盒 ← 微粉化肌酸麝香葡萄隨身包｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F17",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：微粉化肌酸-香檸蜂蜜 7g × 30入／盒 ← 微粉化肌酸香檸蜂蜜隨身包｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F18",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：微粉化肌酸-海鹽柚子 7g × 30入／盒 ← 微粉化肌酸海鹽柚子隨身包｜果果能量 Creatine｜力量表現的訓練補給"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F66",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-奶香金萱茶 500g ← 濃縮乳清蛋白 PLUS 奶香金萱風味｜500g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F67",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名） 500g ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 無加甜紅玉紅茶｜500g｜GOpower "
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F68",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名） 500g ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 梨山烏龍茶風味｜500g｜GOpower "
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F69",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名） 500g ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 濃香焙茶風味｜500g｜GOpower 果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F70",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-蜜香紅茶 500g ← 濃縮乳清蛋白 PLUS 蜜香紅茶｜500g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F71",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-麥芽可可 500g ← 濃縮乳清蛋白 PLUS 麥芽可可｜500g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F72",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：濃縮乳清蛋白PLUS-早安大冰奶 500g ← 濃縮乳清蛋白 PLUS 早安大冰奶｜500g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F90",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-四季春茶 1kg ← 濃縮乳清蛋白 PLUS 無加甜四季春茶風味｜1kg｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F92",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-奶香金萱茶 1kg ← 濃縮乳清蛋白 PLUS 奶香金萱風味｜1kg｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F93",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名） 1kg ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 無加甜紅玉紅茶｜1kg｜GOpower 果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F94",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名） 1kg ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 梨山烏龍茶風味｜1kg｜GOpower 果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F95",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名） 1kg ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 濃香焙茶風味｜1kg｜GOpower 果果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F96",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-蜜香紅茶 1kg ← 濃縮乳清蛋白 PLUS 蜜香紅茶｜1kg｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F97",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-麥芽可可 1kg ← 濃縮乳清蛋白 PLUS 麥芽可可｜1kg｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F98",
+   "old": null,
+   "new": 1800,
+   "why": "官網原價：濃縮乳清蛋白PLUS-早安大冰奶 1kg ← 濃縮乳清蛋白 PLUS 早安大冰奶｜1kg｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F107",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-四季春茶 35g／包 ← 濃縮乳清蛋白 PLUS 無加甜四季春茶風味｜35g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F108",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-鴛鴦奶茶 35g／包 ← 濃縮乳清蛋白 PLUS 鴛鴦奶茶風味｜35g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F109",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-奶香金萱茶 35g／包 ← 濃縮乳清蛋白 PLUS 奶香金萱風味｜35g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F110",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名） 35g／包 ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 無加甜紅玉紅茶｜35g｜GOpower 果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F111",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名） 35g／包 ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 梨山烏龍茶風味｜35g｜GOpower 果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F112",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名） 35g／包 ← 濃縮乳清蛋白 PLUS 初蔚茶萃聯名 濃香焙茶風味｜35g｜GOpower 果果"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F113",
+   "old": null,
+   "new": 85,
+   "why": "官網原價：濃縮乳清蛋白PLUS-蜜香紅茶 35g／包 ← 濃縮乳清蛋白 PLUS 蜜香紅茶｜35g｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F153",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：緩釋酪蛋白-夜巡芝麻 500g ← ProteinZ 緩釋酪蛋白【夜巡芝麻】500g酪蛋白｜GOpower果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F154",
+   "old": null,
+   "new": 900,
+   "why": "官網原價：緩釋酪蛋白-濃醇黑巧 500g ← ProteinZ 緩釋酪蛋白【濃醇黑巧】500g酪蛋白｜GOpower果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F188",
+   "old": null,
+   "new": 1199,
+   "why": "官網原價：PRO EAAs 必需胺基酸-檸檬紅茶 420g ← PRO EAAs Lemon lce Tea"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F201",
+   "old": null,
+   "new": 450,
+   "why": "官網原價：GABA 胺基丁酸 15粒（每粒 500mg） ← GABA 胺基丁酸(500mg/15粒) 【CAP】"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F220",
+   "old": null,
+   "new": 590,
+   "why": "官網原價：堅果能量棒-野櫻莓 10入／盒 ← 堅果能量棒【野櫻莓】10入盒裝-果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F224",
+   "old": null,
+   "new": 480,
+   "why": "官網原價：脆米蛋白棒-双癒可可 6入／盒 ← 脆米蛋白棒【双癒可可】盒裝6入｜GOpower 果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F227",
+   "old": null,
+   "new": 259,
+   "why": "官網原價：蛋白威化餅-檸檬起司 6入／盒 ← 【盒裝】蛋白威化餅（檸檬起司）-果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F229",
+   "old": null,
+   "new": 259,
+   "why": "官網原價：蛋白威化餅-特濃花生 6入／盒 ← 【盒裝】蛋白威化餅（特濃花生）-果果能量"
+  },
+  {
+   "sheet": "Products",
+   "range": "Products!F230",
+   "old": null,
+   "new": 259,
+   "why": "官網原價：蛋白威化餅-芝麻 6入／盒 ← 【盒裝】蛋白威化餅（芝麻）-果果能量"
+  }
+ ],
+ "new_rows": [],
+ "last_row": 411
+}
