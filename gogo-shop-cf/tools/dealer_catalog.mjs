@@ -52,7 +52,9 @@ async function login(user, pass) {
   keepCookies(res);
   return [...jar.keys()].some((k) => k.startsWith("wordpress_logged_in"));
 }
-let COOKIE = "";
+// 也可以直接用瀏覽器裡已登入的身分：COOKIE="$(python3 browser_cookie.py gogonuts.best)" node dealer_catalog.mjs ...
+let COOKIE = (process.env.COOKIE || "").trim();
+if ("COOKIE" in process.env && !COOKIE) { console.log("❌ 沒拿到瀏覽器的登入資料，先停下來。"); process.exit(1); }
 if (process.argv.includes("--login")) {
   const user = await ask("請輸入經銷網站的帳號（email 或使用者名稱），按 Enter：", false);
   const pass = await ask("請輸入密碼（畫面不會顯示），按 Enter：", true);
