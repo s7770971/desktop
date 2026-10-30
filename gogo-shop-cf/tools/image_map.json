@@ -581,7 +581,7 @@
   "nutri": "src:果果能量_PRO EAAs 必需胺基酸/營養標示圖/梅子綠茶.jpg"
  },
  "PROEAAs必需胺基酸-莓果爆擊|420g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870639/",
+  "main": "src:果果能量_PRO EAAs 必需胺基酸/EAA_04.png",
   "nutri": "src:果果能量_PRO EAAs 必需胺基酸/營養標示圖/莓果爆擊.png"
  },
  "PROEAAs必需胺基酸-蜜桃鐵觀音|420g": {
@@ -798,16 +798,16 @@
   "main": "img:https://sell.gogonuts.best/wp-content/uploads/2025/12/Strada-Tritan-28oz-Lilac薄紅紫.png"
  },
  "HyperNutro電動攪拌杯-白|750ml": {
-  "main": "url:https://sell.gogonuts.best/product/fp2325/"
+  "main": "src:其他周邊_Hyper Nutro電動攪拌杯/商品圖/Hyper Nutro電動攪拌杯 (12).jpg"
  },
  "HyperNutro電動攪拌杯-粉|750ml": {
-  "main": "url:https://sell.gogonuts.best/product/fp2326/"
+  "main": "src:其他周邊_Hyper Nutro電動攪拌杯/商品圖/Hyper Nutro電動攪拌杯 (14).jpg"
  },
  "HyperNutro電動攪拌杯-藍|750ml": {
   "main": "url:https://sell.gogonuts.best/product/fp2328/"
  },
  "HyperNutro電動攪拌杯-黑|750ml": {
-  "main": "url:https://sell.gogonuts.best/product/fp2327/"
+  "main": "src:其他周邊_Hyper Nutro電動攪拌杯/商品圖/Hyper Nutro電動攪拌杯 (11).jpg"
  },
  "LP|微粉肌酸": [
   "lp:果果能量_肌酸/銷售頁/袋裝銷售頁/20251201_果果_肌酸銷售頁拷貝_01.png",
@@ -982,118 +982,153 @@
   "nutri": "src:果果能量_濃縮乳清系列/1. 立袋500g/營養標示/營養標示_草莓牛奶.png"
  },
  "微粉化肌酸-經典原味|400g": {
-  "main": "url:https://sell.gogonuts.best/product/4710273810331/"
+  "main": "src:果果能量_肌酸/袋裝/商品圖/微粉化肌酸-經典原味-商品圖.jpg",
+  "nutri": "src:果果能量_肌酸/袋裝/營養標/營養標示_微粉化肌酸-經典原味.jpg"
  },
  "微粉化肌酸-芭樂綠茶|420g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871124/"
+  "main": "src:果果能量_肌酸/袋裝/商品圖/肌酸_芭樂綠茶_商品圖.png",
+  "nutri": "src:果果能量_肌酸/袋裝/營養標/肌酸_芭樂綠茶_營養標.png"
  },
  "微粉化肌酸-仲夏野莓|7g×30入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870875/"
+  "main": "src:果果能量_肌酸/盒裝/商品圖/CRT_30入盒裝_仲夏野莓.png",
+  "nutri": "src:果果能量_肌酸/盒裝/營養標/CRT_30入盒裝_仲夏野莓_營養標.png"
  },
  "微粉化肌酸-檸檬萊姆|7g×30入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870936/"
+  "main": "src:果果能量_肌酸/盒裝/商品圖/CRT_30入盒裝_檸檬萊姆.png",
+  "nutri": "src:果果能量_肌酸/盒裝/營養標/CRT_30入盒裝_檸檬萊姆_營養標.png"
  },
  "微粉化肌酸-麝香葡萄|7g×30入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871070/"
+  "main": "url:https://sell.gogonuts.best/product/4711549871070/",
+  "nutri": "src:果果能量_肌酸/盒裝/營養標/CRT_30入盒裝_麝香葡萄_營養標.png"
  },
  "微粉化肌酸-香檸蜂蜜|7g×30入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871162/"
+  "main": "src:果果能量_肌酸/盒裝/商品圖/微粉化肌酸_香檸蜂蜜_盒裝.png",
+  "nutri": "src:果果能量_肌酸/盒裝/營養標/CRT_30入盒裝_香檸蜂蜜_營養標.png"
  },
  "微粉化肌酸-海鹽柚子|7g×30入／盒": {
   "main": "url:https://sell.gogonuts.best/product/4711549871933/"
  },
  "濃縮乳清蛋白PLUS-臻醇可可|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871230/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_臻醇可可_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_臻醇可可_500g.png"
  },
  "濃縮乳清蛋白PLUS-奶香金萱茶|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549872022/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_奶香金萱_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_奶香金萱_500g.png"
  },
  "濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名）|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871612/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_紅玉紅茶_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_紅玉紅茶_500g.png"
  },
  "濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名）|500g": {
-  "main": "url:https://sell.gogonuts.best/product/%e6%bf%83%e7%b8%ae%e4%b9%b3%e6%b8%85%e8%9b%8b%e7%99%bd-plus-%e5%88%9d%e8%94%9a%e8%8c%b6%e8%90%83%e8%81%af%e5%90%8d%ef%bd%9c%e6%a2%a8%e5%b1%b1%e7%83%8f%e9%be%8d-500%e5%85%8b/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_梨山烏龍_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_梨山烏龍_500g.png"
  },
  "濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名）|500g": {
   "main": "url:https://sell.gogonuts.best/product/4711549871889/"
  },
  "濃縮乳清蛋白PLUS-蜜香紅茶|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871841/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_蜜香紅茶_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_蜜香紅茶_500g.png"
  },
  "濃縮乳清蛋白PLUS-麥芽可可|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871803/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_麥芽可可_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養表_麥芽可可_500g.png"
  },
  "濃縮乳清蛋白PLUS-早安大冰奶|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549872060/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/WPC+濃縮乳清蛋白飲PLUS_商品圖_大冰奶_500g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/1.立袋500g/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_大冰奶_500g.png"
  },
  "濃縮乳清蛋白PLUS-四季春茶|30入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871599/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/5.盒裝/WPC+濃縮乳清蛋白飲PLUS_商品圖_四季春茶_30 入.png"
  },
  "濃縮乳清蛋白PLUS-四季春茶|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871568/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_四季春茶_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_四季春茶_1kg.png"
  },
  "濃縮乳清蛋白PLUS-茉綠歐蕾|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871285/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_茉綠歐蕾_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_茉綠歐蕾_1kg.png"
  },
  "濃縮乳清蛋白PLUS-奶香金萱茶|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549872015/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_奶香金萱_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_奶香金萱_1kg.png"
  },
  "濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名）|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871605/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_紅玉紅茶_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_紅玉紅茶_1kg.png"
  },
  "濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名）|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871759/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_梨山烏龍_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_梨山烏龍_1kg.png"
  },
  "濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名）|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871872/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_焙茶_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_焙茶_1kg.png"
  },
  "濃縮乳清蛋白PLUS-蜜香紅茶|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871834/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_蜜香紅茶_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_蜜香紅茶_1kg.png"
  },
  "濃縮乳清蛋白PLUS-麥芽可可|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871797/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_麥芽可可_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養表_麥芽可可_1kg.png"
  },
  "濃縮乳清蛋白PLUS-早安大冰奶|1kg": {
-  "main": "url:https://sell.gogonuts.best/product/4711549872053/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/WPC+濃縮乳清蛋白飲PLUS_商品圖_大冰奶_1kg.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/4.立袋1kg/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_大冰奶_1kg.png"
  },
  "濃縮乳清蛋白PLUS-四季春茶|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871582/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_四季春茶_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_四季春茶_35g.png"
  },
  "濃縮乳清蛋白PLUS-鴛鴦奶茶|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871414/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_鴛鴦奶茶_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_鴛鴦奶茶_35g.png"
  },
  "濃縮乳清蛋白PLUS-奶香金萱茶|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549872039/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_奶香金萱_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_奶香金萱_35g.png"
  },
  "濃縮乳清蛋白PLUS-紅玉紅茶（初蔚茶萃聯名）|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871629/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_紅玉紅茶_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_紅玉紅茶_35g.png"
  },
  "濃縮乳清蛋白PLUS-梨山烏龍茶（初蔚茶萃聯名）|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871773/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_梨山烏龍_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_梨山烏龍_35g.png"
  },
  "濃縮乳清蛋白PLUS-濃香焙茶（初蔚茶萃聯名）|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871896/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_焙茶_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_焙茶_35g.png"
  },
  "濃縮乳清蛋白PLUS-蜜香紅茶|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871858/"
+  "main": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/WPC+濃縮乳清蛋白飲PLUS_商品圖_蜜香紅茶_35g.png",
+  "nutri": "src:果果能量_濃縮乳清PLUS系列/2.隨手包/營養標/WPC+濃縮乳清蛋白飲PLUS_營養標_蜜香紅茶_35g.png"
  },
  "緩釋酪蛋白-夜巡芝麻|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870448/"
+  "main": "src:果果能量_緩釋酪蛋白系列/500G/商品圖/酪蛋白_夜巡芝麻_500g_白底 (1).png",
+  "nutri": "src:果果能量_緩釋酪蛋白系列/500G/營養標/WPC_500g 夜巡芝麻_營養標示 (1).png"
  },
  "緩釋酪蛋白-濃醇黑巧|500g": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870455/"
+  "main": "src:果果能量_緩釋酪蛋白系列/500G/商品圖/酪蛋白_濃醇黑巧_500g_白底 (2).png",
+  "nutri": "src:果果能量_緩釋酪蛋白系列/500G/營養標/2016-(5).jpg"
  },
  "高蛋白植感濃湯-田園玉米（全素）|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711517610267/"
+  "main": "src:彼蛋白/產品Product/植感濃湯/35克隨身包/2025 植感濃湯商品圖_田園玉米 (1).png",
+  "nutri": "src:彼蛋白/產品Product/植感濃湯/35克隨身包/2025 植感濃湯營養標示_田園玉米 (1).png"
  },
  "高蛋白植感濃湯-蘑菇馬鈴薯（全素）|35g／包": {
-  "main": "url:https://sell.gogonuts.best/product/4711517610274/"
+  "main": "src:彼蛋白/產品Product/植感濃湯/35克隨身包/2025 植感濃湯商品圖-蘑菇馬鈴薯 (1).png",
+  "nutri": "src:彼蛋白/產品Product/植感濃湯/35克隨身包/2025 植感濃湯營養標示_蘑菇馬鈴薯 (1).png"
  },
  "PROEAAs必需胺基酸-檸檬紅茶|420g": {
-  "main": "url:https://sell.gogonuts.best/product/4710273814391/"
+  "main": "src:果果能量_PRO EAAs 必需胺基酸/檸檬紅茶.jpg",
+  "nutri": "src:果果能量_PRO EAAs 必需胺基酸/營養標示圖/檸檬紅茶.jpg"
  },
  "GABA胺基丁酸|15粒（每粒500mg）": {
-  "main": "url:https://sell.gogonuts.best/product/gaba-%e8%83%ba%e5%9f%ba%e4%b8%81%e9%85%b8500mg-15%e7%b2%92/"
+  "main": "url:https://sell.gogonuts.best/product/gaba-%e8%83%ba%e5%9f%ba%e4%b8%81%e9%85%b8500mg-15%e7%b2%92/",
+  "nutri": "src:守衛者/營養標示/GABA 胺基丁酸(500mg／15粒) 【CAP】.jpg"
  },
  "蛋白香酥脆-起司龍捲風|33g／包": {
   "main": "url:https://sell.gogonuts.best/product/4710273814544/"
@@ -1102,27 +1137,35 @@
   "main": "url:https://sell.gogonuts.best/product/4710273814537/"
  },
  "堅果能量棒-野櫻莓|10入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4710273813479/"
+  "main": "src:果果能量_堅果能量棒/野櫻莓/COO_EB_02_FSL盒裝.jpg",
+  "nutri": "src:果果能量_堅果能量棒/野櫻莓/COO_EB_02_NL.jpg"
  },
  "脆米蛋白棒-双癒可可|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4710273814827/"
+  "main": "src:果果能量_脆米蛋白棒/新版脆米蛋白棒/新版-双癒可可-盒裝.jpg",
+  "nutri": "src:果果能量_脆米蛋白棒/新版脆米蛋白棒/新版-双癒可可-營養標示.jpg"
  },
  "蛋白威化餅-檸檬起司|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871018/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/檬起司.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/檸檬起司_營養標示.jpg"
  },
  "蛋白威化餅-濃韻焙茶（健工聯名）|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871025/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/濃韻焙茶.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/濃韻焙茶_營養標示.jpg"
  },
  "蛋白威化餅-特濃花生|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871001/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/特濃花生.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/花生_營養標示.jpg"
  },
  "蛋白威化餅-芝麻|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549870998/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/芝麻.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/芝麻_營養標示.jpg"
  },
  "蛋白威化餅-香草牛奶（健工聯名）|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871049/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/香草牛奶.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/香草牛奶_營養標示.jpg"
  },
  "蛋白威化餅-香蕉可可（健工聯名）|6入／盒": {
-  "main": "url:https://sell.gogonuts.best/product/4711549871032/"
+  "main": "src:果果能量_蛋白威化餅/6入盒裝/香蕉可可.png",
+  "nutri": "src:果果能量_蛋白威化餅/上架圖+營養標/香蕉可可_營養標示.jpg"
  }
 }
