@@ -21,7 +21,6 @@ if (!srcRoot || !fs.existsSync(srcRoot)) {
 }
 const map = JSON.parse(fs.readFileSync(path.join(root, "tools/image_map.json"), "utf8"));
 const outDir = path.join(root, "public/images/p");
-fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "gogo-img-"));
 
@@ -105,6 +104,12 @@ async function build(source) {
     }
     done[source] = "/images/p/" + name;
   } catch (err) {
+    // 抓不到時，如果上次已經做好同一張圖就沿用，網站不會突然少圖
+    if (fs.existsSync(dst)) {
+      report.missing.push("（沿用上次的圖）" + String(err.message || err));
+      done[source] = "/images/p/" + name;
+      return done[source];
+    }
     report.missing.push(String(err.message || err));
     done[source] = null;
   }
