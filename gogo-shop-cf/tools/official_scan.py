@@ -8,8 +8,11 @@ OUT = sys.argv[1]
 SITE = "www.gogonuts.best"
 
 
-def osa(script):
-    r = subprocess.run(["osascript", "-"], input=script, capture_output=True, text=True)
+def osa(script, wait=60):
+    try:
+        r = subprocess.run(["osascript", "-"], input=script, capture_output=True, text=True, timeout=wait)
+    except subprocess.TimeoutExpired:
+        sys.exit("❌ Safari 超過 %d 秒沒回應。請看畫面上有沒有跳出「允許」的視窗沒按；按完再跑一次。" % wait)
     if r.returncode != 0:
         sys.exit("❌ 跟 Safari 溝通失敗：" + r.stderr.strip())
     return r.stdout.strip()
@@ -29,14 +32,19 @@ tell application "Safari"
 end tell''' % SITE)
 
 
+print("1. 找 Safari 裡的果果官網分頁…", flush=True)
 loc = find_tab()
 if not loc:
+    print("   沒有開著的官網分頁，幫你開一個，等 8 秒…", flush=True)
     osa('tell application "Safari" to make new document with properties {URL:"https://%s/"}' % SITE)
     time.sleep(8)
-    loc = find_tab()
+    print("1. 找 Safari 裡的果果官網分頁…", flush=True)
+loc = find_tab()
 if not loc:
+    print("   沒有開著的官網分頁，幫你開一個，等 8 秒…", flush=True)
     sys.exit("❌ 開不出官網分頁")
 wid, tid = loc.split(",")
+print("2. 用這個分頁讀官網（Safari 視窗 %s 第 %s 個分頁）" % (wid, tid), flush=True)
 jsfile = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8").name
 
 
@@ -86,14 +94,19 @@ JS = r'''
   return "started";
 })()
 '''
+print("3. 開始讀取商品清單…", flush=True)
+run_js("window.__offrun = (window.__offrun || 0) + 1; 'ok'")
 run_js(JS)
 last = -1
+started = time.time()
 while True:
     time.sleep(3)
     st = json.loads(run_js("JSON.stringify({d: window.__off.done, t: window.__off.total, f: !!window.__off.finished, log: window.__off.log})"))
-    if st["d"] != last and (st["d"] % 25 == 0 or st["f"]):
-        print("  %d / %d" % (st["d"], st["t"]), st["log"])
+    if st["d"] != last or int(time.time() - started) % 30 < 3:
+        print("   已讀 %d / %d 個商品頁 %s" % (st["d"], st["t"], st["log"]), flush=True)
         last = st["d"]
+    if st["t"] == 0 and st["f"]:
+        sys.exit("❌ 官網的商品清單（sitemap）讀不到，回報給 Claude。")
     if st["f"]:
         break
 items = []
