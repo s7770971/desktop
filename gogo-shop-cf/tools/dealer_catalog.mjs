@@ -5,7 +5,9 @@ import fs from "node:fs";
 
 const OUT = process.argv[2] || "經銷網站商品清單.json";
 const BASE = "https://sell.gogonuts.best";
-const UA = { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/605.1.15" } };
+// 有登入跟沒登入看到的價格不同：要看登入後的經銷價，執行時帶 COOKIE="$(pbpaste)"（先從瀏覽器複製登入後的 cookie）
+const COOKIE = (process.env.COOKIE || "").replace(/^cookie:\s*/i, "").trim();
+const UA = { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 Safari/605.1.15", ...(COOKIE ? { cookie: COOKIE } : {}) } };
 
 async function get(url) {
   for (let i = 0; i < 3; i++) {
@@ -23,12 +25,16 @@ const decode = (s) => String(s || "").replace(/&amp;/g, "&").replace(/&#0?39;|&#
 
 // 1. 翻商品列表頁，收集商品網址
 const links = new Map();
-let loginWall = false;
+let loginWall = false, loggedIn = false;
 for (let page = 1; page <= 60; page++) {
   const url = page === 1 ? BASE + "/shop/" : BASE + "/shop/page/" + page + "/";
   const r = await get(url);
   if (r.status !== 200) { console.log("列表第 " + page + " 頁：" + r.status + "（結束）"); break; }
   if (/my-account|wp-login/.test(r.url)) { console.log("⚠️ 被導到登入頁：" + r.url); loginWall = true; break; }
+  if (page === 1) {
+    loggedIn = /<body[^>]+class="[^"]*\blogged-in\b/.test(r.html);
+    console.log(loggedIn ? "✅ 已用登入身分讀取（看到的是登入後的價格）" : COOKIE ? "⚠️ 有帶 cookie 但網站沒認出登入，可能 cookie 複製不完整或已過期" : "目前是「沒登入」身分（看到的是沒登入的價格）");
+  }
   const before = links.size;
   for (const m of r.html.matchAll(/<a[^>]+href="(https:\/\/sell\.gogonuts\.best\/product\/[^"#?]+)"/g)) links.set(m[1], true);
   console.log("列表第 " + page + " 頁，累計 " + links.size + " 個商品");
@@ -82,7 +88,7 @@ async function worker() {
 }
 await Promise.all([worker(), worker(), worker(), worker()]);
 items.sort((a, b) => (a.title || "").localeCompare(b.title || "", "zh-Hant"));
-fs.writeFileSync(OUT, JSON.stringify({ scannedAt: new Date().toISOString(), loginWall, count: items.length, items }, null, 1));
+fs.writeFileSync(OUT, JSON.stringify({ scannedAt: new Date().toISOString(), loggedIn, loginWall, count: items.length, items }, null, 1));
 const out = items.filter((i) => i.stockClass === "缺貨").length;
 const vOut = items.reduce((n, i) => n + (i.variations || []).filter((v) => !v.inStock).length, 0);
 console.log("完成：共 " + items.length + " 個商品，整個缺貨 " + out + " 個，另有 " + vOut + " 個口味／規格缺貨。檔案：" + OUT);
