@@ -1,4 +1,4 @@
-# 在 CLAUDE.md 鐵則第 10 條後面加第 11 條「大量資料先用程式抓」，標題「十條鐵則」改「十一條鐵則」
+# 在 CLAUDE.md 鐵則第 10 條後面加第 11 條「能寫程式在終端機做的，就用程式做」，標題「十條鐵則」改「十一條鐵則」
 # 預設只列出改前改後；加 --write 才寫入，寫入前先備份到 backups/
 import os, re, shutil, sys, time
 
@@ -6,11 +6,12 @@ WRITE = "--write" in sys.argv
 path = os.path.join(os.getcwd(), "CLAUDE.md")
 if not os.path.exists(path):
     sys.exit("請先 cd 到 Mo-Agent 資料夾再執行")
-RULE = ("11. **大量資料先用程式抓，只讀重點**：要讀幾十頁以上的網頁或大量資料（經銷網站、官網、整份試算表、大批檔案）時，"
-        "先寫程式把資料抓下來存成檔案，再用程式篩出要看的部分來讀；不要用瀏覽器或網頁工具一頁一頁看。"
-        "這樣省 token，也比較不會漏看。抓完要核對筆數，確定沒有漏抓。\n")
+RULE = ("11. **能寫程式在終端機做的，就用程式做**：抓資料、比對、整理檔案、批次修改、檢查數量這類重複或大量的工作，"
+        "先寫程式在終端機跑，不要用瀏覽器或網頁工具一頁一頁點、一筆一筆手動改。讀資料時先把結果存成檔案，再用程式篩出重點來讀。"
+        "這樣省 token、速度快，也比較不會漏。會改到檔案或試算表的程式，照第 6 條先預覽再寫入，跑完要核對筆數。"
+        "需要判斷、品味的事（寫文案、看設計）才自己讀、自己寫。\n")
 text = open(path, encoding="utf-8").read()
-if "大量資料先用程式抓" in text:
+if "能寫程式在終端機做的" in text:
     sys.exit("第 11 條已經加過了，不用再加。")
 lines = text.splitlines(keepends=True)
 idx = next((i for i, l in enumerate(lines) if re.match(r"10\. \*\*", l)), None)
