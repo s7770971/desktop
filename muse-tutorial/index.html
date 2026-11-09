@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meta Muse 註冊教學</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+  body { margin: 0; }
+  /* 版面：長篇指南，單欄；頂部固定推薦碼條；註冊步驟用左側時間軸，方法 A 藍、方法 B 綠、共同步驟深色 */
+  :root {
+    --bg: #f5f6fa; --paper: #ffffff; --ink: #151a29; --sub: #5b6378; --line: #dfe3ec;
+    --a: #2b5cf0; --a-soft: #e7edfe; --b: #0e8a6a; --b-soft: #e0f3ec; --c: #151a29;
+    --mark: #ffd21f; --mark-ink: #151a29; --warn: #c2560a; --warn-soft: #fff1e3;
+    --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #0f121a; --paper: #181c28; --ink: #eef1f8; --sub: #a5acc0; --line: #2a3042;
+    --a: #7c9cff; --a-soft: #1c2647; --b: #4fc9a3; --b-soft: #12302a; --c: #eef1f8;
+    --mark: #ffd21f; --mark-ink: #151a29; --warn: #f3a35c; --warn-soft: #36240f; color-scheme: dark; } }
+  :root[data-theme="dark"] {
+    --bg: #0f121a; --paper: #181c28; --ink: #eef1f8; --sub: #a5acc0; --line: #2a3042;
+    --a: #7c9cff; --a-soft: #1c2647; --b: #4fc9a3; --b-soft: #12302a; --c: #eef1f8;
+    --mark: #ffd21f; --mark-ink: #151a29; --warn: #f3a35c; --warn-soft: #36240f; color-scheme: dark; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { background: var(--bg); color: var(--ink); font: 16px/1.8 var(--font); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+  p, h1, h2, h3, ul, ol { margin: 0; }
+  a { color: var(--a); }
+  code { font-family: var(--mono); font-size: .9em; background: var(--a-soft); padding: 1px 6px; border-radius: 5px; }
+  img { display: block; max-width: 100%; }
+  .gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .col { max-width: 720px; margin: 0 auto; }
+
+  .topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .topbar .col { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+  .brand { font-weight: 900; letter-spacing: .02em; }
+  .codechip { font: 600 15px var(--mono); letter-spacing: .1em; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 99px; padding: 6px 14px; cursor: pointer; }
+  .codechip:focus-visible, .btn:focus-visible, .copy:focus-visible, summary:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+
+  main { padding-block: 32px 72px; }
+  main > .col { display: grid; gap: 56px; }
+  section { display: grid; gap: 18px; scroll-margin-top: 70px; min-width: 0; }
+
+  .hero { gap: 16px; }
+  .badge { justify-self: start; font-size: 13px; font-weight: 700; background: var(--paper); border: 1px solid var(--line); border-radius: 99px; padding: 3px 12px; color: var(--sub); }
+  h1 { font-size: clamp(32px, 8vw, 46px); font-weight: 900; line-height: 1.2; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--a); display: block; }
+  .lead { color: var(--sub); font-size: 17px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { font: 700 16px var(--font); border-radius: 14px; padding: 12px 20px; text-decoration: none; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+  .btn.primary { background: var(--a); border-color: var(--a); color: #fff; }
+  .btn b { font-family: var(--mono); letter-spacing: .08em; color: var(--a); }
+  .meta { font-size: 13px; color: var(--sub); }
+  .heroimg { border-radius: 20px; border: 1px solid var(--line); max-width: 420px; justify-self: center; width: 100%; }
+
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--sub); }
+  .eyebrow b { color: var(--a); font-family: var(--mono); margin-right: 8px; }
+  h2 { font-size: 28px; font-weight: 900; line-height: 1.3; text-wrap: balance; }
+  h3 { font-size: 19px; font-weight: 700; line-height: 1.4; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .stats div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+  .stats span { font-size: 13px; color: var(--sub); }
+  .stats b { font-size: 17px; }
+
+  .callout { border-radius: 14px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+  .callout.warn { background: var(--warn-soft); border-left: 4px solid var(--warn); }
+  .callout.tip { background: var(--a-soft); border-left: 4px solid var(--a); }
+
+  .codecard { background: var(--a); color: #fff; border-radius: 24px; padding: 24px; display: grid; gap: 12px; }
+  .codecard .k { font-size: 14px; font-weight: 700; opacity: .85; letter-spacing: .08em; }
+  .codecard .row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .codecard .val { font: 600 clamp(40px, 12vw, 60px)/1 var(--mono); letter-spacing: .14em; user-select: all; }
+  .copy { font: 700 15px var(--font); background: var(--mark); color: var(--mark-ink); border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer; }
+  .codecard p { font-size: 15px; opacity: .92; }
+
+  .tablewrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 420px; }
+  th, td { text-align: left; padding: 12px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+  thead th { border-top: 0; font-size: 15px; }
+  thead th.a { color: var(--a); } thead th.b { color: var(--b); }
+  tbody th { color: var(--sub); font-weight: 500; white-space: nowrap; }
+
+  .prep { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 8px; }
+  .prep ul { padding-left: 1.2em; display: grid; gap: 4px; }
+
+  .route { display: grid; margin-top: 8px; }
+  .route .tag { justify-self: start; color: #fff; font-weight: 900; font-size: 14px; padding: 4px 14px; border-radius: 99px; }
+  .route.a .tag { background: var(--a); } .route.b .tag { background: var(--b); } .route.c .tag { background: var(--c); color: var(--bg); }
+  ol.steps { list-style: none; padding: 0; display: grid; }
+  ol.steps > li { position: relative; padding: 0 0 30px 52px; display: grid; gap: 10px; min-width: 0; }
+  ol.steps > li::before { content: ""; position: absolute; left: 17px; top: 40px; bottom: 4px; width: 2px; background: var(--line); }
+  ol.steps > li:last-child { padding-bottom: 0; }
+  ol.steps > li:last-child::before { display: none; }
+  .dot { position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font: 900 14px var(--font); color: #fff; }
+  .a .dot { background: var(--a); } .b .dot { background: var(--b); } .c .dot { background: var(--c); color: var(--bg); }
+  .step-k { font-size: 13px; color: var(--sub); font-weight: 700; letter-spacing: .06em; line-height: 36px; }
+  .shot { border-radius: 16px; border: 1px solid var(--line); max-width: 460px; width: 100%; }
+  pre { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: 600 14px/1.6 var(--mono); white-space: pre-wrap; }
+
+  .todo { display: grid; gap: 10px; }
+  .todo div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: start; }
+  .todo .n { grid-row: span 2; width: 30px; height: 30px; border-radius: 50%; background: var(--mark); color: var(--mark-ink); font-weight: 900; display: grid; place-items: center; }
+  .todo p { color: var(--sub); font-size: 15px; }
+
+  .feat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  @media (max-width: 520px) { .feat { grid-template-columns: minmax(0, 1fr); } }
+  .feat div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+  .feat p { color: var(--sub); font-size: 15px; }
+
+  details { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
+  details + details { margin-top: 8px; }
+  summary { font-weight: 700; cursor: pointer; }
+  details p { color: var(--sub); margin-top: 8px; }
+
+  .end { background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 24px; display: grid; gap: 14px; text-align: center; justify-items: center; }
+  .end .val { font: 600 40px/1 var(--mono); letter-spacing: .14em; }
+  .sources { font-size: 13px; color: var(--sub); display: grid; gap: 4px; }
+  .sources ul { padding-left: 1.2em; }
+</style>
+
+</head>
+<body>
+<div class="topbar gutter"><div class="col">
+  <span class="brand">@mohuang_ig</span>
+  <button type="button" class="codechip" data-copy>TAG35N ⧉</button>
+</div></div>
+
+<main class="gutter"><div class="col">
+
+  <section class="hero">
+    <span class="badge">Muse 註冊教學｜阿 Mo 實測</span>
+    <h1>Meta Muse 台灣註冊全攻略<em>兩種方法＋永久 10 億 token</em></h1>
+    <p class="lead">Meta 的新 AI 助理 Muse 目前還沒開放台灣。這篇用我自己的手機實測，帶你用兩種方法註冊成功，再領到不會過期的 10 億 token。</p>
+    <div class="actions">
+      <a class="btn primary" href="#signup">看註冊步驟 ↓</a>
+      <button type="button" class="btn" data-copy>複製推薦碼 <b>TAG35N</b></button>
+    </div>
+    <p class="meta">最後更新：2026 年 11 月 9 日｜步驟截圖都是我的實測畫面｜本頁是個人教學，不是 Meta 官方頁面</p>
+    <img class="heroimg" src="images/c02.jpg" alt="台灣也能用 Meta Muse，2 種註冊方法＋領永久 10 億 token">
+  </section>
+
+  <section id="what">
+    <p class="eyebrow">先認識它</p>
+    <h2>Muse 是什麼？</h2>
+    <p>Muse 是 Meta 在 2026 年 9 月推出的個人 AI 助理。它跟一般聊天型 AI 最大的不同是會「動手做事」：經過你同意後，它可以在你連結的 App 裡傳訊息、購物、執行動作，而且你關掉 App 之後它還會繼續跑。</p>
+    <div class="stats">
+      <div><span>上線</span><b>2026 年 9 月</b></div>
+      <div><span>開放地區</span><b>目前限北美</b></div>
+      <div><span>費用</span><b>免費，每週有額度</b></div>
+      <div><span>推薦碼獎勵</span><b>10 億 token 永不過期</b></div>
+    </div>
+    <p>打開之後，左上角選單裡有聊天室、動態消息、構想、目標、資料庫，還能建立「空間」。設定裡也有連接器，可以接上你常用的服務。</p>
+  </section>
+
+  <section id="code">
+    <div class="codecard">
+      <span class="k">我的推薦碼｜註冊後盡快輸入</span>
+      <div class="row"><span class="val">TAG35N</span><button type="button" class="copy" data-copy>一鍵複製</button></div>
+      <p>輸入後會多出「額外符元」10 億，而且永不過期。輸入位置在下面的「兌換推薦碼」步驟。</p>
+    </div>
+  </section>
+
+  <section id="compare">
+    <p class="eyebrow">比一比</p>
+    <h2>兩種方法，挑一個就好</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th class="a">方法 A｜Brave VPN</th><th class="b">方法 B｜Gemini 任務</th></tr></thead>
+      <tbody>
+        <tr><th>適合誰</th><td>用 iPhone，想最快完成</td><td>有 Gemini 付費會員</td></tr>
+        <tr><th>要不要 VPN</th><td>要（Brave 內建）</td><td>不用</td></tr>
+        <tr><th>費用</th><td>7 天試用內取消就免費</td><td>會員費</td></tr>
+        <tr><th>原理</th><td>手機連到美國再註冊</td><td>借用 Gemini 在美國的雲端瀏覽器註冊</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="signup">
+    <p class="eyebrow"><b>01</b>註冊</p>
+    <h2>在台灣註冊 Muse 的步驟</h2>
+    <div class="callout warn"><b>先把整個流程看完再動手</b>Email 請用一個沒在 Muse 輸入過的。如果還沒切到美國就先輸入，這個 Email 可能會被排進等候清單，之後就算照步驟做也可能註冊不了，只能換一個 Email。</div>
+    <div class="prep"><b>開始前準備好</b><ul><li>一支手機</li><li>一個沒在 Muse 用過的 Email</li><li>Instagram 帳號，或一張簽帳金融卡／信用卡（驗證年齡用）</li></ul></div>
+
+    <div class="route a" id="method-a"><span class="tag">方法 A｜Brave VPN</span></div>
+    <ol class="steps a">
+      <li><span class="dot">A1</span><span class="step-k">第一步</span><h3>到 App Store 下載 Brave</h3>
+        <p>在 App Store 搜尋「Brave」，下載「Brave 瀏覽器：擋廣告、防追蹤」。下面那個「Leo 瀏覽器人工智慧助理」的試用不用按，我們要的是 VPN。</p>
+        <img class="shot" src="images/c04.jpg" alt="A1 畫面" loading="lazy"></li>
+      <li><span class="dot">A2</span><span class="step-k">第二步</span><h3>打開 Brave，開美國 VPN</h3>
+        <p>點右下角「…」→「開啟 VPN」，選 7 天免費試用，跳出提示選「允許」，地區選 USA。</p>
+        <img class="shot" src="images/c05.jpg" alt="A2 畫面" loading="lazy"></li>
+      <li><span class="dot">A3</span><span class="step-k">第三步</span><h3>打開 muse.ai，輸入 Email</h3>
+        <p>在 Brave 網址列輸入 <code>muse.ai</code>，輸入 Email 註冊，再填信箱收到的 6 位數驗證碼。</p>
+        <img class="shot" src="images/c06.jpg" alt="A2 畫面" loading="lazy"></li>
+      <li><span class="dot">A4</span><span class="step-k">第四步</span><h3>填生日，按開始使用</h3>
+        <p>生日照實填按「確認」，看完須知事項按「開始使用」。如果跳出年齡驗證，看下面的「年齡驗證」。</p>
+        <img class="shot" src="images/c07.jpg" alt="A3 畫面" loading="lazy"></li>
+    </ol>
+
+    <div class="route b" id="method-b"><span class="tag">方法 B｜Gemini 任務（免 VPN）</span></div>
+    <ol class="steps b">
+      <li><span class="dot">B1</span><span class="step-k">第一步</span><h3>Gemini 切到「任務」</h3>
+        <p>打開 Gemini App，在輸入框上方切到「任務」，輸入：</p>
+        <pre>使用遠端瀏覽器開始muse註冊</pre>
+        <img class="shot" src="images/c08.jpg" alt="B1 畫面" loading="lazy"></li>
+      <li><span class="dot">B2</span><span class="step-k">第二步</span><h3>按「觀看即時頁面」接手</h3>
+        <p>Gemini 會在美國的雲端瀏覽器幫你打開 Muse 註冊頁。按「觀看即時頁面」，等它準備好電腦。</p>
+        <img class="shot" src="images/c09.jpg" alt="B2 畫面" loading="lazy"></li>
+      <li><span class="dot">B3</span><span class="step-k">第三步</span><h3>輸入 Email 和驗證碼</h3>
+        <p>點畫面下方的鍵盤圖示叫出鍵盤，輸入 Email → 繼續 → 填驗證碼。</p>
+        <img class="shot" src="images/c10.jpg" alt="B3 畫面" loading="lazy"></li>
+      <li><span class="dot">B4</span><span class="step-k">第四步</span><h3>填生日，按確認</h3>
+        <p>生日照實填，按「確認」就好。</p>
+        <img class="shot" src="images/c11.jpg" alt="B4 畫面" loading="lazy"></li>
+      <li><span class="dot">B5</span><span class="step-k">第五步</span><h3>結束控制，回自己的瀏覽器登入</h3>
+        <p>看到 Muse 聊天畫面就代表註冊成功。按右下「結束控制」，再用自己手機的瀏覽器打開 <code>muse.ai</code>，登入剛剛的帳號，不用開 VPN。</p>
+        <img class="shot" src="images/c12.jpg" alt="B5 畫面" loading="lazy"></li>
+    </ol>
+    <div class="callout tip"><b>雲端瀏覽器是 Google 的</b>你在裡面輸入的內容 Google 看得到。只拿來註冊 Muse，不要在裡面登入其他重要帳號。</div>
+
+    <div class="route c" id="common"><span class="tag">兩種方法都一樣</span></div>
+    <ol class="steps c">
+      <li><span class="dot">!</span><span class="step-k">可能遇到</span><h3>年齡驗證</h3>
+        <p>兩種方法都可能跳出年齡驗證。可以用簽帳金融卡或信用卡，或點畫面下方的 Instagram／Facebook 驗證。卡片驗證卡住的話，改用 Instagram 最快。卡片驗證只會臨時授權，不會真的扣款。</p>
+        <img class="shot" src="images/c13.jpg" alt="年齡驗證畫面" loading="lazy"></li>
+      <li><span class="dot">★</span><span class="step-k">領 token</span><h3>進入設定 → 一般</h3>
+        <p>點左上角兩條槓 ☰ 打開選單 → 設定 → 一般。</p>
+        <img class="shot" src="images/c14.jpg" alt="設定畫面" loading="lazy"></li>
+      <li><span class="dot">★</span><span class="step-k">領 token</span><h3>兌換推薦碼</h3>
+        <p>點「兌換邀請代碼」，輸入 <code>TAG35N</code>，按確認。也可以點聊天畫面右上角的禮物圖示輸入。</p>
+        <img class="shot" src="images/c15.jpg" alt="兌換推薦碼畫面" loading="lazy"></li>
+      <li><span class="dot">✓</span><span class="step-k">完成</span><h3>看到 10 億 token 就成功</h3>
+        <p>出現「你已加入」就兌換成功。回到設定 → 一般，「額外符元」會顯示剩餘 10 億，永不過期。</p>
+        <img class="shot" src="images/c16.jpg" alt="成功畫面" loading="lazy"></li>
+    </ol>
+  </section>
+
+  <section id="after">
+    <p class="eyebrow">註冊完</p>
+    <h2>順手做這兩件事</h2>
+    <div class="todo">
+      <div><span class="n">1</span><b>輸入推薦碼 TAG35N</b><p>註冊後盡快到 設定 → 一般 → 兌換邀請代碼 輸入，才拿得到 10 億 token。</p></div>
+      <div><span class="n">2</span><b>用方法 A 的：取消 Brave 試用</b><p>7 天內到 iPhone 設定 → 你的名字 → 訂閱項目，取消 Brave 訂閱，就不會扣款。</p></div>
+    </div>
+  </section>
+
+  <section id="app">
+    <p class="eyebrow"><b>02</b>手機 App</p>
+    <h2>想在手機上用 App</h2>
+    <p>用網頁版 <code>muse.ai</code> 就能直接用。想裝 App 的話，台灣的商店搜尋不到，要從美區下載：</p>
+    <div class="feat">
+      <div><b>iPhone</b><p>設定 → 你的名字 → 媒體與購買項目，換成美國 Apple ID（不用登出 iCloud），搜尋 Muse 下載後，用註冊好的帳號登入。</p></div>
+      <div><b>Android</b><p>用美國的 Google 帳號登入 Google Play，開著美國 VPN 搜尋 Muse 下載，再登入。</p></div>
+    </div>
+    <p class="meta">登入後如果顯示地區無法使用，先開美國 VPN 再打開。</p>
+  </section>
+
+  <section id="features">
+    <p class="eyebrow"><b>03</b>功能</p>
+    <h2>登入後看得到的功能</h2>
+    <div class="feat">
+      <div><b>聊天室</b><p>跟一般 AI 一樣對話，直接說你要它做的事。</p></div>
+      <div><b>動態消息</b><p>它會整理你可能想看的內容。</p></div>
+      <div><b>構想</b><p>不知道 AI 能做什麼時，從這裡挑範例。</p></div>
+      <div><b>目標</b><p>設一個目標，讓它幫你拆成任務、追進度。</p></div>
+      <div><b>資料庫</b><p>它幫你做的圖、文件等都收在這裡。</p></div>
+      <div><b>空間</b><p>把資訊整理在固定的頁面，不會被對話洗掉。</p></div>
+      <div><b>連接器</b><p>在設定裡接上你常用的服務，讓它幫你處理。</p></div>
+      <div><b>先問過你</b><p>傳訊息、購物這類動作會先經過你批准，可以在設定裡選哪些要審核。</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <p class="eyebrow">常見問題</p>
+    <h2>常見問題</h2>
+    <div>
+      <details><summary>台灣可以用 Muse 嗎？</summary><p>官方目前還沒開放台灣，要照上面兩種方法之一註冊。註冊好之後，用網頁版通常不開 VPN 也能登入。</p></details>
+      <details><summary>Muse 要錢嗎？</summary><p>可以免費使用，每週有使用額度；想用更多可以升級。推薦碼送的 10 億 token 不會過期。</p></details>
+      <details><summary>推薦碼在哪裡輸入？</summary><p>設定 → 一般 → 兌換邀請代碼，或聊天畫面右上角的禮物圖示。</p></details>
+      <details><summary>畫面顯示等候清單怎麼辦？</summary><p>代表這個 Email 被排進等候清單了。換一個沒用過的 Email，確認已經切到美國（方法 A）或在雲端瀏覽器裡（方法 B）再註冊。</p></details>
+      <details><summary>推薦碼顯示無效？</summary><p>可能名額用完了，或超過可兌換的時間。</p></details>
+      <details><summary>跨區註冊有風險嗎？</summary><p>可能違反服務條款，帳號有被停用的風險，請自行評估，重要資料不要只放在 Muse。</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="end">
+      <h2>準備好就去註冊吧</h2>
+      <p class="lead">先選方法 A 或 B 註冊，再到設定輸入推薦碼。</p>
+      <span class="val">TAG35N</span>
+      <div class="actions" style="justify-content:center"><button type="button" class="btn primary" data-copy>一鍵複製推薦碼</button><a class="btn" href="#signup">回到註冊步驟</a></div>
+      <p class="meta">卡關了？到 Threads／IG 留言給 @mohuang_ig</p>
+    </div>
+    <div class="sources"><b>資料來源</b><ul>
+      <li><a href="https://www.inside.com.tw/article/42443-meta-muse-app-store-number-one-us-2026" target="_blank" rel="noopener">INSIDE：Meta Muse 上線不到兩週登頂美國 App Store</a></li>
+      <li><a href="https://cybernews.com/vpn-guides/how-to-access-meta-muse-from-anywhere/" target="_blank" rel="noopener">Cybernews：How to access Meta Muse outside the US</a></li>
+      <li>其餘功能說明與所有步驟截圖，來自我 2026 年 11 月 9 日的實測畫面。</li>
+    </ul></div>
+  </section>
+
+</div></main>
+
+<script>
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var orig = btn.innerHTML;
+      function done(t) { btn.textContent = t; setTimeout(function () { btn.innerHTML = orig; }, 1600); }
+      try { navigator.clipboard.writeText("TAG35N").then(function () { done("已複製 TAG35N ✓"); }, function () { done("請手動複製 TAG35N"); }); }
+      catch (e) { done("請手動複製 TAG35N"); }
+    });
+  });
+</script>
+
+</body>
+</html>
