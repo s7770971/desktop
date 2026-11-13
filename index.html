@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旅行規劃</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="siteheader">
+  <div id="brand"></div>
+  <div id="tripsummary">
+    <h1 id="tripname"></h1>
+    <p id="tripmeta"></p>
+  </div>
+  <div id="triptotal">
+    <span id="totallabel">總花費</span>
+    <strong id="totalvalue" aria-live="polite">＊＊＊＊</strong>
+    <button id="eyebutton" type="button" aria-pressed="false" aria-label="顯示總花費"></button>
+  </div>
+</header>
+
+<nav id="pagenav" aria-label="頁面">
+  <button type="button" data-page="plan" class="active">行程規劃</button>
+  <button type="button" data-page="expenses">費用總覽</button>
+  <button type="button" data-page="packing">攜帶用品</button>
+</nav>
+
+<main>
+  <section id="planpage" class="page">
+    <div id="notices" role="status"></div>
+    <div id="workspace">
+      <div id="mapcolumn">
+        <section id="mappanel" aria-label="地圖">
+          <div id="mapheading">
+            <h2>地圖</h2>
+            <div class="mapbuttons">
+              <button type="button" id="previewroute" aria-pressed="false">路徑預覽</button>
+              <button type="button" id="fit">整天概覽</button>
+            </div>
+          </div>
+          <div id="map"></div>
+          <p id="mapfallback" hidden>地圖底圖載入不到，地標位置仍可參考；也可以用下方連結在外部地圖開啟。</p>
+        </section>
+        <details id="routepanel" open>
+          <summary>交通明細</summary>
+          <div id="routelist"></div>
+        </details>
+      </div>
+      <section id="calendarpanel" aria-label="行事曆">
+        <div class="paneltoolbar">
+          <div class="paneltitle">
+            <h2>行事曆</h2>
+            <span id="calendarmonth"></span>
+          </div>
+          <div class="calendar-viewtoggle" role="group" aria-label="檢視">
+            <button type="button" data-view="week" class="active">週</button>
+            <button type="button" data-view="day">單日</button>
+          </div>
+          <div class="toolbarbuttons">
+            <button type="button" id="undobutton" aria-label="復原" title="復原"></button>
+            <button type="button" id="addbutton"><span class="addicon"></span><span class="addtext">新增地點</span></button>
+          </div>
+        </div>
+        <div id="calendar"></div>
+      </section>
+    </div>
+  </section>
+
+  <section id="expensespage" class="page" hidden></section>
+  <section id="packingpage" class="page" hidden></section>
+</main>
+
+<div id="toolwrap">
+  <div id="toolmenu" role="menu" hidden>
+    <button type="button" role="menuitem" data-tool="settings">旅程設定</button>
+    <button type="button" role="menuitem" data-tool="export">匯出 JSON 備份</button>
+    <button type="button" role="menuitem" data-tool="import">匯入 JSON</button>
+    <button type="button" role="menuitem" data-tool="ics">匯出行事曆（ICS）</button>
+    <button type="button" role="menuitem" data-tool="blank">清空成空白旅程</button>
+    <button type="button" role="menuitem" data-tool="reset">還原成範例行程</button>
+  </div>
+  <button type="button" id="toolbutton" aria-haspopup="menu" aria-expanded="false" aria-label="工具"></button>
+</div>
+<input type="file" id="importfile" accept="application/json,.json" hidden>
+
+<dialog id="itemdialog"></dialog>
+<dialog id="legdialog"></dialog>
+<dialog id="settingsdialog"></dialog>
+<div id="preview" hidden></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="vendor/leaflet.js"></script>
+<script src="icons.js"></script>
+<script src="illustrations.js"></script>
+<script src="trip.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
